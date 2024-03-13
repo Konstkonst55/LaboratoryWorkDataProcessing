@@ -1,0 +1,279 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [
+        {
+          "ruleId": "C26451",
+          "message": {
+            "text": "Арифметическое переполнение: использование оператора \"+\" на байтовом значении 4 и приведение результата к байтовому значению 8. Приведите значение к более широкому типу перед вызовом оператора \"+\", чтобы избежать переполнения (io.2)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/ArrayUtils.cpp"
+                },
+                "region": {
+                  "startLine": 212,
+                  "startColumn": 17,
+                  "endLine": 212,
+                  "endColumn": 21
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "getKnutSteps",
+                  "decoratedName": "?getKnutSteps@@YA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@H@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6011",
+          "message": {
+            "text": "Разыменование пустого указателя \"mt\". "
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/ArrayUtils.cpp"
+                },
+                "region": {
+                  "startLine": 341,
+                  "startColumn": 52,
+                  "endLine": 341,
+                  "endColumn": 87
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "GetSortData",
+                  "decoratedName": "?GetSortData@@YA?AV?$vector@V?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@V?$allocator@V?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@@2@@std@@ABV?$vector@V?$function@$$A6AXPAHH00@Z@std@@V?$allocator@V?$function@$$A6AXPAHH00@Z@std@@@2@@2@ABV?$vector@V?$function@$$A6AXPAHH@Z@std@@V?$allocator@V?$function@$$A6AXPAHH@Z@std@@@2@@2@HHHP6AHH@Z2_N3@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/ArrayUtils.cpp"
+                          },
+                          "region": {
+                            "startLine": 334,
+                            "startColumn": 25
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/ArrayUtils.cpp"
+                          },
+                          "region": {
+                            "startLine": 336,
+                            "startColumn": 11
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/ArrayUtils.cpp"
+                          },
+                          "region": {
+                            "startLine": 336,
+                            "startColumn": 22
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/ArrayUtils.cpp"
+                          },
+                          "region": {
+                            "startLine": 337,
+                            "startColumn": 8
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/ArrayUtils.cpp"
+                          },
+                          "region": {
+                            "startLine": 337,
+                            "startColumn": 13
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/ArrayUtils.cpp"
+                          },
+                          "region": {
+                            "startLine": 337,
+                            "startColumn": 20
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/ArrayUtils.cpp"
+                          },
+                          "region": {
+                            "startLine": 338,
+                            "startColumn": 18
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/ArrayUtils.cpp"
+                          },
+                          "region": {
+                            "startLine": 340,
+                            "startColumn": 7
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/ArrayUtils.cpp"
+                          },
+                          "region": {
+                            "startLine": 341,
+                            "startColumn": 33
+                          }
+                        },
+                        "message": {
+                          "text": "\"mt\" может быть равно NULL (Войти в эту ветвь)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/ArrayUtils.cpp"
+                          },
+                          "region": {
+                            "startLine": 341,
+                            "startColumn": 65
+                          }
+                        },
+                        "message": {
+                          "text": "\"mt\" разыменовано, но, возможно, по-прежнему равно NULL"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.35.32217.1",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/ArrayUtils.cpp"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "fcc7133eadb03f726fd5e268058a116838fe27752942293e0b163b64b678ca35"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/sibsutis/course 1/саод/code/labaratoryworkdataprocessing/mathutils.h"
+          },
+          "hashes": {
+            "sha-256": "239d5476f4e41b2a228e8a42d3ba394c20a221839ada9bd64c57a8fbacc7d394"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/sibsutis/course 1/саод/code/labaratoryworkdataprocessing/arrayutils.h"
+          },
+          "hashes": {
+            "sha-256": "65e34cc6fc78880e62e83e03ce549c697513d65ca67be7fac1c19de4db5d1442"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/sibsutis/course 1/саод/code/labaratoryworkdataprocessing/point.h"
+          },
+          "hashes": {
+            "sha-256": "b307b950239a61176e1bcc5e862288ac5f110040da19f6085f10bc80a66a2345"
+          }
+        }
+      ]
+    }
+  ]
+}

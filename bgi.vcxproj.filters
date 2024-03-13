@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Lib">
+      <UniqueIdentifier>{1c049d4c-8355-4f2c-9f62-6c83fc484275}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utils">
+      <UniqueIdentifier>{df9e90c5-a694-4621-8401-b7ddf98ea1e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Lib">
+      <UniqueIdentifier>{33f855ad-06e4-4412-ab1f-c8901f72ce2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utils">
+      <UniqueIdentifier>{a1bb148c-ac43-447c-af33-aca221983517}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\View">
+      <UniqueIdentifier>{a4178fd0-1e8e-429b-98f2-c074d4365a62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\View">
+      <UniqueIdentifier>{f3bc547c-f8ee-499e-84ac-00445672e802}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Data">
+      <UniqueIdentifier>{b3a16471-c94a-4a90-b276-9ce8b424f1b8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="bgiout.cxx">
+      <Filter>Source Files\Lib</Filter>
+    </ClCompile>
+    <ClCompile Include="dibutil.cxx">
+      <Filter>Source Files\Lib</Filter>
+    </ClCompile>
+    <ClCompile Include="drawing.cxx">
+      <Filter>Source Files\Lib</Filter>
+    </ClCompile>
+    <ClCompile Include="file.cxx">
+      <Filter>Source Files\Lib</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cxx">
+      <Filter>Source Files\Lib</Filter>
+    </ClCompile>
+    <ClCompile Include="misc.cxx">
+      <Filter>Source Files\Lib</Filter>
+    </ClCompile>
+    <ClCompile Include="mouse.cxx">
+      <Filter>Source Files\Lib</Filter>
+    </ClCompile>
+    <ClCompile Include="palette.cxx">
+      <Filter>Source Files\Lib</Filter>
+    </ClCompile>
+    <ClCompile Include="text.cxx">
+      <Filter>Source Files\Lib</Filter>
+    </ClCompile>
+    <ClCompile Include="winbgi.cxx">
+      <Filter>Source Files\Lib</Filter>
+    </ClCompile>
+    <ClCompile Include="winthread.cxx">
+      <Filter>Source Files\Lib</Filter>
+    </ClCompile>
+    <ClCompile Include="ArrayUtils.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="MathUtils.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowSize.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Table.h">
+      <Filter>Header Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="Chart.cpp">
+      <Filter>Source Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="Table.cpp">
+      <Filter>Source Files\View</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="dibutil.h">
+      <Filter>Header Files\Lib</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics.h">
+      <Filter>Header Files\Lib</Filter>
+    </ClInclude>
+    <ClInclude Include="winbgi.h">
+      <Filter>Header Files\Lib</Filter>
+    </ClInclude>
+    <ClInclude Include="winbgim.h">
+      <Filter>Header Files\Lib</Filter>
+    </ClInclude>
+    <ClInclude Include="winbgitypes.h">
+      <Filter>Header Files\Lib</Filter>
+    </ClInclude>
+    <ClInclude Include="ArrayUtils.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="MathUtils.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Point.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Chart.h">
+      <Filter>Header Files\View</Filter>
+    </ClInclude>
+    <ClInclude Include="AxisType.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="TableHeaders.h">
+      <Filter>Header Files\Data</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

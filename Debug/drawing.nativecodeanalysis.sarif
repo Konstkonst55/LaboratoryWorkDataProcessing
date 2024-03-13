@@ -1,0 +1,747 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [
+        {
+          "ruleId": "C6387",
+          "message": {
+            "text": "\"_Param_(10)\" может быть \"0\"."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/drawing.cxx"
+                },
+                "region": {
+                  "startLine": 1076,
+                  "startColumn": 2,
+                  "endLine": 1076,
+                  "endColumn": 93
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "readimagefile",
+                  "decoratedName": "readimagefile",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/drawing.cxx"
+                          },
+                          "region": {
+                            "startLine": 1044,
+                            "startColumn": 17
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/drawing.cxx"
+                          },
+                          "region": {
+                            "startLine": 1045,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/drawing.cxx"
+                          },
+                          "region": {
+                            "startLine": 1046,
+                            "startColumn": 15
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/drawing.cxx"
+                          },
+                          "region": {
+                            "startLine": 1047,
+                            "startColumn": 10
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/drawing.cxx"
+                          },
+                          "region": {
+                            "startLine": 1047,
+                            "startColumn": 22
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/drawing.cxx"
+                          },
+                          "region": {
+                            "startLine": 1048,
+                            "startColumn": 10
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/drawing.cxx"
+                          },
+                          "region": {
+                            "startLine": 1048,
+                            "startColumn": 17
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/drawing.cxx"
+                          },
+                          "region": {
+                            "startLine": 1049,
+                            "startColumn": 18
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/drawing.cxx"
+                          },
+                          "region": {
+                            "startLine": 1050,
+                            "startColumn": 11
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/drawing.cxx"
+                          },
+                          "region": {
+                            "startLine": 1052,
+                            "startColumn": 18
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/drawing.cxx"
+                          },
+                          "region": {
+                            "startLine": 1064,
+                            "startColumn": 18
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/drawing.cxx"
+                          },
+                          "region": {
+                            "startLine": 1067,
+                            "startColumn": 11
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/drawing.cxx"
+                          },
+                          "region": {
+                            "startLine": 1068,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/drawing.cxx"
+                          },
+                          "region": {
+                            "startLine": 1070,
+                            "startColumn": 11
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/drawing.cxx"
+                          },
+                          "region": {
+                            "startLine": 1071,
+                            "startColumn": 6
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/drawing.cxx"
+                          },
+                          "region": {
+                            "startLine": 1072,
+                            "startColumn": 8
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/drawing.cxx"
+                          },
+                          "region": {
+                            "startLine": 1073,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/drawing.cxx"
+                          },
+                          "region": {
+                            "startLine": 1074,
+                            "startColumn": 28
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/drawing.cxx"
+                          },
+                          "region": {
+                            "startLine": 1075,
+                            "startColumn": 29
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/drawing.cxx"
+                          },
+                          "region": {
+                            "startLine": 1076,
+                            "startColumn": 18
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6054",
+          "message": {
+            "text": "Возможно, строка \"fn\" не завершается нулем."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/drawing.cxx"
+                },
+                "region": {
+                  "startLine": 1109,
+                  "startColumn": 6,
+                  "endLine": 1109,
+                  "endColumn": 74
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "writeimagefile",
+                  "decoratedName": "writeimagefile",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/drawing.cxx"
+                          },
+                          "region": {
+                            "startLine": 1089,
+                            "startColumn": 10
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/drawing.cxx"
+                          },
+                          "region": {
+                            "startLine": 1089,
+                            "startColumn": 17
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/drawing.cxx"
+                          },
+                          "region": {
+                            "startLine": 1090,
+                            "startColumn": 17
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/drawing.cxx"
+                          },
+                          "region": {
+                            "startLine": 1091,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/drawing.cxx"
+                          },
+                          "region": {
+                            "startLine": 1092,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/drawing.cxx"
+                          },
+                          "region": {
+                            "startLine": 1093,
+                            "startColumn": 13
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/drawing.cxx"
+                          },
+                          "region": {
+                            "startLine": 1094,
+                            "startColumn": 13
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/drawing.cxx"
+                          },
+                          "region": {
+                            "startLine": 1095,
+                            "startColumn": 10
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/drawing.cxx"
+                          },
+                          "region": {
+                            "startLine": 1096,
+                            "startColumn": 18
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/drawing.cxx"
+                          },
+                          "region": {
+                            "startLine": 1097,
+                            "startColumn": 11
+                          }
+                        },
+                        "message": {
+                          "text": "Это выражение может привести к тому, что \"fn\" не будет завершаться нулем"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/drawing.cxx"
+                          },
+                          "region": {
+                            "startLine": 1099,
+                            "startColumn": 18
+                          }
+                        },
+                        "message": {
+                          "text": "Войти в эту ветвь (предполагается \"filename==0\")"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/drawing.cxx"
+                          },
+                          "region": {
+                            "startLine": 1101,
+                            "startColumn": 2
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/drawing.cxx"
+                          },
+                          "region": {
+                            "startLine": 1102,
+                            "startColumn": 2
+                          }
+                        },
+                        "message": {
+                          "text": "\"fn\" является выходными данными из \"memset\" (объявлено в c:\\program files\\microsoft visual studio\\2022\\community\\vc\\tools\\msvc\\14.35.32215\\include\\vcruntime_string.h:63)"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/drawing.cxx"
+                          },
+                          "region": {
+                            "startLine": 1103,
+                            "startColumn": 18
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/drawing.cxx"
+                          },
+                          "region": {
+                            "startLine": 1104,
+                            "startColumn": 18
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/drawing.cxx"
+                          },
+                          "region": {
+                            "startLine": 1105,
+                            "startColumn": 16
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/drawing.cxx"
+                          },
+                          "region": {
+                            "startLine": 1106,
+                            "startColumn": 15
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/drawing.cxx"
+                          },
+                          "region": {
+                            "startLine": 1107,
+                            "startColumn": 12
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/drawing.cxx"
+                          },
+                          "region": {
+                            "startLine": 1108,
+                            "startColumn": 6
+                          }
+                        },
+                        "message": {
+                          "text": "Пропустить эту ветвь (предполагается, что \"!GetSaveFileNameA(&ofn)\" равно false)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/drawing.cxx"
+                          },
+                          "region": {
+                            "startLine": 1109,
+                            "startColumn": 21
+                          }
+                        },
+                        "message": {
+                          "text": "\"fn\" является входными данными для \"strlen\" (объявлено в c:\\program files (x86)\\windows kits\\10\\include\\10.0.22621.0\\ucrt\\string.h:215)"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/drawing.cxx"
+                          },
+                          "region": {
+                            "startLine": 1109,
+                            "startColumn": 21
+                          }
+                        },
+                        "message": {
+                          "text": "\"fn\" должно завершаться нулем в соответствии с SAL-аннотацией для \"strlen\""
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.35.32217.1",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/drawing.cxx"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "103405b020a91381c8e9d946694660634e4cebed8ce1a163d0d95eb0e79784d2"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/sibsutis/course 1/саод/code/labaratoryworkdataprocessing/winbgi.h"
+          },
+          "hashes": {
+            "sha-256": "42341bae9183cc6e86b933dc39822c9c6f33dac532e9f6fd9fb853c080bfdf9a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/sibsutis/course 1/саод/code/labaratoryworkdataprocessing/winbgitypes.h"
+          },
+          "hashes": {
+            "sha-256": "db11d4647a25621de799bd12ec335a720a1fa003f3c1a879adf6412a775e17ad"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/sibsutis/course 1/саод/code/labaratoryworkdataprocessing/dibapi.h"
+          },
+          "hashes": {
+            "sha-256": "99f92e35b3e87c82d363d3b2142bea8573d8a1d50243902d4b80cad3bbda2739"
+          }
+        }
+      ]
+    }
+  ]
+}

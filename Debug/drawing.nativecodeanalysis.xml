@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DEFECTS>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\SibSUTIS\Course 1\САОД\Code\LabaratoryWorkDataProcessing\</FILEPATH>
+      <FILENAME>drawing.cxx</FILENAME>
+      <LINE>1076</LINE>
+      <COLUMN>17</COLUMN>
+    </SFA>
+    <DEFECTCODE>6387</DEFECTCODE>
+    <DESCRIPTION>"_Param_(10)" может быть "0".</DESCRIPTION>
+    <FUNCTION>readimagefile</FUNCTION>
+    <DECORATED>readimagefile</DECORATED>
+    <FUNCLINE>1039</FUNCLINE>
+    <PROBABILITY>1</PROBABILITY>
+    <RANK>4</RANK>
+    <CATEGORY>
+      <RULECATEGORY>mspft</RULECATEGORY>
+    </CATEGORY>
+    <PATH>
+      <SFA>
+        <FILEPATH>D:\SibSUTIS\Course 1\САОД\Code\LabaratoryWorkDataProcessing\</FILEPATH>
+        <FILENAME>drawing.cxx</FILENAME>
+        <LINE>1044</LINE>
+        <COLUMN>16</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>D:\SibSUTIS\Course 1\САОД\Code\LabaratoryWorkDataProcessing\</FILEPATH>
+        <FILENAME>drawing.cxx</FILENAME>
+        <LINE>1045</LINE>
+        <COLUMN>8</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>D:\SibSUTIS\Course 1\САОД\Code\LabaratoryWorkDataProcessing\</FILEPATH>
+        <FILENAME>drawing.cxx</FILENAME>
+        <LINE>1046</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>D:\SibSUTIS\Course 1\САОД\Code\LabaratoryWorkDataProcessing\</FILEPATH>
+        <FILENAME>drawing.cxx</FILENAME>
+        <LINE>1047</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>D:\SibSUTIS\Course 1\САОД\Code\LabaratoryWorkDataProcessing\</FILEPATH>
+        <FILENAME>drawing.cxx</FILENAME>
+        <LINE>1047</LINE>
+        <COLUMN>21</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>D:\SibSUTIS\Course 1\САОД\Code\LabaratoryWorkDataProcessing\</FILEPATH>
+        <FILENAME>drawing.cxx</FILENAME>
+        <LINE>1048</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>D:\SibSUTIS\Course 1\САОД\Code\LabaratoryWorkDataProcessing\</FILEPATH>
+        <FILENAME>drawing.cxx</FILENAME>
+        <LINE>1048</LINE>
+        <COLUMN>16</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>D:\SibSUTIS\Course 1\САОД\Code\LabaratoryWorkDataProcessing\</FILEPATH>
+        <FILENAME>drawing.cxx</FILENAME>
+        <LINE>1049</LINE>
+        <COLUMN>17</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>D:\SibSUTIS\Course 1\САОД\Code\LabaratoryWorkDataProcessing\</FILEPATH>
+        <FILENAME>drawing.cxx</FILENAME>
+        <LINE>1050</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>D:\SibSUTIS\Course 1\САОД\Code\LabaratoryWorkDataProcessing\</FILEPATH>
+        <FILENAME>drawing.cxx</FILENAME>
+        <LINE>1052</LINE>
+        <COLUMN>17</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>D:\SibSUTIS\Course 1\САОД\Code\LabaratoryWorkDataProcessing\</FILEPATH>
+        <FILENAME>drawing.cxx</FILENAME>
+        <LINE>1064</LINE>
+        <COLUMN>17</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>D:\SibSUTIS\Course 1\САОД\Code\LabaratoryWorkDataProcessing\</FILEPATH>
+        <FILENAME>drawing.cxx</FILENAME>
+        <LINE>1067</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>D:\SibSUTIS\Course 1\САОД\Code\LabaratoryWorkDataProcessing\</FILEPATH>
+        <FILENAME>drawing.cxx</FILENAME>
+        <LINE>1068</LINE>
+        <COLUMN>8</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>D:\SibSUTIS\Course 1\САОД\Code\LabaratoryWorkDataProcessing\</FILEPATH>
+        <FILENAME>drawing.cxx</FILENAME>
+        <LINE>1070</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>D:\SibSUTIS\Course 1\САОД\Code\LabaratoryWorkDataProcessing\</FILEPATH>
+        <FILENAME>drawing.cxx</FILENAME>
+        <LINE>1071</LINE>
+        <COLUMN>5</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>D:\SibSUTIS\Course 1\САОД\Code\LabaratoryWorkDataProcessing\</FILEPATH>
+        <FILENAME>drawing.cxx</FILENAME>
+        <LINE>1072</LINE>
+        <COLUMN>7</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>D:\SibSUTIS\Course 1\САОД\Code\LabaratoryWorkDataProcessing\</FILEPATH>
+        <FILENAME>drawing.cxx</FILENAME>
+        <LINE>1073</LINE>
+        <COLUMN>8</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>D:\SibSUTIS\Course 1\САОД\Code\LabaratoryWorkDataProcessing\</FILEPATH>
+        <FILENAME>drawing.cxx</FILENAME>
+        <LINE>1074</LINE>
+        <COLUMN>27</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>D:\SibSUTIS\Course 1\САОД\Code\LabaratoryWorkDataProcessing\</FILEPATH>
+        <FILENAME>drawing.cxx</FILENAME>
+        <LINE>1075</LINE>
+        <COLUMN>28</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>D:\SibSUTIS\Course 1\САОД\Code\LabaratoryWorkDataProcessing\</FILEPATH>
+        <FILENAME>drawing.cxx</FILENAME>
+        <LINE>1076</LINE>
+        <COLUMN>17</COLUMN>
+      </SFA>
+    </PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\SibSUTIS\Course 1\САОД\Code\LabaratoryWorkDataProcessing\</FILEPATH>
+      <FILENAME>drawing.cxx</FILENAME>
+      <LINE>1109</LINE>
+      <COLUMN>20</COLUMN>
+    </SFA>
+    <DEFECTCODE>6054</DEFECTCODE>
+    <DESCRIPTION>Возможно, строка "fn" не завершается нулем.</DESCRIPTION>
+    <FUNCTION>writeimagefile</FUNCTION>
+    <DECORATED>writeimagefile</DECORATED>
+    <FUNCLINE>1083</FUNCLINE>
+    <PROBABILITY>1</PROBABILITY>
+    <RANK>3</RANK>
+    <CATEGORY>
+      <RULECATEGORY>mspft</RULECATEGORY>
+    </CATEGORY>
+    <PATH>
+      <SFA>
+        <FILEPATH>D:\SibSUTIS\Course 1\САОД\Code\LabaratoryWorkDataProcessing\</FILEPATH>
+        <FILENAME>drawing.cxx</FILENAME>
+        <LINE>1089</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>D:\SibSUTIS\Course 1\САОД\Code\LabaratoryWorkDataProcessing\</FILEPATH>
+        <FILENAME>drawing.cxx</FILENAME>
+        <LINE>1089</LINE>
+        <COLUMN>16</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>D:\SibSUTIS\Course 1\САОД\Code\LabaratoryWorkDataProcessing\</FILEPATH>
+        <FILENAME>drawing.cxx</FILENAME>
+        <LINE>1090</LINE>
+        <COLUMN>16</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>D:\SibSUTIS\Course 1\САОД\Code\LabaratoryWorkDataProcessing\</FILEPATH>
+        <FILENAME>drawing.cxx</FILENAME>
+        <LINE>1091</LINE>
+        <COLUMN>8</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>D:\SibSUTIS\Course 1\САОД\Code\LabaratoryWorkDataProcessing\</FILEPATH>
+        <FILENAME>drawing.cxx</FILENAME>
+        <LINE>1092</LINE>
+        <COLUMN>8</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>D:\SibSUTIS\Course 1\САОД\Code\LabaratoryWorkDataProcessing\</FILEPATH>
+        <FILENAME>drawing.cxx</FILENAME>
+        <LINE>1093</LINE>
+        <COLUMN>12</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>D:\SibSUTIS\Course 1\САОД\Code\LabaratoryWorkDataProcessing\</FILEPATH>
+        <FILENAME>drawing.cxx</FILENAME>
+        <LINE>1094</LINE>
+        <COLUMN>12</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>D:\SibSUTIS\Course 1\САОД\Code\LabaratoryWorkDataProcessing\</FILEPATH>
+        <FILENAME>drawing.cxx</FILENAME>
+        <LINE>1095</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>D:\SibSUTIS\Course 1\САОД\Code\LabaratoryWorkDataProcessing\</FILEPATH>
+        <FILENAME>drawing.cxx</FILENAME>
+        <LINE>1096</LINE>
+        <COLUMN>17</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>D:\SibSUTIS\Course 1\САОД\Code\LabaratoryWorkDataProcessing\</FILEPATH>
+        <FILENAME>drawing.cxx</FILENAME>
+        <LINE>1097</LINE>
+        <COLUMN>10</COLUMN>
+        <KEYEVENT>
+          <ID>1</ID>
+          <KIND>declaration</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>Это выражение может привести к тому, что "fn" не будет завершаться нулем</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>D:\SibSUTIS\Course 1\САОД\Code\LabaratoryWorkDataProcessing\</FILEPATH>
+        <FILENAME>drawing.cxx</FILENAME>
+        <LINE>1099</LINE>
+        <COLUMN>17</COLUMN>
+        <KEYEVENT>
+          <ID>2</ID>
+          <KIND>branch</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>Войти в эту ветвь (предполагается "filename==0")</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>D:\SibSUTIS\Course 1\САОД\Code\LabaratoryWorkDataProcessing\</FILEPATH>
+        <FILENAME>drawing.cxx</FILENAME>
+        <LINE>1101</LINE>
+        <COLUMN>1</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>D:\SibSUTIS\Course 1\САОД\Code\LabaratoryWorkDataProcessing\</FILEPATH>
+        <FILENAME>drawing.cxx</FILENAME>
+        <LINE>1102</LINE>
+        <COLUMN>1</COLUMN>
+        <KEYEVENT>
+          <ID>3</ID>
+          <KIND>declaration</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>"fn" является выходными данными из "memset" (объявлено в c:\program files\microsoft visual studio\2022\community\vc\tools\msvc\14.35.32215\include\vcruntime_string.h:63)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>D:\SibSUTIS\Course 1\САОД\Code\LabaratoryWorkDataProcessing\</FILEPATH>
+        <FILENAME>drawing.cxx</FILENAME>
+        <LINE>1103</LINE>
+        <COLUMN>17</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>D:\SibSUTIS\Course 1\САОД\Code\LabaratoryWorkDataProcessing\</FILEPATH>
+        <FILENAME>drawing.cxx</FILENAME>
+        <LINE>1104</LINE>
+        <COLUMN>17</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>D:\SibSUTIS\Course 1\САОД\Code\LabaratoryWorkDataProcessing\</FILEPATH>
+        <FILENAME>drawing.cxx</FILENAME>
+        <LINE>1105</LINE>
+        <COLUMN>15</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>D:\SibSUTIS\Course 1\САОД\Code\LabaratoryWorkDataProcessing\</FILEPATH>
+        <FILENAME>drawing.cxx</FILENAME>
+        <LINE>1106</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>D:\SibSUTIS\Course 1\САОД\Code\LabaratoryWorkDataProcessing\</FILEPATH>
+        <FILENAME>drawing.cxx</FILENAME>
+        <LINE>1107</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>D:\SibSUTIS\Course 1\САОД\Code\LabaratoryWorkDataProcessing\</FILEPATH>
+        <FILENAME>drawing.cxx</FILENAME>
+        <LINE>1108</LINE>
+        <COLUMN>5</COLUMN>
+        <KEYEVENT>
+          <ID>4</ID>
+          <KIND>branch</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>Пропустить эту ветвь (предполагается, что "!GetSaveFileNameA(&amp;ofn)" равно false)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>D:\SibSUTIS\Course 1\САОД\Code\LabaratoryWorkDataProcessing\</FILEPATH>
+        <FILENAME>drawing.cxx</FILENAME>
+        <LINE>1109</LINE>
+        <COLUMN>20</COLUMN>
+        <KEYEVENT>
+          <ID>5</ID>
+          <KIND>usage</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>"fn" является входными данными для "strlen" (объявлено в c:\program files (x86)\windows kits\10\include\10.0.22621.0\ucrt\string.h:215)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>D:\SibSUTIS\Course 1\САОД\Code\LabaratoryWorkDataProcessing\</FILEPATH>
+        <FILENAME>drawing.cxx</FILENAME>
+        <LINE>1109</LINE>
+        <COLUMN>20</COLUMN>
+        <KEYEVENT>
+          <ID>6</ID>
+          <KIND>usage</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>"fn" должно завершаться нулем в соответствии с SAL-аннотацией для "strlen"</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+    </PATH>
+  </DEFECT>
+</DEFECTS>

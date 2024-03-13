@@ -1,0 +1,1233 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"WindowData::width\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/winbgitypes.h"
+                },
+                "region": {
+                  "startLine": 69,
+                  "startColumn": 1,
+                  "endLine": 69,
+                  "endColumn": 1
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "WindowData::{ctor}",
+                  "decoratedName": "??0WindowData@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "WindowData::width"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"WindowData::height\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/winbgitypes.h"
+                },
+                "region": {
+                  "startLine": 69,
+                  "startColumn": 1,
+                  "endLine": 69,
+                  "endColumn": 1
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "WindowData::{ctor}",
+                  "decoratedName": "??0WindowData@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "WindowData::height"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"WindowData::initleft\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/winbgitypes.h"
+                },
+                "region": {
+                  "startLine": 69,
+                  "startColumn": 1,
+                  "endLine": 69,
+                  "endColumn": 1
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "WindowData::{ctor}",
+                  "decoratedName": "??0WindowData@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "WindowData::initleft"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"WindowData::inittop\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/winbgitypes.h"
+                },
+                "region": {
+                  "startLine": 69,
+                  "startColumn": 1,
+                  "endLine": 69,
+                  "endColumn": 1
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "WindowData::{ctor}",
+                  "decoratedName": "??0WindowData@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "WindowData::inittop"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"WindowData::arcInfo\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/winbgitypes.h"
+                },
+                "region": {
+                  "startLine": 69,
+                  "startColumn": 1,
+                  "endLine": 69,
+                  "endColumn": 1
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "WindowData::{ctor}",
+                  "decoratedName": "??0WindowData@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "WindowData::arcInfo"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"WindowData::fillInfo\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/winbgitypes.h"
+                },
+                "region": {
+                  "startLine": 69,
+                  "startColumn": 1,
+                  "endLine": 69,
+                  "endColumn": 1
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "WindowData::{ctor}",
+                  "decoratedName": "??0WindowData@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "WindowData::fillInfo"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"WindowData::uPattern\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/winbgitypes.h"
+                },
+                "region": {
+                  "startLine": 69,
+                  "startColumn": 1,
+                  "endLine": 69,
+                  "endColumn": 1
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "WindowData::{ctor}",
+                  "decoratedName": "??0WindowData@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "WindowData::uPattern"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"WindowData::lineInfo\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/winbgitypes.h"
+                },
+                "region": {
+                  "startLine": 69,
+                  "startColumn": 1,
+                  "endLine": 69,
+                  "endColumn": 1
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "WindowData::{ctor}",
+                  "decoratedName": "??0WindowData@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "WindowData::lineInfo"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"WindowData::textInfo\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/winbgitypes.h"
+                },
+                "region": {
+                  "startLine": 69,
+                  "startColumn": 1,
+                  "endLine": 69,
+                  "endColumn": 1
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "WindowData::{ctor}",
+                  "decoratedName": "??0WindowData@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "WindowData::textInfo"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"WindowData::viewportInfo\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/winbgitypes.h"
+                },
+                "region": {
+                  "startLine": 69,
+                  "startColumn": 1,
+                  "endLine": 69,
+                  "endColumn": 1
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "WindowData::{ctor}",
+                  "decoratedName": "??0WindowData@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "WindowData::viewportInfo"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"WindowData::hWnd\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/winbgitypes.h"
+                },
+                "region": {
+                  "startLine": 69,
+                  "startColumn": 1,
+                  "endLine": 69,
+                  "endColumn": 1
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "WindowData::{ctor}",
+                  "decoratedName": "??0WindowData@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "WindowData::hWnd"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"WindowData::hDC\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/winbgitypes.h"
+                },
+                "region": {
+                  "startLine": 69,
+                  "startColumn": 1,
+                  "endLine": 69,
+                  "endColumn": 1
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "WindowData::{ctor}",
+                  "decoratedName": "??0WindowData@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "WindowData::hDC"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"WindowData::hOldBitmap\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/winbgitypes.h"
+                },
+                "region": {
+                  "startLine": 69,
+                  "startColumn": 1,
+                  "endLine": 69,
+                  "endColumn": 1
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "WindowData::{ctor}",
+                  "decoratedName": "??0WindowData@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "WindowData::hOldBitmap"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"WindowData::VisualPage\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/winbgitypes.h"
+                },
+                "region": {
+                  "startLine": 69,
+                  "startColumn": 1,
+                  "endLine": 69,
+                  "endColumn": 1
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "WindowData::{ctor}",
+                  "decoratedName": "??0WindowData@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "WindowData::VisualPage"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"WindowData::ActivePage\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/winbgitypes.h"
+                },
+                "region": {
+                  "startLine": 69,
+                  "startColumn": 1,
+                  "endLine": 69,
+                  "endColumn": 1
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "WindowData::{ctor}",
+                  "decoratedName": "??0WindowData@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "WindowData::ActivePage"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"WindowData::DoubleBuffer\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/winbgitypes.h"
+                },
+                "region": {
+                  "startLine": 69,
+                  "startColumn": 1,
+                  "endLine": 69,
+                  "endColumn": 1
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "WindowData::{ctor}",
+                  "decoratedName": "??0WindowData@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "WindowData::DoubleBuffer"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"WindowData::CloseBehavior\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/winbgitypes.h"
+                },
+                "region": {
+                  "startLine": 69,
+                  "startColumn": 1,
+                  "endLine": 69,
+                  "endColumn": 1
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "WindowData::{ctor}",
+                  "decoratedName": "??0WindowData@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "WindowData::CloseBehavior"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"WindowData::drawColor\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/winbgitypes.h"
+                },
+                "region": {
+                  "startLine": 69,
+                  "startColumn": 1,
+                  "endLine": 69,
+                  "endColumn": 1
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "WindowData::{ctor}",
+                  "decoratedName": "??0WindowData@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "WindowData::drawColor"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"WindowData::bgColor\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/winbgitypes.h"
+                },
+                "region": {
+                  "startLine": 69,
+                  "startColumn": 1,
+                  "endLine": 69,
+                  "endColumn": 1
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "WindowData::{ctor}",
+                  "decoratedName": "??0WindowData@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "WindowData::bgColor"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"WindowData::key_waiting\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/winbgitypes.h"
+                },
+                "region": {
+                  "startLine": 69,
+                  "startColumn": 1,
+                  "endLine": 69,
+                  "endColumn": 1
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "WindowData::{ctor}",
+                  "decoratedName": "??0WindowData@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "WindowData::key_waiting"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"WindowData::WindowCreated\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/winbgitypes.h"
+                },
+                "region": {
+                  "startLine": 69,
+                  "startColumn": 1,
+                  "endLine": 69,
+                  "endColumn": 1
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "WindowData::{ctor}",
+                  "decoratedName": "??0WindowData@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "WindowData::WindowCreated"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"WindowData::threadID\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/winbgitypes.h"
+                },
+                "region": {
+                  "startLine": 69,
+                  "startColumn": 1,
+                  "endLine": 69,
+                  "endColumn": 1
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "WindowData::{ctor}",
+                  "decoratedName": "??0WindowData@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "WindowData::threadID"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"WindowData::error_code\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/winbgitypes.h"
+                },
+                "region": {
+                  "startLine": 69,
+                  "startColumn": 1,
+                  "endLine": 69,
+                  "endColumn": 1
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "WindowData::{ctor}",
+                  "decoratedName": "??0WindowData@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "WindowData::error_code"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"WindowData::x_aspect_ratio\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/winbgitypes.h"
+                },
+                "region": {
+                  "startLine": 69,
+                  "startColumn": 1,
+                  "endLine": 69,
+                  "endColumn": 1
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "WindowData::{ctor}",
+                  "decoratedName": "??0WindowData@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "WindowData::x_aspect_ratio"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"WindowData::y_aspect_ratio\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/winbgitypes.h"
+                },
+                "region": {
+                  "startLine": 69,
+                  "startColumn": 1,
+                  "endLine": 69,
+                  "endColumn": 1
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "WindowData::{ctor}",
+                  "decoratedName": "??0WindowData@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "WindowData::y_aspect_ratio"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"WindowData::hbitmap\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/winbgitypes.h"
+                },
+                "region": {
+                  "startLine": 69,
+                  "startColumn": 1,
+                  "endLine": 69,
+                  "endColumn": 1
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "WindowData::{ctor}",
+                  "decoratedName": "??0WindowData@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "WindowData::hbitmap"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"WindowData::ipBitmap\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/winbgitypes.h"
+                },
+                "region": {
+                  "startLine": 69,
+                  "startColumn": 1,
+                  "endLine": 69,
+                  "endColumn": 1
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "WindowData::{ctor}",
+                  "decoratedName": "??0WindowData@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "WindowData::ipBitmap"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"WindowData::hDCMutex\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/winbgitypes.h"
+                },
+                "region": {
+                  "startLine": 69,
+                  "startColumn": 1,
+                  "endLine": 69,
+                  "endColumn": 1
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "WindowData::{ctor}",
+                  "decoratedName": "??0WindowData@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "WindowData::hDCMutex"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"WindowData::pbmpInfo\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/winbgitypes.h"
+                },
+                "region": {
+                  "startLine": 69,
+                  "startColumn": 1,
+                  "endLine": 69,
+                  "endColumn": 1
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "WindowData::{ctor}",
+                  "decoratedName": "??0WindowData@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "WindowData::pbmpInfo"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"WindowData::t_scale\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/winbgitypes.h"
+                },
+                "region": {
+                  "startLine": 69,
+                  "startColumn": 1,
+                  "endLine": 69,
+                  "endColumn": 1
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "WindowData::{ctor}",
+                  "decoratedName": "??0WindowData@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "WindowData::t_scale"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"WindowData::alignment\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/winbgitypes.h"
+                },
+                "region": {
+                  "startLine": 69,
+                  "startColumn": 1,
+                  "endLine": 69,
+                  "endColumn": 1
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "WindowData::{ctor}",
+                  "decoratedName": "??0WindowData@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "WindowData::alignment"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"WindowData::refreshing\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/winbgitypes.h"
+                },
+                "region": {
+                  "startLine": 69,
+                  "startColumn": 1,
+                  "endLine": 69,
+                  "endColumn": 1
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "WindowData::{ctor}",
+                  "decoratedName": "??0WindowData@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "WindowData::refreshing"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"WindowData::mouse\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/winbgitypes.h"
+                },
+                "region": {
+                  "startLine": 69,
+                  "startColumn": 1,
+                  "endLine": 69,
+                  "endColumn": 1
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "WindowData::{ctor}",
+                  "decoratedName": "??0WindowData@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "WindowData::mouse"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"WindowData::mouse_handlers\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/winbgitypes.h"
+                },
+                "region": {
+                  "startLine": 69,
+                  "startColumn": 1,
+                  "endLine": 69,
+                  "endColumn": 1
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "WindowData::{ctor}",
+                  "decoratedName": "??0WindowData@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "WindowData::mouse_handlers"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"WindowData::mouse_queuing\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/winbgitypes.h"
+                },
+                "region": {
+                  "startLine": 69,
+                  "startColumn": 1,
+                  "endLine": 69,
+                  "endColumn": 1
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "WindowData::{ctor}",
+                  "decoratedName": "??0WindowData@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "WindowData::mouse_queuing"
+          }
+        },
+        {
+          "ruleId": "C6385",
+          "message": {
+            "text": "Чтение недопустимых данных из \"msg\"."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/winbgi.cxx"
+                },
+                "region": {
+                  "startLine": 575,
+                  "startColumn": 9,
+                  "endLine": 575,
+                  "endColumn": 30
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "grapherrormsg",
+                  "decoratedName": "grapherrormsg",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/winbgi.cxx"
+                          },
+                          "region": {
+                            "startLine": 563,
+                            "startColumn": 18
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/winbgi.cxx"
+                          },
+                          "region": {
+                            "startLine": 572,
+                            "startColumn": 30
+                          }
+                        },
+                        "message": {
+                          "text": "Пропустить эту ветвь (предполагается, что \"<условие ветви>\" равно false)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/winbgi.cxx"
+                          },
+                          "region": {
+                            "startLine": 575,
+                            "startColumn": 9
+                          }
+                        },
+                        "message": {
+                          "text": "Недопустимая операция чтения из \"msg[16]\" (доступный для чтения диапазон: от 0 до 15)"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.35.32217.1",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/winbgitypes.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "db11d4647a25621de799bd12ec335a720a1fa003f3c1a879adf6412a775e17ad"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///D:/SibSUTIS/Course 1/САОД/Code/LabaratoryWorkDataProcessing/winbgi.cxx"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "f2654f0f475ff783a1be66156ac52a7f6e6347eec7e1761960be746d9f2a4594"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/sibsutis/course 1/саод/code/labaratoryworkdataprocessing/winbgi.h"
+          },
+          "hashes": {
+            "sha-256": "42341bae9183cc6e86b933dc39822c9c6f33dac532e9f6fd9fb853c080bfdf9a"
+          }
+        }
+      ]
+    }
+  ]
+}
