@@ -247,8 +247,68 @@ void ShellSortKnutPhoneBook(PhoneBook arr[], int len, bool (*comparator)(const P
 
 void PrintPhoneBook(PhoneBook arr[], int len) {
 	for (int i = 0; i < len; i++) {
-		printf("%s %s %s %s\n", arr[i].surname.c_str(), arr[i].name.c_str(), arr[i].phone.c_str(), arr[i].address.c_str());
+		printf("[%d] %s %s   %s   %s\n", i, arr[i].surname.c_str(), arr[i].name.c_str(), arr[i].phone.c_str(), arr[i].address.c_str());
 	}
+}
+
+int BSearchPhoneBook(PhoneBook arr[], int len, string key, string field) {
+	int l = 0, r = len - 1;
+
+	for (auto& c : field) {
+		c = tolower(c);
+	}
+
+	while (l <= r) {
+		int m = l + (r - l) / 2;
+
+		if (field == "surname" && arr[m].surname == key) return m;
+		if (field == "name" && arr[m].name == key) return m;
+		if (field == "phone" && arr[m].phone == key) return m;
+		if (field == "address" && arr[m].address == key) return m;
+
+		if (field == "surname" && arr[m].surname < key) l = m + 1;
+		else if (field == "name" && arr[m].name < key) l = m + 1;
+		else if (field == "phone" && arr[m].phone < key) l = m + 1;
+		else if (field == "address" && arr[m].address < key) l = m + 1;
+		else r = m - 1;
+	}
+
+	return -1;
+}
+
+vector<int> BSearchAllPhoneBookSurname(PhoneBook arr[], int len, string key) {
+	vector<int> indexes;
+	int l = 0, r = len - 1;
+
+	while (l <= r) {
+		int m = l + (r - l) / 2;
+
+		if (arr[m].surname == key) {
+			indexes.push_back(m);
+			int temp = m - 1;
+
+			while (temp >= 0) {
+				if (arr[temp].surname != key) break;
+
+				indexes.push_back(temp--);
+			}
+
+			temp = m + 1;
+
+			while (temp < len) {
+				if (arr[temp].surname != key) break;
+
+				indexes.push_back(temp++);
+			}
+
+			break;
+		}
+
+		if (arr[m].surname < key) l = m + 1;
+		else r = m - 1;
+	}
+
+	return indexes;
 }
 
 int BSearch(int arr[], int len, int key, int* c) {

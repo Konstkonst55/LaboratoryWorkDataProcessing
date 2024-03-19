@@ -12,6 +12,7 @@
 #include "AxisType.h"
 #include "PhoneBook.h"
 
+
 void ShowSorts();
 void ShowSearches();
 void ShowStructSorting();
@@ -23,7 +24,8 @@ int main() {
     if (!GetConsoleMode(hOut, &dwMode)) return 0;
     dwMode |= ENABLE_VIRTUAL_TERMINAL_PROCESSING;
     if (!SetConsoleMode(hOut, dwMode)) return 0;
-    setlocale(LC_ALL, "Russian");
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
 
     ShowStructSorting();
 }
@@ -181,13 +183,13 @@ void ShowStructSorting() {
     PhoneBook phoneBook[] = {
         {"Иванов", "Иван", "9231405857", "ул. Пушкина, 1"},
         {"Петров", "Петр", "9231405828", "ул. Пушкина, 2"},
-        {"Сидоров", "Сидор", "9231476822", "ул. Пушкина, 3"},
+        {"Сидоров", "Сергей", "9231476822", "ул. Пушкина, 3"},
         {"Кузнецов", "Кузьма", "9231402326", "ул. Пушкина, 4"},
         {"Смирнов", "Олег", "9231405829", "ул. Пушкина, 5"},
         {"Васильев", "Василий", "9231345827", "ул. Пушкина, 6"},
         {"Дмитриев", "Дмитрий", "9231685824", "ул. Пушкина, 7"},
         {"Дмитриев", "Борис", "9231685824", "ул. Пушкина, 7"},
-        {"Новиков", "Новик", "9231405834", "ул. Пушкина, 8"},
+        {"Новиков", "Дмитрий", "9231405834", "ул. Пушкина, 8"},
         {"Михайлов", "Михаил", "9231695827", "ул. Пушкина, 9"},
         {"Михайлов", "Евгений", "9231401548", "ул. Пушкина, 10"},
         {"Алексеев", "Алексей", "9231409632", "ул. Пушкина, 11"},
@@ -205,6 +207,26 @@ void ShowStructSorting() {
     printf("\nОтсортированный справочник: \n\n");
 
     PrintPhoneBook(phoneBook, n);
+
+    printf("\n");
+
+    while (true) {
+        string key;
+
+        printf("\nВведите ключ: ");
+        cin >> key;
+
+        vector<int> sRes = BSearchAllPhoneBookSurname(phoneBook, n, key);
+
+        if (sRes.empty()) printf("\nТакого человека нет в справочнике");
+        else printf("\nНайдены: ");
+        for (auto id : sRes) printf("\n - [%d] %s %s", id, phoneBook[id].surname.c_str(), phoneBook[id].name.c_str());
+
+        char choice;
+        printf("\n\nПродолжить поиск? (y/n): ");
+        cin >> choice;
+        if (tolower(choice) != 'y' && tolower(choice) != 'д') break;
+    }
 
     printf("\n");
     system("PAUSE");

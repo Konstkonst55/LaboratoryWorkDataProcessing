@@ -13,8 +13,10 @@
 #include <stdlib.h>
 #include <cmath>
 #include <time.h>
+#include <iostream>
 
 using namespace std;
+
 using sortersFType = function<void(int*, int, int*, int*)>;
 using fillersFType = function<void(int*, int)>;
 
@@ -49,6 +51,8 @@ string getImpSteps(int len);
 bool ComparePhoneBooks(const PhoneBook& pb1, const PhoneBook& pb2);
 void ShellSortKnutPhoneBook(PhoneBook arr[], int len, bool (*comparator)(const PhoneBook&, const PhoneBook&));
 void PrintPhoneBook(PhoneBook arr[], int len);
+int BSearchPhoneBook(PhoneBook arr[], int len, string key, string field = "surname");
+vector<int> BSearchAllPhoneBookSurname(PhoneBook arr[], int len, string key);
 
 int BSearch(int arr[], int len, int key, int* c);
 int BSearchImp(int arr[], int len, int key, int* c);
