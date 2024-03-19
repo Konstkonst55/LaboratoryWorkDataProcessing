@@ -3,6 +3,9 @@
 #ifndef MATH_UTILS_H
 #define MATH_UTILS_H
 
+#include <stdlib.h>
+#include <math.h>
+
 int GetRandomInt(int min = 0, int max = 9);
 
 int GetCTheorSelectSort(int n);

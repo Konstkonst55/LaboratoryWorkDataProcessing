@@ -90,6 +90,7 @@
     <ClInclude Include="graphics.h" />
     <ClInclude Include="MathUtils.h" />
     <ClInclude Include="Point.h" />
+    <ClInclude Include="PhoneBook.h" />
     <ClInclude Include="TableHeaders.h" />
     <ClInclude Include="winbgi.h" />
     <ClInclude Include="winbgim.h" />

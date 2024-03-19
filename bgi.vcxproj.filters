@@ -78,9 +78,6 @@
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="WindowSize.h">
-      <Filter>Header Files\Utils</Filter>
-    </ClCompile>
     <ClCompile Include="Table.h">
       <Filter>Header Files\View</Filter>
     </ClCompile>
@@ -89,6 +86,9 @@
     </ClCompile>
     <ClCompile Include="Table.cpp">
       <Filter>Source Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowSize.h">
+      <Filter>Header Files\Data</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -113,16 +113,19 @@
     <ClInclude Include="MathUtils.h">
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="Point.h">
-      <Filter>Header Files\Utils</Filter>
-    </ClInclude>
     <ClInclude Include="Chart.h">
       <Filter>Header Files\View</Filter>
     </ClInclude>
-    <ClInclude Include="AxisType.h">
-      <Filter>Header Files\Utils</Filter>
-    </ClInclude>
     <ClInclude Include="TableHeaders.h">
+      <Filter>Header Files\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="PhoneBook.h">
+      <Filter>Header Files\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Point.h">
+      <Filter>Header Files\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="AxisType.h">
       <Filter>Header Files\Data</Filter>
     </ClInclude>
   </ItemGroup>

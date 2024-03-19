@@ -1,3 +1,4 @@
 D:\SibSUTIS\Course 1\САОД\Code\LabaratoryWorkDataProcessing\Debug\LabaratoryWorkDataProcessing.exe
 D:\SibSUTIS\Course 1\САОД\Code\LabaratoryWorkDataProcessing\Debug\LabaratoryWorkDataProcessing.exe.lastcodeanalysissucceeded
 D:\SibSUTIS\Course 1\САОД\Code\LabaratoryWorkDataProcessing\Debug\NativeCodeAnalysis.read.1.tlog
+D:\SibSUTIS\Course 1\САОД\Code\LaboratoryWorkDataProcessing\Debug\LaboratoryWorkDataProcessing.exe
