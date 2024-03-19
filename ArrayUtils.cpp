@@ -1,10 +1,5 @@
-#include "MathUtils.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <cmath>
-#include <time.h>
+
 #include "ArrayUtils.h"
-#include "Point.h"
 
 void FillInc(int arr[], int len) {
 	for (int i = 0; i < len; i++) arr[i] = i + 1;
@@ -222,6 +217,40 @@ string getImpSteps(int len) {
 	return to_string(h1) + "..." + to_string(h);
 }
 
+bool ComparePhoneBooks(const PhoneBook& pb1, const PhoneBook& pb2) {
+	return pb1.surname == pb2.surname ? pb1.name < pb2.name : pb1.surname < pb2.surname;
+}
+
+void ShellSortKnutPhoneBook(PhoneBook arr[], int len, bool (*comparator)(const PhoneBook&, const PhoneBook&)) {
+	int max = (log2(len)) - 1;
+	int* hArr = new int[max];
+	hArr[0] = 1;
+	for (int i = 1; i < max; i++) hArr[i] = 2 * hArr[i - 1] + 1;
+
+	PhoneBook temp;
+	int k, j, l = max - 1;
+
+	for (k = hArr[l]; l >= 0; l--, k = hArr[l]) {
+		for (int i = k; i < len; i++) {
+			temp = arr[i];
+			j = i - k;
+
+			while (j >= 0 && comparator(temp, arr[j])) {
+				arr[j + k] = arr[j];
+				j -= k;
+			}
+
+			arr[j + k] = temp;
+		}
+	}
+}
+
+void PrintPhoneBook(PhoneBook arr[], int len) {
+	for (int i = 0; i < len; i++) {
+		printf("%s %s %s %s\n", arr[i].surname.c_str(), arr[i].name.c_str(), arr[i].phone.c_str(), arr[i].address.c_str());
+	}
+}
+
 int BSearch(int arr[], int len, int key, int* c) {
 	int l = 0, r = len - 1;
 
@@ -374,7 +403,7 @@ vector<vector<string>> GetSearchData(const vector<searchersFType>& searchers, co
 		ShellSortKnut(arr, n, &sc, &sm);
 
 		for (auto search : searchers) {
-			search(arr, n, GetRandomInt(0, n - 1), &c);
+			search(arr, n, GetRandomInt(0, n * 2), &c);
 			row.push_back(to_string(c));
 			c = 0;
 		}

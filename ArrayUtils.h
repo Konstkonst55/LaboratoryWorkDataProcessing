@@ -7,6 +7,12 @@
 #include <string>
 #include "Point.h"
 #include <functional>
+#include "PhoneBook.h"
+#include "MathUtils.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <cmath>
+#include <time.h>
 
 using namespace std;
 using sortersFType = function<void(int*, int, int*, int*)>;
@@ -36,8 +42,13 @@ void InsertSortWithStep(int arr[], int len, int* m, int* c, int step);
 
 void ShellSort(int arr[], int len, int* m, int* c);
 void ShellSortKnut(int arr[], int len, int* m, int* c);
+
 string getKnutSteps(int len);
 string getImpSteps(int len);
+
+bool ComparePhoneBooks(const PhoneBook& pb1, const PhoneBook& pb2);
+void ShellSortKnutPhoneBook(PhoneBook arr[], int len, bool (*comparator)(const PhoneBook&, const PhoneBook&));
+void PrintPhoneBook(PhoneBook arr[], int len);
 
 int BSearch(int arr[], int len, int key, int* c);
 int BSearchImp(int arr[], int len, int key, int* c);

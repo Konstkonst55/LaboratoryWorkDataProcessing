@@ -1,17 +1,20 @@
-﻿#include "graphics.h"
+﻿#include <windows.h>
 #include <stdio.h>
+#include <iostream>
+#include "graphics.h"
 #include "ArrayUtils.h"
 #include "MathUtils.h"
 #include "TableHeaders.h"
 #include "Point.h"
 #include "WindowSize.h"
-#include <windows.h>
 #include "Table.h"
 #include "Chart.h"
 #include "AxisType.h"
+#include "PhoneBook.h"
 
 void ShowSorts();
 void ShowSearches();
+void ShowStructSorting();
 
 int main() {
     HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -20,8 +23,9 @@ int main() {
     if (!GetConsoleMode(hOut, &dwMode)) return 0;
     dwMode |= ENABLE_VIRTUAL_TERMINAL_PROCESSING;
     if (!SetConsoleMode(hOut, dwMode)) return 0;
+    setlocale(LC_ALL, "Russian");
 
-    ShowSearches();
+    ShowStructSorting();
 }
 
 void ShowSorts() {
@@ -94,11 +98,11 @@ void ShowSearches() {
     const int
         MIN_N = 100,
         MAX_N = 1000,
-        STEP = 10,
+        STEP = 1,
         LABEL_DENSITY = 10,
         LEGEND_STEP = 20,
         LEGEND_START = 50,
-        DATA_STEP = 10;
+        DATA_STEP = 100;
     const double
         X_SCALE = 1,
         Y_SCALE = 30,
@@ -120,7 +124,16 @@ void ShowSearches() {
 
     DrawAxis(BOTTOM_LEFT, "N", "C", AXIS_STEP * X_SCALE, AXIS_STEP * Y_SCALE, 3, true, true);
 
-    for (size_t s = 0, y = 2; s < searchersDataTable[0].size() - 2; s++, y++) {
+    for (size_t s = 0, y = 2; s < searchersDataTable[0].size() - 4; s++, y++) {
+        OutChartText(LEGEND_START, legY += LEGEND_STEP, colors[s], (char*)labels[s].c_str());
+        DrawChartWithPoints(CreatePoints(searchersDataTable, 3, 0, y), X_SCALE, Y_SCALE, ALLOW_LABELS, LABEL_DENSITY, colors[s]);
+    }
+
+    initwindow(wSize.x, wSize.y);
+
+    DrawAxis(BOTTOM_LEFT, "N", "C", AXIS_STEP * X_SCALE, AXIS_STEP * Y_SCALE, 3, true, true);
+
+    for (size_t s = 2, y = 4; s < searchersDataTable[0].size() - 2; s++, y++) {
         OutChartText(LEGEND_START, legY += LEGEND_STEP, colors[s], (char*)labels[s].c_str());
         DrawChartWithPoints(CreatePoints(searchersDataTable, 3, 0, y), X_SCALE, Y_SCALE, ALLOW_LABELS, LABEL_DENSITY, colors[s]);
     }
@@ -162,4 +175,37 @@ void ShowSearches() {
 
     system("PAUSE");
     closegraph();
+}
+
+void ShowStructSorting() {
+    PhoneBook phoneBook[] = {
+        {"Иванов", "Иван", "9231405857", "ул. Пушкина, 1"},
+        {"Петров", "Петр", "9231405828", "ул. Пушкина, 2"},
+        {"Сидоров", "Сидор", "9231476822", "ул. Пушкина, 3"},
+        {"Кузнецов", "Кузьма", "9231402326", "ул. Пушкина, 4"},
+        {"Смирнов", "Олег", "9231405829", "ул. Пушкина, 5"},
+        {"Васильев", "Василий", "9231345827", "ул. Пушкина, 6"},
+        {"Дмитриев", "Дмитрий", "9231685824", "ул. Пушкина, 7"},
+        {"Дмитриев", "Борис", "9231685824", "ул. Пушкина, 7"},
+        {"Новиков", "Новик", "9231405834", "ул. Пушкина, 8"},
+        {"Михайлов", "Михаил", "9231695827", "ул. Пушкина, 9"},
+        {"Михайлов", "Евгений", "9231401548", "ул. Пушкина, 10"},
+        {"Алексеев", "Алексей", "9231409632", "ул. Пушкина, 11"},
+        {"Сергеев", "Сергей", "9231429327", "ул. Пушкина, 12"}
+    };
+
+    int n = sizeof(phoneBook) / sizeof(phoneBook[0]);
+
+    printf("Исходный справочник: \n\n");
+
+    PrintPhoneBook(phoneBook, n);
+
+    ShellSortKnutPhoneBook(phoneBook, n, ComparePhoneBooks);
+
+    printf("\nОтсортированный справочник: \n\n");
+
+    PrintPhoneBook(phoneBook, n);
+
+    printf("\n");
+    system("PAUSE");
 }
