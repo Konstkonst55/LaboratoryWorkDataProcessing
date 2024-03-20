@@ -221,7 +221,7 @@ bool ComparePhoneBooks(const PhoneBook& pb1, const PhoneBook& pb2) {
 	return pb1.surname == pb2.surname ? pb1.name < pb2.name : pb1.surname < pb2.surname;
 }
 
-void ShellSortKnutPhoneBook(PhoneBook arr[], int len, bool (*comparator)(const PhoneBook&, const PhoneBook&)) {
+void ShellSortKnutPhoneBook(PhoneBook arr[], int len, bool (*comparator)(const PhoneBook&, const PhoneBook&), bool isAsc) {
 	int max = (log2(len)) - 1;
 	int* hArr = new int[max];
 	hArr[0] = 1;
@@ -235,7 +235,7 @@ void ShellSortKnutPhoneBook(PhoneBook arr[], int len, bool (*comparator)(const P
 			temp = arr[i];
 			j = i - k;
 
-			while (j >= 0 && comparator(temp, arr[j])) {
+			while (j >= 0 && (isAsc ? comparator(temp, arr[j]) : !comparator(temp, arr[j]))) {
 				arr[j + k] = arr[j];
 				j -= k;
 			}

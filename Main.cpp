@@ -202,7 +202,7 @@ void ShowStructSorting() {
 
     PrintPhoneBook(phoneBook, n);
 
-    ShellSortKnutPhoneBook(phoneBook, n, ComparePhoneBooks);
+    ShellSortKnutPhoneBook(phoneBook, n, ComparePhoneBooks, true);
 
     printf("\nОтсортированный справочник: \n\n");
 
