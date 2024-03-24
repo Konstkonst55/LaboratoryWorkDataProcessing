@@ -182,6 +182,8 @@ void ShowSearches() {
 void ShowStructSorting() {
     PhoneBook phoneBook[] = {
         {"Иванов", "Иван", "9231405857", "ул. Пушкина, 1"},
+        {"Иванов", "Иван", "9231405858", "ул. Пушкина, 1"},
+        {"Иванов", "Иван", "9231405856", "ул. Пушкина, 1"},
         {"Петров", "Петр", "9231405828", "ул. Пушкина, 2"},
         {"Сидоров", "Сергей", "9231476822", "ул. Пушкина, 3"},
         {"Кузнецов", "Кузьма", "9231402326", "ул. Пушкина, 4"},
@@ -202,7 +204,7 @@ void ShowStructSorting() {
 
     PrintPhoneBook(phoneBook, n);
 
-    ShellSortKnutPhoneBook(phoneBook, n, ComparePhoneBooks, true);
+    ShellSortKnutPhoneBook(phoneBook, n, ComparePhoneBooksAsc);
 
     printf("\nОтсортированный справочник: \n\n");
 

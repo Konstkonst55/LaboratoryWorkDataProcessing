@@ -48,10 +48,10 @@ void ShellSortKnut(int arr[], int len, int* m, int* c);
 string getKnutSteps(int len);
 string getImpSteps(int len);
 
-bool ComparePhoneBooks(const PhoneBook& pb1, const PhoneBook& pb2);
-void ShellSortKnutPhoneBook(PhoneBook arr[], int len, bool (*comparator)(const PhoneBook&, const PhoneBook&) = ComparePhoneBooks, bool isAsc = true);
+bool ComparePhoneBooksAsc(const PhoneBook& pb1, const PhoneBook& pb2);
+bool ComparePhoneBooksDesc(const PhoneBook& pb1, const PhoneBook& pb2);
+void ShellSortKnutPhoneBook(PhoneBook arr[], int len, bool (*comparator)(const PhoneBook&, const PhoneBook&) = ComparePhoneBooksAsc);
 void PrintPhoneBook(PhoneBook arr[], int len);
-int BSearchPhoneBook(PhoneBook arr[], int len, string key, string field = "surname");
 vector<int> BSearchAllPhoneBookSurname(PhoneBook arr[], int len, string key);
 
 int BSearch(int arr[], int len, int key, int* c);

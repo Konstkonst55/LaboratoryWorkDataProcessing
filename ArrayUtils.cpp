@@ -217,11 +217,15 @@ string getImpSteps(int len) {
 	return to_string(h1) + "..." + to_string(h);
 }
 
-bool ComparePhoneBooks(const PhoneBook& pb1, const PhoneBook& pb2) {
-	return pb1.surname == pb2.surname ? pb1.name < pb2.name : pb1.surname < pb2.surname;
+bool ComparePhoneBooksAsc(const PhoneBook& pb1, const PhoneBook& pb2) {
+	return pb1.surname == pb2.surname ? (pb1.name == pb2.name ? pb1.phone < pb2.phone : pb1.name < pb2.name) : pb1.surname < pb2.surname;
 }
 
-void ShellSortKnutPhoneBook(PhoneBook arr[], int len, bool (*comparator)(const PhoneBook&, const PhoneBook&), bool isAsc) {
+bool ComparePhoneBooksDesc(const PhoneBook& pb1, const PhoneBook& pb2) {
+	return pb1.surname == pb2.surname ? (pb1.name == pb2.name ? pb1.phone > pb2.phone : pb1.name > pb2.name) : pb1.surname > pb2.surname;
+}
+
+void ShellSortKnutPhoneBook(PhoneBook arr[], int len, bool (*comparator)(const PhoneBook&, const PhoneBook&)) {
 	int max = (log2(len)) - 1;
 	int* hArr = new int[max];
 	hArr[0] = 1;
@@ -235,7 +239,7 @@ void ShellSortKnutPhoneBook(PhoneBook arr[], int len, bool (*comparator)(const P
 			temp = arr[i];
 			j = i - k;
 
-			while (j >= 0 && (isAsc ? comparator(temp, arr[j]) : !comparator(temp, arr[j]))) {
+			while (j >= 0 && comparator(temp, arr[j])) {
 				arr[j + k] = arr[j];
 				j -= k;
 			}
@@ -251,61 +255,26 @@ void PrintPhoneBook(PhoneBook arr[], int len) {
 	}
 }
 
-int BSearchPhoneBook(PhoneBook arr[], int len, string key, string field) {
-	int l = 0, r = len - 1;
-
-	for (auto& c : field) {
-		c = tolower(c);
-	}
-
-	while (l <= r) {
-		int m = l + (r - l) / 2;
-
-		if (field == "surname" && arr[m].surname == key) return m;
-		if (field == "name" && arr[m].name == key) return m;
-		if (field == "phone" && arr[m].phone == key) return m;
-		if (field == "address" && arr[m].address == key) return m;
-
-		if (field == "surname" && arr[m].surname < key) l = m + 1;
-		else if (field == "name" && arr[m].name < key) l = m + 1;
-		else if (field == "phone" && arr[m].phone < key) l = m + 1;
-		else if (field == "address" && arr[m].address < key) l = m + 1;
-		else r = m - 1;
-	}
-
-	return -1;
-}
-
 vector<int> BSearchAllPhoneBookSurname(PhoneBook arr[], int len, string key) {
 	vector<int> indexes;
-	int l = 0, r = len - 1;
+	int l = 0, r = len - 1, m = 0;
 
-	while (l <= r) {
-		int m = l + (r - l) / 2;
-
-		if (arr[m].surname == key) {
-			indexes.push_back(m);
-			int temp = m - 1;
-
-			while (temp >= 0) {
-				if (arr[temp].surname != key) break;
-
-				indexes.push_back(temp--);
-			}
-
-			temp = m + 1;
-
-			while (temp < len) {
-				if (arr[temp].surname != key) break;
-
-				indexes.push_back(temp++);
-			}
-
-			break;
-		}
+	while (l < r) {
+		m = l + (r - l) / 2;
 
 		if (arr[m].surname < key) l = m + 1;
-		else r = m - 1;
+		else r = m;
+	}
+
+	if (arr[l].surname == key) {
+		indexes.push_back(l);
+		int temp = l + 1;
+
+		while (temp < len) {
+			if (arr[temp].surname != key) break;
+
+			indexes.push_back(temp++);
+		}
 	}
 
 	return indexes;
