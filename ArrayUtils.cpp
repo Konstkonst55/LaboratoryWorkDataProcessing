@@ -199,6 +199,8 @@ void ShellSortKnut(int arr[], int len, int* m, int* c) {
 			arr[j + k] = temp; (*m)++;
 		}
 	}
+
+	delete[] hArr;
 }
 
 string getKnutSteps(int len) {
@@ -247,11 +249,44 @@ void ShellSortKnutPhoneBook(PhoneBook arr[], int len, bool (*comparator)(const P
 			arr[j + k] = temp;
 		}
 	}
+
+	delete[] hArr;
+}
+
+void ShellSortKnutPhoneBookIdx(PhoneBook pbArr[], int idArr[], int len, bool (*comparator)(const PhoneBook&, const PhoneBook&)) {
+	int max = (log2(len)) - 1;
+	int* hArr = new int[max];
+	hArr[0] = 1;
+	for (int i = 1; i < max; i++) hArr[i] = 2 * hArr[i - 1] + 1;
+
+	int k, j, l = max - 1;
+
+	for (k = hArr[l]; l >= 0; l--, k = hArr[l]) {
+		for (int i = k; i < len; i++) {
+			int tempId = idArr[i];
+			int j = i - k;
+
+			while (j >= 0 && comparator(pbArr[tempId], pbArr[idArr[j]])) {
+				idArr[j + k] = idArr[j];
+				j -= k;
+			}
+
+			idArr[j + k] = tempId;
+		}
+	}
+
+	delete[] hArr; 
 }
 
 void PrintPhoneBook(PhoneBook arr[], int len) {
 	for (int i = 0; i < len; i++) {
 		printf("[%d] %s %s   %s   %s\n", i, arr[i].surname.c_str(), arr[i].name.c_str(), arr[i].phone.c_str(), arr[i].address.c_str());
+	}
+}
+
+void PrintPhoneBookIdx(PhoneBook pbArr[], int idArr[], int len) {
+	for (int i = 0; i < len; i++) {
+		printf("[%d] %s %s   %s   %s\n", idArr[i], pbArr[idArr[i]].surname.c_str(), pbArr[idArr[i]].name.c_str(), pbArr[idArr[i]].phone.c_str(), pbArr[idArr[i]].address.c_str());
 	}
 }
 
@@ -274,6 +309,31 @@ vector<int> BSearchAllPhoneBookSurname(PhoneBook arr[], int len, string key) {
 			if (arr[temp].surname != key) break;
 
 			indexes.push_back(temp++);
+		}
+	}
+
+	return indexes;
+}
+
+vector<int> BSearchAllPhoneBookIdxSurname(PhoneBook arr[], int idArr[], int len, string key) {
+	vector<int> indexes;
+	int l = 0, r = len - 1, m = 0;
+
+	while (l < r) {
+		m = l + (r - l) / 2;
+
+		if (arr[idArr[m]].surname < key) l = m + 1;
+		else r = m;
+	}
+
+	if (arr[idArr[l]].surname == key) {
+		indexes.push_back(idArr[l]);
+		int tempId = l + 1;
+
+		while (tempId < len) {
+			if (arr[idArr[tempId]].surname != key) break;
+
+			indexes.push_back(idArr[tempId++]);
 		}
 	}
 
@@ -353,7 +413,7 @@ vector<int> BSearchAll(int arr[], int len, int key, int* c) {
 
 vector<int> BSearchAllImp(int arr[], int len, int key, int* c) {
 	vector<int> indexes;
-	int l = 0, r = len, m = 0;
+	int l = 0, r = len - 1, m = 0;
 
 	while (l < r) {
 		m = l + (r - l) / 2;
@@ -364,18 +424,9 @@ vector<int> BSearchAllImp(int arr[], int len, int key, int* c) {
 	}
 
 	(*c)++;
-	if (arr[m] == key) {
-		indexes.push_back(m);
-		int temp = m - 1;
-
-		while (temp >= 0) {
-			(*c)++;
-			if (arr[temp] != key) break;
-
-			indexes.push_back(temp--);
-		}
-
-		temp = m + 1;
+	if (arr[l] == key) {
+		indexes.push_back(l);
+		int temp = l + 1;
 
 		while (temp < len) {
 			(*c)++;

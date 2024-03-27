@@ -12,10 +12,28 @@
 #include "AxisType.h"
 #include "PhoneBook.h"
 
-
 void ShowSorts();
 void ShowSearches();
 void ShowStructSorting();
+void ShowIndexes();
+
+PhoneBook phoneBook[] = {
+    {"Иванов", "Иван", "9231405856", "ул. Пушкина, 1"},
+    {"Петров", "Петр", "9231405828", "ул. Пушкина, 2"},
+    {"Сидоров", "Сергей", "9231476822", "ул. Пушкина, 3"},
+    {"Кузнецов", "Кузьма", "9231402326", "ул. Пушкина, 4"},
+    {"Смирнов", "Олег", "9231405829", "ул. Пушкина, 5"},
+    {"Васильев", "Василий", "9231345827", "ул. Пушкина, 6"},
+    {"Дмитриев", "Дмитрий", "9231685824", "ул. Пушкина, 7"},
+    {"Иванов", "Иван", "9231405858", "ул. Пушкина, 1"},
+    {"Дмитриев", "Борис", "9231685824", "ул. Пушкина, 7"},
+    {"Новиков", "Дмитрий", "9231405834", "ул. Пушкина, 8"},
+    {"Михайлов", "Михаил", "9231695827", "ул. Пушкина, 9"},
+    {"Михайлов", "Евгений", "9231401548", "ул. Пушкина, 10"},
+    {"Иванов", "Иван", "9231405857", "ул. Пушкина, 1"},
+    {"Алексеев", "Алексей", "9231409632", "ул. Пушкина, 11"},
+    {"Сергеев", "Сергей", "9231429327", "ул. Пушкина, 12"}
+};
 
 int main() {
     HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -27,7 +45,7 @@ int main() {
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
 
-    ShowStructSorting();
+    ShowIndexes();
 }
 
 void ShowSorts() {
@@ -180,24 +198,6 @@ void ShowSearches() {
 }
 
 void ShowStructSorting() {
-    PhoneBook phoneBook[] = {
-        {"Иванов", "Иван", "9231405857", "ул. Пушкина, 1"},
-        {"Иванов", "Иван", "9231405858", "ул. Пушкина, 1"},
-        {"Иванов", "Иван", "9231405856", "ул. Пушкина, 1"},
-        {"Петров", "Петр", "9231405828", "ул. Пушкина, 2"},
-        {"Сидоров", "Сергей", "9231476822", "ул. Пушкина, 3"},
-        {"Кузнецов", "Кузьма", "9231402326", "ул. Пушкина, 4"},
-        {"Смирнов", "Олег", "9231405829", "ул. Пушкина, 5"},
-        {"Васильев", "Василий", "9231345827", "ул. Пушкина, 6"},
-        {"Дмитриев", "Дмитрий", "9231685824", "ул. Пушкина, 7"},
-        {"Дмитриев", "Борис", "9231685824", "ул. Пушкина, 7"},
-        {"Новиков", "Дмитрий", "9231405834", "ул. Пушкина, 8"},
-        {"Михайлов", "Михаил", "9231695827", "ул. Пушкина, 9"},
-        {"Михайлов", "Евгений", "9231401548", "ул. Пушкина, 10"},
-        {"Алексеев", "Алексей", "9231409632", "ул. Пушкина, 11"},
-        {"Сергеев", "Сергей", "9231429327", "ул. Пушкина, 12"}
-    };
-
     int n = sizeof(phoneBook) / sizeof(phoneBook[0]);
 
     printf("Исходный справочник: \n\n");
@@ -226,6 +226,50 @@ void ShowStructSorting() {
 
         char choice;
         printf("\n\nПродолжить поиск? (y/n): ");
+        cin >> choice;
+        if (tolower(choice) != 'y' && tolower(choice) != 'д') break;
+    }
+
+    printf("\n");
+    system("PAUSE");
+}
+
+void ShowIndexes() {
+    int n = sizeof(phoneBook) / sizeof(phoneBook[0]);
+    int* idArr = new int[n];
+
+    for (int i = 0; i < n; i++) idArr[i] = i;
+
+    printf("Исходный справочник: \n\n");
+
+    PrintPhoneBook(phoneBook, n);
+
+    ShellSortKnutPhoneBookIdx(phoneBook, idArr, n, ComparePhoneBooksAsc);
+
+    printf("\nИсходный справочник после сортировки: \n\n");
+
+    PrintPhoneBook(phoneBook, n);
+
+    printf("\nОтсортированный справочник: \n\n");
+
+    PrintPhoneBookIdx(phoneBook, idArr, n);
+
+    printf("\n");
+
+    while (true) {
+        string key;
+
+        printf("\nВведите ключ: ");
+        cin >> key;
+
+        vector<int> sRes = BSearchAllPhoneBookIdxSurname(phoneBook, idArr, n, key);
+
+        if (sRes.empty()) printf("\nТакого человека нет в справочнике");
+        else printf("\nНайдены: \n");
+        PrintPhoneBookIdx(phoneBook, sRes.data(), sRes.size());
+
+        char choice;
+        printf("\nПродолжить поиск? (y/n): ");
         cin >> choice;
         if (tolower(choice) != 'y' && tolower(choice) != 'д') break;
     }

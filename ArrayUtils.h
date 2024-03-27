@@ -51,8 +51,11 @@ string getImpSteps(int len);
 bool ComparePhoneBooksAsc(const PhoneBook& pb1, const PhoneBook& pb2);
 bool ComparePhoneBooksDesc(const PhoneBook& pb1, const PhoneBook& pb2);
 void ShellSortKnutPhoneBook(PhoneBook arr[], int len, bool (*comparator)(const PhoneBook&, const PhoneBook&) = ComparePhoneBooksAsc);
+void ShellSortKnutPhoneBookIdx(PhoneBook pbArr[], int idArr[], int len, bool (*comparator)(const PhoneBook&, const PhoneBook&));
 void PrintPhoneBook(PhoneBook arr[], int len);
+void PrintPhoneBookIdx(PhoneBook pbArr[], int idArr[], int len);
 vector<int> BSearchAllPhoneBookSurname(PhoneBook arr[], int len, string key);
+vector<int> BSearchAllPhoneBookIdxSurname(PhoneBook arr[], int idArr[], int len, string key);
 
 int BSearch(int arr[], int len, int key, int* c);
 int BSearchImp(int arr[], int len, int key, int* c);
