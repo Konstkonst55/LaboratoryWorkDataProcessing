@@ -20,10 +20,16 @@ int GetMTheorShakerSort(int n);
 int GetCTheorInsertSort(int n);
 int GetMTheorInsertSort(int n);
 
+int GetCTheorShellSort(int n);
+int GetMTheorShellSort(int n);
+
 int GetCTheorBSearch(int n);
 int GetCTheorBSearchImp(int n);
 
 int GetCTheorBSearchAll(int n);
 int GetCTheorBSearchAllImp(int n);
+
+int GetCTheorHeapSort(int n);
+int GetMTheorHeapSort(int n);
 
 #endif // !MATH_UTILS_H

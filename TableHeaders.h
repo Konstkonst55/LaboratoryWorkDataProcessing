@@ -20,6 +20,11 @@ const vector<vector<string>> DefaultMiniHeader = {
     { "-", "----------", "-------", "-------", "-------"}
 };
 
+const vector<vector<string>> NMCHeader = {
+    { "N", "Dec", "Rand", "Inc"},
+    { "-", "---", "----", "---"}
+};
+
 const vector<vector<string>> BubbleSortWithImpHeader = {
     { "N", "M+C theor.", "Src M+C", "Src M+C", "Src M+C", "Imp M+C", "Imp M+C", "Imp M+C" },
     { " ", " ", "Dec", "Rand", "Inc", "Dec", "Rand", "Inc" },

@@ -19,7 +19,6 @@ using namespace std;
 
 using sortersFType = function<void(int*, int, int*, int*)>;
 using fillersFType = function<void(int*, int)>;
-
 using searchersFType = function<void(int*, int, int, int*)>;
 
 void FillInc(int arr[], int len);
@@ -45,11 +44,14 @@ void InsertSortWithStep(int arr[], int len, int* m, int* c, int step);
 void ShellSort(int arr[], int len, int* m, int* c);
 void ShellSortKnut(int arr[], int len, int* m, int* c);
 
-string getKnutSteps(int len);
-string getImpSteps(int len);
+string GetKnutSteps(int len);
+string GetImpSteps(int len);
 
 bool ComparePhoneBooksAsc(const PhoneBook& pb1, const PhoneBook& pb2);
 bool ComparePhoneBooksDesc(const PhoneBook& pb1, const PhoneBook& pb2);
+bool ComparePhoneBookAscSurname(const PhoneBook& pb1, const PhoneBook& pb2);
+bool ComparePhoneBookAscName(const PhoneBook & pb1, const PhoneBook & pb2);
+
 void ShellSortKnutPhoneBook(PhoneBook arr[], int len, bool (*comparator)(const PhoneBook&, const PhoneBook&) = ComparePhoneBooksAsc);
 void ShellSortKnutPhoneBookIdx(PhoneBook pbArr[], int idArr[], int len, bool (*comparator)(const PhoneBook&, const PhoneBook&));
 void PrintPhoneBook(PhoneBook arr[], int len);
@@ -61,6 +63,9 @@ int BSearch(int arr[], int len, int key, int* c);
 int BSearchImp(int arr[], int len, int key, int* c);
 vector<int> BSearchAll(int arr[], int len, int key, int* c);
 vector<int> BSearchAllImp(int arr[], int len, int key, int* c);
+
+void BuildHeap(int arr[], int l, int r, int* m, int* c);
+void HeapSort(int arr[], int len, int* m, int* c);
 
 vector<vector<string>> GetSortData(const vector<sortersFType>& sorters, const vector<fillersFType>& fillers, const int min, const int max, const int step, int (*ct)(int) = nullptr, int (*mt)(int) = nullptr, const bool allowN = true, const bool allowMC = true);
 vector<vector<string>> GetSearchData(const vector<searchersFType>& searchers, const int min, const int max, const int step, int (*ct)(int) = nullptr, const bool allowN = false);

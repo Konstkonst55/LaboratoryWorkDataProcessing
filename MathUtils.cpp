@@ -37,6 +37,14 @@ int GetMTheorInsertSort(int n) {
 	return GetCTheorInsertSort(n) + n - 1;
 }
 
+int GetCTheorShellSort(int n) {
+	return pow(n, 1.2) / 2;
+}
+
+int GetMTheorShellSort(int n) {
+	return pow(n, 1.2) / 2;
+}
+
 int GetCTheorBSearch(int n) {
 	return 2 * log2(n);
 }
@@ -53,4 +61,12 @@ int GetCTheorBSearchAll(int n) {
 // ---- ? ---- //
 int GetCTheorBSearchAllImp(int n) {
 	return log2(n);
+}
+
+int GetCTheorHeapSort(int n) {
+	return 2 * n * log2(n) + n + 2;
+}
+
+int GetMTheorHeapSort(int n) {
+	return n * log2(n) + 6.5 * n - 4;
 }

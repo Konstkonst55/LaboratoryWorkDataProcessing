@@ -16,6 +16,7 @@ void ShowSorts();
 void ShowSearches();
 void ShowStructSorting();
 void ShowIndexes();
+void ShowHeapShell();
 
 PhoneBook phoneBook[] = {
     {"Иванов", "Иван", "9231405856", "ул. Пушкина, 1"},
@@ -45,7 +46,7 @@ int main() {
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
 
-    ShowIndexes();
+    ShowHeapShell();
 }
 
 void ShowSorts() {
@@ -85,8 +86,8 @@ void ShowSorts() {
 
     for (int n = MIN_N; n <= MAX_N; n += STEP) {
         vector<string> knutStepsCol, impStepsCol;
-        knutStepsCol.push_back(getKnutSteps(n));
-        impStepsCol.push_back(getImpSteps(n));
+        knutStepsCol.push_back(GetKnutSteps(n));
+        impStepsCol.push_back(GetImpSteps(n));
         knutSteps.push_back(knutStepsCol);
         impSteps.push_back(impStepsCol);
     }
@@ -236,23 +237,31 @@ void ShowStructSorting() {
 
 void ShowIndexes() {
     int n = sizeof(phoneBook) / sizeof(phoneBook[0]);
-    int* idArr = new int[n];
+    int* idArrSurname = new int[n], *idArrName = new int[n];
 
-    for (int i = 0; i < n; i++) idArr[i] = i;
+    for (int i = 0; i < n; i++) {
+        idArrSurname[i] = i;
+        idArrName[i] = i;
+    }
 
     printf("Исходный справочник: \n\n");
 
     PrintPhoneBook(phoneBook, n);
 
-    ShellSortKnutPhoneBookIdx(phoneBook, idArr, n, ComparePhoneBooksAsc);
+    ShellSortKnutPhoneBookIdx(phoneBook, idArrSurname, n, ComparePhoneBookAscSurname);
+    ShellSortKnutPhoneBookIdx(phoneBook, idArrName, n, ComparePhoneBookAscName);
 
     printf("\nИсходный справочник после сортировки: \n\n");
 
     PrintPhoneBook(phoneBook, n);
 
-    printf("\nОтсортированный справочник: \n\n");
+    printf("\nОтсортированный справочник по фамилии: \n\n");
 
-    PrintPhoneBookIdx(phoneBook, idArr, n);
+    PrintPhoneBookIdx(phoneBook, idArrSurname, n);
+    
+    printf("\nОтсортированный справочник по имени: \n\n");
+
+    PrintPhoneBookIdx(phoneBook, idArrName, n);
 
     printf("\n");
 
@@ -262,7 +271,7 @@ void ShowIndexes() {
         printf("\nВведите ключ: ");
         cin >> key;
 
-        vector<int> sRes = BSearchAllPhoneBookIdxSurname(phoneBook, idArr, n, key);
+        vector<int> sRes = BSearchAllPhoneBookIdxSurname(phoneBook, idArrSurname, n, key);
 
         if (sRes.empty()) printf("\nТакого человека нет в справочнике");
         else printf("\nНайдены: \n");
@@ -272,6 +281,71 @@ void ShowIndexes() {
         printf("\nПродолжить поиск? (y/n): ");
         cin >> choice;
         if (tolower(choice) != 'y' && tolower(choice) != 'д') break;
+    }
+
+    printf("\n");
+    system("PAUSE");
+}
+
+void ShowHeapShell() {
+    WindowSize wSize = { 1200, 800 };
+    const int
+        MIN_N = 100,
+        MAX_N = 1000,
+        STEP = 10,
+        LABEL_DENSITY = 10,
+        LEGEND_STEP = 20,
+        LEGEND_START = 50,
+        DATA_STEP = 10;
+    const double
+        X_SCALE = 1.1,
+        Y_SCALE = 0.02,
+        AXIS_STEP = MIN_N;
+    const bool ALLOW_LABELS = false;
+    const vector<fillersFType> fillers = { FillDec, FillRand, FillInc };
+    const vector<int> colors = { LIGHTBLUE, LIGHTRED };
+    const vector<string> labels = { "HEAP", "SHELL" };
+
+    int legY = 60;
+
+    vector<vector<string>>
+        MCTable = DefaultMiniHeader,
+        BuildMCTable = NMCHeader,
+        heapSortData = GetSortData({ HeapSort }, fillers, MIN_N, MAX_N, STEP, GetCTheorHeapSort, GetMTheorHeapSort),
+        shellSortKnutData = GetSortData({ ShellSort }, fillers, MIN_N, MAX_N, STEP, GetCTheorShellSort, GetMTheorShellSort),
+        heapBuildData;
+    const vector<vector<vector<string>>> sortsData = { heapSortData, shellSortKnutData };
+
+    for (int n = MIN_N; n <= MAX_N; n += DATA_STEP) {
+        int* arr, c = 0, m = 0;
+        vector<string> row;
+
+        row.push_back(to_string(n));
+
+        for (auto filler : fillers) {
+            arr = new int[n];
+            filler(arr, n);
+            BuildHeap(arr, 0, n, &m, &c);
+            row.push_back(to_string(m + c));
+            delete[] arr; m = 0, c = 0;
+        }
+
+        heapBuildData.push_back(row);
+    }
+
+    FillTable(BuildMCTable, heapBuildData, 9, DATA_STEP);
+    FillTable(MCTable, heapSortData, 9, DATA_STEP);
+
+    CreateTable(BuildMCTable);
+    CreateTable(MCTable);
+
+    initwindow(wSize.x, wSize.y);
+
+    DrawAxis(BOTTOM_LEFT, "N", "M+C", AXIS_STEP * X_SCALE, AXIS_STEP * Y_SCALE, 3, true, true);
+
+    for (size_t s = 0; s < sortsData.size(); s++) {
+        OutChartText(LEGEND_START, legY += LEGEND_STEP, colors[s], (char*)labels[s].c_str());
+        DrawChartWithPoints(CreatePoints(sortsData[s], 0, 0, 3), X_SCALE, Y_SCALE, ALLOW_LABELS, LABEL_DENSITY, colors[s]);
     }
 
     printf("\n");

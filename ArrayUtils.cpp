@@ -203,7 +203,7 @@ void ShellSortKnut(int arr[], int len, int* m, int* c) {
 	delete[] hArr;
 }
 
-string getKnutSteps(int len) {
+string GetKnutSteps(int len) {
 	int h1 = 1, h = h1, i;
 
 	for (h, i = 2; i + 1 < log2(len); h = 2 * h + 1, i++);
@@ -211,7 +211,7 @@ string getKnutSteps(int len) {
 	return to_string(h1) + "..." + to_string(h);
 }
 
-string getImpSteps(int len) {
+string GetImpSteps(int len) {
 	int h1 = 1, h = h1;
 
 	while (h < len / 3) h = h * 3 + 1;
@@ -225,6 +225,14 @@ bool ComparePhoneBooksAsc(const PhoneBook& pb1, const PhoneBook& pb2) {
 
 bool ComparePhoneBooksDesc(const PhoneBook& pb1, const PhoneBook& pb2) {
 	return pb1.surname == pb2.surname ? (pb1.name == pb2.name ? pb1.phone > pb2.phone : pb1.name > pb2.name) : pb1.surname > pb2.surname;
+}
+
+bool ComparePhoneBookAscSurname(const PhoneBook& pb1, const PhoneBook& pb2) {
+	return pb1.surname < pb2.surname;
+}
+
+bool ComparePhoneBookAscName(const PhoneBook& pb1, const PhoneBook& pb2) {
+	return pb1.name < pb2.name;
 }
 
 void ShellSortKnutPhoneBook(PhoneBook arr[], int len, bool (*comparator)(const PhoneBook&, const PhoneBook&)) {
@@ -439,6 +447,44 @@ vector<int> BSearchAllImp(int arr[], int len, int key, int* c) {
 	return indexes;
 }
 
+void BuildHeap(int arr[], int l, int r, int* m, int* c) {
+	int x = arr[l], i = l, j = 2 * i; (*m)++;
+
+	while (1) {
+		j = 2 * i;
+
+		if (j >= r) break;
+
+		(*c)++;
+		if ((j < r) && (arr[j + 1] >= arr[j])) j++;
+
+		(*c)++;
+		if (x >= arr[j]) break;
+		
+		arr[i] = arr[j]; (*m)++;
+		i = j;
+	}
+
+	arr[i] = x; (*m)++;
+}
+
+void HeapSort(int arr[], int len, int* m, int* c) {
+	int l = floor(len / 2), r;
+
+	while (l + 1 > 0) {
+		BuildHeap(arr, l, len, m, c);
+		l--;
+	}
+
+	r = len;
+	
+	while (r > 1) {
+		swap(arr[0], arr[r - 1]); (*m) += 3;
+		r--;
+		BuildHeap(arr, 0, r - 1, m, c);
+	}
+}
+
 vector<vector<string>> GetSortData(const vector<sortersFType>& sorters, const vector<fillersFType>& fillers, const int min, const int max, const int step, int (*ct)(int), int (*mt)(int), const bool allowN, const bool allowMC) {
 	vector<vector<string>> data;
 
@@ -447,7 +493,7 @@ vector<vector<string>> GetSortData(const vector<sortersFType>& sorters, const ve
 		vector<string> row;
 
 		if (allowN) row.push_back(to_string(n));
-		if (allowMC || *mt != nullptr || *ct != nullptr) row.push_back(to_string(mt(n) + ct(n)));
+		if (allowMC || mt != nullptr || ct != nullptr) row.push_back(to_string(mt(n) + ct(n)));
 
 		for (auto sorter : sorters)
 		{
