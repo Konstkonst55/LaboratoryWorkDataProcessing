@@ -1,5 +1,11 @@
 
 #include "ArrayUtils.h"
+#include "MathUtils.h"
+#include <iostream>
+#include <stdlib.h>
+#include <cmath>
+#include <time.h>
+#include <stdio.h>
 
 void FillInc(int arr[], int len) {
 	for (int i = 0; i < len; i++) arr[i] = i + 1;

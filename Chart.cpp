@@ -1,5 +1,6 @@
 
 #include "Chart.h"
+#include "graphics.h"
 
 void DrawChartWithPoints(vector<Point> points, const double xScale, const double yScale, const bool allowDataLabels, int labelsDensity, const int color, const int pattern, const int thickness)
 {

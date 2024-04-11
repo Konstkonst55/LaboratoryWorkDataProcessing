@@ -8,12 +8,6 @@
 #include "Point.h"
 #include <functional>
 #include "PhoneBook.h"
-#include "MathUtils.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <cmath>
-#include <time.h>
-#include <iostream>
 
 using namespace std;
 

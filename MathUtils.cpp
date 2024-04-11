@@ -1,5 +1,7 @@
 
 #include "MathUtils.h"
+#include <stdlib.h>
+#include <math.h>
 
 int GetRandomInt(int min, int max) {
 	return min + rand() % (max - min + 1);
@@ -69,4 +71,12 @@ int GetCTheorHeapSort(int n) {
 
 int GetMTheorHeapSort(int n) {
 	return n * log2(n) + 6.5 * n - 4;
+}
+
+int GetCTheorQuickSort(int n) {
+	return (n * n + 5 * n + 4) / 2;
+}
+
+int GetMTheorQuickSort(int n) {
+	return 3 * (n - 1);
 }

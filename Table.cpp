@@ -1,5 +1,6 @@
 
 #include "Table.h"
+#include <stdio.h>
 
 void CreateTable(const vector<vector<string>>& table)
 {

@@ -351,3 +351,7 @@ void ShowHeapShell() {
     printf("\n");
     system("PAUSE");
 }
+
+void ShowQuickHeapShell() {
+
+}

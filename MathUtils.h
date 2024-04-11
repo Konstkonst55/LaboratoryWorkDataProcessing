@@ -3,9 +3,6 @@
 #ifndef MATH_UTILS_H
 #define MATH_UTILS_H
 
-#include <stdlib.h>
-#include <math.h>
-
 int GetRandomInt(int min = 0, int max = 9);
 
 int GetCTheorSelectSort(int n);
@@ -31,5 +28,8 @@ int GetCTheorBSearchAllImp(int n);
 
 int GetCTheorHeapSort(int n);
 int GetMTheorHeapSort(int n);
+
+int GetCTheorQuickSort(int n);
+int GetMTheorQuickSort(int n);
 
 #endif // !MATH_UTILS_H

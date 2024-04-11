@@ -1,12 +1,12 @@
-#include <vector>
-#include <string>
-
-using namespace std;
-
 #pragma once
 
 #ifndef TABLE_HEADERS_H
 #define TABLE_HEADERS_H
+
+#include <vector>
+#include <string>
+
+using namespace std;
 
 const vector<vector<string>> DefaultHeader = {
     { "N", "M+C theor.", "Src M+C", "Src M+C", "Src M+C", "Imp M+C", "Imp M+C", "Imp M+C" },

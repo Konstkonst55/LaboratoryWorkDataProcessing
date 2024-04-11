@@ -3,12 +3,10 @@
 #ifndef CHART_H
 #define CHART_H
 
-#include "WindowSize.h"
 #include "Point.h"
 #include <vector>
 #include <string>
 #include "AxisType.h"
-#include "graphics.h"
 
 using namespace std;
 
