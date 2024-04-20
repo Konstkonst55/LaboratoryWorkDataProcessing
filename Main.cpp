@@ -1,4 +1,5 @@
-﻿#include <windows.h>
+﻿
+#include <windows.h>
 #include <stdio.h>
 #include <iostream>
 #include "graphics.h"
@@ -11,6 +12,8 @@
 #include "Chart.h"
 #include "AxisType.h"
 #include "PhoneBook.h"
+#include "Stack.h"
+#include "Queue.h"
 
 void ShowSorts();
 void ShowSearches();
@@ -18,6 +21,7 @@ void ShowStructSorting();
 void ShowIndexes();
 void ShowHeapShell();
 void ShowQuickHeapShell();
+void ShowStackQueueList();
 
 PhoneBook phoneBook[] = {
     {"Иванов", "Иван", "9231405856", "ул. Пушкина, 1"},
@@ -47,7 +51,7 @@ int main() {
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
 
-    ShowQuickHeapShell();
+    ShowStackQueueList();
 }
 
 void ShowSorts() {
@@ -441,6 +445,62 @@ void ShowQuickHeapShell() {
     system("PAUSE");
 }
 
-void ShowOrderStack() {
+void ShowStackQueueList() {
+    Stack stack;
 
+    stack.FillInc(1, 9);
+    cout << "Возрастающий стэк:" << endl;
+    stack.Print();
+    stack.Clear();
+    cout << endl << endl;
+
+    stack.FillDec(9, 1);
+    cout << "Убывающий стэк:" << endl;
+    stack.Print();
+    stack.Clear();
+    cout << endl << endl;
+
+    stack.FillRand(9, 1, 9);
+    cout << "Случайный стэк:" << endl;
+    stack.Print();
+    stack.Clear();
+    cout << endl << endl;
+
+    Queue queue;
+
+    queue.FillInc(1, 9);
+    cout << "Возрастающая очередь:" << endl;
+    queue.Print();
+    queue.Clear();
+    cout << endl << endl;
+
+    queue.FillDec(9, 1);
+    cout << "Убывающая очередь:" << endl;
+    queue.Print();
+    queue.Clear();
+    cout << endl << endl;
+
+    queue.FillRand(9, 1, 9);
+    cout << "Случайная очередь:" << endl;
+    queue.Print();
+    queue.Clear();
+    cout << endl << endl;
+
+    stack.FillRand(15, 0, 30);
+    cout << endl << "Случайный стэк:" << endl;
+    stack.Print();
+    cout << endl << "Случайный стэк (обр.):" << endl;
+    stack.PrintReverse();
+    cout << endl << "Сумма: " << stack.GetSum() << endl;
+    cout << "Серии: " << stack.GetSeries() << endl;
+
+    queue.FillRand(15, 0, 30);
+    cout << endl << "Случайная очередь:" << endl;
+    queue.Print();
+    cout << endl << "Случайная очередь (обр.):" << endl;
+    queue.PrintReverse();
+    cout << endl << "Сумма: " << queue.GetSum() << endl;
+    cout << "Серии: " << queue.GetSeries() << endl;
+
+    system("PAUSE");
 }

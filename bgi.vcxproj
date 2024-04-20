@@ -75,6 +75,8 @@
     <ClCompile Include="mouse.cxx" />
     <ClCompile Include="palette.cxx" />
     <ClCompile Include="main.cxx" />
+    <ClCompile Include="Queue.cpp" />
+    <ClCompile Include="Stack.cpp" />
     <ClCompile Include="Table.cpp" />
     <ClCompile Include="Table.h" />
     <ClCompile Include="text.cxx" />
@@ -91,7 +93,9 @@
     <ClInclude Include="MathUtils.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="PhoneBook.h" />
+    <ClInclude Include="Queue.h" />
     <ClInclude Include="Stack.h" />
+    <ClInclude Include="Node.h" />
     <ClInclude Include="TableHeaders.h" />
     <ClInclude Include="winbgi.h" />
     <ClInclude Include="winbgim.h" />

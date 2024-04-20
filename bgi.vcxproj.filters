@@ -90,6 +90,12 @@
     <ClCompile Include="WindowSize.h">
       <Filter>Header Files\Data</Filter>
     </ClCompile>
+    <ClCompile Include="Stack.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Queue.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dibutil.h">
@@ -129,6 +135,12 @@
       <Filter>Header Files\Data</Filter>
     </ClInclude>
     <ClInclude Include="Stack.h">
+      <Filter>Header Files\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>Header Files\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Queue.h">
       <Filter>Header Files\Data</Filter>
     </ClInclude>
   </ItemGroup>
