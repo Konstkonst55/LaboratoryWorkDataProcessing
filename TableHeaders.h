@@ -25,6 +25,12 @@ const vector<vector<string>> NMCHeader = {
     { "-", "---", "----", "---"}
 };
 
+const vector<vector<string>> QuickSortHeader = {
+    { "N", "QS 1", "QS 1", "QS 1", "QS 2", "QS 2", "QS 2" },
+    { " ", "Dec", "Rand", "Inc", "Dec", "Rand", "Inc" },
+    { "-", "----", "----", "----", "----", "----", "----"}
+};
+
 const vector<vector<string>> BubbleSortWithImpHeader = {
     { "N", "M+C theor.", "Src M+C", "Src M+C", "Src M+C", "Imp M+C", "Imp M+C", "Imp M+C" },
     { " ", " ", "Dec", "Rand", "Inc", "Dec", "Rand", "Inc" },

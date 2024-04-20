@@ -12,6 +12,7 @@
 using namespace std;
 
 using sortersFType = function<void(int*, int, int*, int*)>;
+using sortersQuickFType = function<void(int*, int, int, int*, int*, int*, int*)>;
 using fillersFType = function<void(int*, int)>;
 using searchersFType = function<void(int*, int, int, int*)>;
 
@@ -60,6 +61,9 @@ vector<int> BSearchAllImp(int arr[], int len, int key, int* c);
 
 void BuildHeap(int arr[], int l, int r, int* m, int* c);
 void HeapSort(int arr[], int len, int* m, int* c);
+
+void QuickSort(int arr[], int l, int r, int* m, int* c, int* rec, int* maxRec);
+void QuickSortImp(int arr[], int l, int r, int* m, int* c, int* rec, int* maxRec);
 
 vector<vector<string>> GetSortData(const vector<sortersFType>& sorters, const vector<fillersFType>& fillers, const int min, const int max, const int step, int (*ct)(int) = nullptr, int (*mt)(int) = nullptr, const bool allowN = true, const bool allowMC = true);
 vector<vector<string>> GetSearchData(const vector<searchersFType>& searchers, const int min, const int max, const int step, int (*ct)(int) = nullptr, const bool allowN = false);

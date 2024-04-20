@@ -17,6 +17,7 @@ void ShowSearches();
 void ShowStructSorting();
 void ShowIndexes();
 void ShowHeapShell();
+void ShowQuickHeapShell();
 
 PhoneBook phoneBook[] = {
     {"Иванов", "Иван", "9231405856", "ул. Пушкина, 1"},
@@ -46,7 +47,7 @@ int main() {
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
 
-    ShowHeapShell();
+    ShowQuickHeapShell();
 }
 
 void ShowSorts() {
@@ -353,5 +354,93 @@ void ShowHeapShell() {
 }
 
 void ShowQuickHeapShell() {
+    WindowSize wSize = { 1200, 800 };
+    const int
+        MIN_N = 100,
+        MAX_N = 1000,
+        STEP = 10,
+        LABEL_DENSITY = 10,
+        LEGEND_STEP = 20,
+        LEGEND_START = 50,
+        DATA_STEP = 10;
+    const double
+        X_SCALE = 1.1,
+        Y_SCALE = 0.02,
+        AXIS_STEP = MIN_N;
+    const bool ALLOW_LABELS = false;
+    const vector<fillersFType> fillers = { FillDec, FillRand, FillInc };
+    const vector<sortersQuickFType> sorters = { QuickSort, QuickSortImp };
+    const vector<int> colors = { WHITE, LIGHTBLUE, LIGHTRED };
+    const vector<string> labels = { "SHELL", "HEAP", "QUICK" };
+    int legY = 60;
+
+    vector<vector<string>> MCTable = DefaultMiniHeader,
+        recTable = QuickSortHeader,
+        quickSortData,
+        quickSortRecData,
+        shellSortData = GetSortData({ ShellSort }, fillers, MIN_N, MAX_N, STEP, GetCTheorShellSort, GetMTheorShellSort),
+        heapSortData = GetSortData({ HeapSort }, fillers, MIN_N, MAX_N, STEP, GetCTheorHeapSort, GetMTheorHeapSort);
+    vector<vector<vector<string>>> sortsData = { shellSortData, heapSortData };
+
+    for (int n = MIN_N; n <= MAX_N; n += STEP) {
+        int* arr, c = 0, m = 0, rec = 0, maxRec = 0;
+        vector<string> row;
+
+        row.push_back(to_string(n));
+        row.push_back(to_string(GetCTheorQuickSort(n) + GetMTheorQuickSort(n)));
+
+        for (auto filler : fillers) {
+            arr = new int[n];
+            filler(arr, n);
+            QuickSort(arr, 0, n - 1, &m, &c, &rec, &maxRec);
+            row.push_back(to_string(m + c));
+            delete[] arr; m = 0; c = 0; rec = 0; maxRec = 0;
+        }
+
+        quickSortData.push_back(row);
+    }
+
+    for (int n = MIN_N; n <= MAX_N; n += DATA_STEP) {
+        int* arr, c = 0, m = 0, rec = 0, maxRec = 0;
+        vector<string> row;
+
+        row.push_back(to_string(n));
+
+        for (auto sorter : sorters) {
+            for (auto filler : fillers) {
+                arr = new int[n];
+                filler(arr, n);
+                sorter(arr, 0, n - 1, &m, &c, &rec, &maxRec);
+                row.push_back(to_string(maxRec));
+                delete[] arr; m = 0; c = 0; rec = 0; maxRec = 0;
+            }
+        }
+
+        quickSortRecData.push_back(row);
+    }
+
+    FillTable(MCTable, quickSortData, 9, DATA_STEP);
+    CreateTable(MCTable);
+    sortsData.push_back(quickSortData);
+
+    cout << "Глубина" << endl << endl;
+
+    FillTable(recTable, quickSortRecData, 9, DATA_STEP);
+    CreateTable(recTable);
+
+    initwindow(wSize.x, wSize.y);
+
+    DrawAxis(BOTTOM_LEFT, "N", "M+C", AXIS_STEP * X_SCALE, AXIS_STEP * Y_SCALE, 3, true, true);
+
+    for (size_t s = 0; s < sortsData.size(); s++) {
+        OutChartText(LEGEND_START, legY += LEGEND_STEP, colors[s], (char*)labels[s].c_str());
+        DrawChartWithPoints(CreatePoints(sortsData[s], 0, 0, 3), X_SCALE, Y_SCALE, ALLOW_LABELS, LABEL_DENSITY, colors[s]);
+    }
+
+    printf("\n");
+    system("PAUSE");
+}
+
+void ShowOrderStack() {
 
 }

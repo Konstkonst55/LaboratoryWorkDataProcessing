@@ -128,5 +128,8 @@
     <ClInclude Include="AxisType.h">
       <Filter>Header Files\Data</Filter>
     </ClInclude>
+    <ClInclude Include="Stack.h">
+      <Filter>Header Files\Data</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

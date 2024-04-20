@@ -491,6 +491,70 @@ void HeapSort(int arr[], int len, int* m, int* c) {
 	}
 }
 
+void QuickSort(int arr[], int l, int r, int* m, int* c, int* rec, int* maxRec) {
+	(*rec)++;
+	if (*rec > *maxRec) *maxRec = *rec;
+
+	int pivot = arr[l + (r - l) / 2] , i = l, j = r;
+
+	while (i < j) {
+		while (arr[i] < pivot) {
+			i++;
+			(*c)++;
+		}
+
+		while (arr[j] > pivot) {
+			j--;
+			(*c)++;
+		}
+
+		if (i <= j) {
+			swap(arr[i++], arr[j--]); (*m) += 3;
+		}
+	}
+
+	if (l < j) QuickSort(arr, l, j, m, c, rec, maxRec);
+	if (i < r) QuickSort(arr, i, r, m, c, rec, maxRec);
+
+	(*rec)--;
+}
+
+void QuickSortImp(int arr[], int l, int r, int* m, int* c, int* rec, int* maxRec) {
+	(*rec)++;
+	if (*rec > *maxRec) *maxRec = *rec;
+
+	while (l < r) {
+		int pivot = arr[l + (r - l) / 2], i = l, j = r;
+
+		while (i < j) {
+			while (arr[i] < pivot) {
+				i++;
+				(*c)++;
+			}
+
+			while (arr[j] > pivot) {
+				j--;
+				(*c)++;
+			}
+
+			if (i <= j) {
+				swap(arr[i++], arr[j--]); (*m) += 3;
+			}
+		}
+
+		if (j - l < r - i) {
+			QuickSortImp(arr, l, j, m, c, rec, maxRec);
+			l = i;
+		}
+		else {
+			QuickSortImp(arr, i, r, m, c, rec, maxRec); 
+			r = j;
+		}
+	}
+
+	rec--;
+}
+
 vector<vector<string>> GetSortData(const vector<sortersFType>& sorters, const vector<fillersFType>& fillers, const int min, const int max, const int step, int (*ct)(int), int (*mt)(int), const bool allowN, const bool allowMC) {
 	vector<vector<string>> data;
 
@@ -499,10 +563,9 @@ vector<vector<string>> GetSortData(const vector<sortersFType>& sorters, const ve
 		vector<string> row;
 
 		if (allowN) row.push_back(to_string(n));
-		if (allowMC || mt != nullptr || ct != nullptr) row.push_back(to_string(mt(n) + ct(n)));
+		if (allowMC && mt != nullptr && ct != nullptr) row.push_back(to_string((*mt)(n) + (*ct)(n)));
 
-		for (auto sorter : sorters)
-		{
+		for (auto sorter : sorters) {
 			if (sorter == nullptr) continue;
 
 			for (auto filler : fillers) {

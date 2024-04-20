@@ -74,9 +74,9 @@ int GetMTheorHeapSort(int n) {
 }
 
 int GetCTheorQuickSort(int n) {
-	return (n * n + 5 * n + 4) / 2;
+	return n * log2(n);
 }
 
 int GetMTheorQuickSort(int n) {
-	return 3 * (n - 1);
+	return n * log2(n);
 }
