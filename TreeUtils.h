@@ -6,22 +6,6 @@
 #include "Node.h"
 
 class BinaryTree {
-protected: 
-	void PrintRootLeftRightRecursive(Vertex* node);
-	void PrintLeftRootRightRecursive(Vertex* node);
-	void PrintLeftRightRootRecursive(Vertex* node);
-
-	int CalculateTreeSizeRecursive(Vertex* node);
-	int CalculateTreeSumRecursive(Vertex* node);
-	int CalculateTreeHeightRecursive(Vertex* node);
-	void CalculateSumOfPathRecursive(Vertex* node, int currentHeight, int& totalHeight);
-
-	Vertex* FindVertexRecursive(Vertex* node, int value);
-	Vertex** FindVertexPointer(Vertex** node, int value);
-
-	bool DeleteVertexRecursive(Vertex* node, int value);
-	void DeleteTreeRecursive(Vertex* node);
-
 public:
 	Vertex* root;
 
@@ -41,7 +25,9 @@ public:
 
 	Vertex* FindVertex(int key);
 
-	bool DeleteVertex(int key);
+	virtual void AddVertex(int data);
+	virtual bool DeleteVertex(int key);
+
 	void Delete();
 };
 
@@ -56,21 +42,30 @@ class RST : public BinaryTree {
 public:
 	RST();
 
-	void AddVertex(int data);
 	void AddVertexDoubleIndirection(int data);
 };
 
 class AVL : public BinaryTree {
 private:
-	void RotateLL(Vertex*& node);
-	void RotateRR(Vertex*& node);
-	void RotateLR(Vertex*& node);
-	void RotateRL(Vertex*& node);
+	bool _decrease = false;
+	bool _grow = true;
+
+protected:
+	void RotateLL(Vertex*& p);
+	void RotateRR(Vertex*& p);
+	void RotateLR(Vertex*& p);
+	void RotateRL(Vertex*& p);
+	void RotateLL1(Vertex*& p);
+	void RotateRR1(Vertex*& p);
+	void DeleteT2(Vertex*& p, Vertex*& q);
+	void BalanceLeftDelete(Vertex*& p);
+	void BalanceRightDelete(Vertex*& p);
 
 public:
 	AVL();
 
-	void AddVertex(int data);
+	void AddVertex(int data) override;
+	bool DeleteVertex(int key) override;
 };
 
 Vertex* CreateVertex(int value);
