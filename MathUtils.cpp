@@ -2,9 +2,14 @@
 #include "MathUtils.h"
 #include <stdlib.h>
 #include <math.h>
+#include <random>
 
 int GetRandomInt(int min, int max) {
-	return min + rand() % (max - min + 1);
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<> distr(min, max);
+
+	return distr(gen);
 }
 
 int GetCTheorSelectSort(int n) {
@@ -55,12 +60,12 @@ int GetCTheorBSearchImp(int n) {
 	return log2(n);
 }
 
-// ---- ? ---- //
+// ------------- ? ------------- //
 int GetCTheorBSearchAll(int n) {
 	return 2 * log2(n);
 }
 
-// ---- ? ---- //
+// ------------- ? ------------- //
 int GetCTheorBSearchAllImp(int n) {
 	return log2(n);
 }
@@ -78,5 +83,13 @@ int GetCTheorQuickSort(int n) {
 }
 
 int GetMTheorQuickSort(int n) {
+	return n * log2(n);
+}
+
+int GetCTheorMergeSort(int n) {
+	return n * log2(n);
+}
+
+int GetMTheorMergeSort(int n) {
 	return n * log2(n);
 }

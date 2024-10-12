@@ -32,4 +32,7 @@ int GetMTheorHeapSort(int n);
 int GetCTheorQuickSort(int n);
 int GetMTheorQuickSort(int n);
 
+int GetCTheorMergeSort(int n);
+int GetMTheorMergeSort(int n);
+
 #endif // !MATH_UTILS_H
