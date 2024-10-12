@@ -6,6 +6,7 @@
 #include <cmath>
 #include <time.h>
 #include <stdio.h>
+#include <random>
 
 void FillInc(int arr[], int len) {
 	for (int i = 0; i < len; i++) arr[i] = i + 1;
@@ -16,8 +17,20 @@ void FillDec(int arr[], int len) {
 }
 
 void FillRand(int arr[], int len) {
-	srand((unsigned int)time(NULL));
 	for (int i = 0; i < len; i++) arr[i] = GetRandomInt(0, len * 2);
+}
+
+void FillRandUniq(int arr[], int len) {
+	std::vector<int> numbers;
+	numbers.reserve(len);
+
+	for (int i = 0; i < len; ++i) numbers.push_back(i);
+
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::shuffle(numbers.begin(), numbers.end(), gen);
+
+	for (int i = 0; i < len; ++i) arr[i] = numbers[i];
 }
 
 int CheckSum(int arr[], int len) {
@@ -40,7 +53,7 @@ void PrintMas(int arr[], int len) {
 	for (int i = 0; i < len; i++) printf("[%d] ", arr[i]);
 }
 
-void swap(int* a, int* b) {
+void Swap(int* a, int* b) {
 	int temp = *a;
 	*a = *b;
 	*b = temp;
@@ -56,7 +69,7 @@ void SelectSort(int arr[], int len, int* m, int* c) {
 				minIndex = i;
 		}
 
-		swap(&arr[minIndex], &arr[step]); (*m) += 3;
+		Swap(&arr[minIndex], &arr[step]); (*m) += 3;
 	}
 }
 
@@ -76,7 +89,7 @@ void SelectSortBetter(int arr[], int len, int* m = 0, int* c = 0) {
 		}
 
 		if (changed) {
-			swap(&arr[minIndex], &arr[step]);
+			Swap(&arr[minIndex], &arr[step]);
 			(*m) += 3;
 		}
 	}
@@ -87,7 +100,7 @@ void BubbleSort(int arr[], int len, int* m, int* c) {
 		for (int j = 0; j < len - i - 1; j++) {
 			(*c)++;
 			if (arr[j] > arr[j + 1]) {
-				swap(arr[j], arr[j + 1]);
+				Swap(&arr[j], &arr[j + 1]);
 				(*m) += 3;
 			}
 		}
@@ -103,7 +116,7 @@ void BubbleSortBetter(int arr[], int len, int* m, int* c) { // T.T
 		for (int j = 0; j < len - i - 1; j++) {
 			(*c)++;
 			if (arr[j] > arr[j + 1]) {
-				swap(arr[j], arr[j + 1]);
+				Swap(&arr[j], &arr[j + 1]);
 				swapped = true; (*m) += 3;
 			}
 		}
@@ -119,7 +132,7 @@ void ShakerSort(int arr[], int len, int* m, int* c) {
 		for (int j = right; j > left; j--) {
 			(*c)++;
 			if (arr[j] < arr[j - 1]) {
-				swap(arr[j], arr[j - 1]); (*m) += 3;
+				Swap(&arr[j], &arr[j - 1]); (*m) += 3;
 				k = j;
 			}
 		}
@@ -129,7 +142,7 @@ void ShakerSort(int arr[], int len, int* m, int* c) {
 		for (int j = left; j < right; j++) {
 			(*c)++;
 			if (arr[j] > arr[j + 1]) {
-				swap(arr[j], arr[j + 1]); (*m) += 3;
+				Swap(&arr[j], &arr[j + 1]); (*m) += 3;
 				k = j;
 			}
 		}
@@ -273,7 +286,7 @@ void ShellSortKnutPhoneBookIdx(PhoneBook pbArr[], int idArr[], int len, bool (*c
 	hArr[0] = 1;
 	for (int i = 1; i < max; i++) hArr[i] = 2 * hArr[i - 1] + 1;
 
-	int k, j, l = max - 1;
+	int k, l = max - 1;
 
 	for (k = hArr[l]; l >= 0; l--, k = hArr[l]) {
 		for (int i = k; i < len; i++) {
@@ -485,74 +498,267 @@ void HeapSort(int arr[], int len, int* m, int* c) {
 	r = len;
 	
 	while (r > 1) {
-		swap(arr[0], arr[r - 1]); (*m) += 3;
+		Swap(&arr[0], &arr[r - 1]); (*m) += 3;
 		r--;
 		BuildHeap(arr, 0, r - 1, m, c);
 	}
 }
 
-void QuickSort(int arr[], int l, int r, int* m, int* c, int* rec, int* maxRec) {
-	(*rec)++;
-	if (*rec > *maxRec) *maxRec = *rec;
+int _recCounter = 0;
 
-	int pivot = arr[l + (r - l) / 2] , i = l, j = r;
+void QuickSort(int arr[], int l, int r, int* m, int* c, int* maxRec) {
+	_recCounter++;
+	if (_recCounter > *maxRec) *maxRec = _recCounter;
+
+	int pivot = arr[l], i = l, j = r;
 
 	while (i < j) {
+		(*c)++;
 		while (arr[i] < pivot) {
 			i++;
 			(*c)++;
 		}
 
+		(*c)++;
 		while (arr[j] > pivot) {
 			j--;
 			(*c)++;
 		}
 
 		if (i <= j) {
-			swap(arr[i++], arr[j--]); (*m) += 3;
+			Swap(&arr[i++], &arr[j--]); (*m) += 3;
 		}
 	}
 
-	if (l < j) QuickSort(arr, l, j, m, c, rec, maxRec);
-	if (i < r) QuickSort(arr, i, r, m, c, rec, maxRec);
+	if (l < j) QuickSort(arr, l, j, m, c, maxRec);
+	if (i < r) QuickSort(arr, i, r, m, c, maxRec);
 
-	(*rec)--;
+	_recCounter--;
 }
 
-void QuickSortImp(int arr[], int l, int r, int* m, int* c, int* rec, int* maxRec) {
-	(*rec)++;
-	if (*rec > *maxRec) *maxRec = *rec;
+void QuickSortImp(int arr[], int l, int r, int* m, int* c, int* maxRec) {
+	_recCounter++;
+	if (_recCounter > *maxRec) *maxRec = _recCounter;
 
 	while (l < r) {
-		int pivot = arr[l + (r - l) / 2], i = l, j = r;
+		int pivot = arr[l], i = l, j = r;
 
 		while (i < j) {
+			(*c)++;
 			while (arr[i] < pivot) {
 				i++;
 				(*c)++;
 			}
 
+			(*c)++;
 			while (arr[j] > pivot) {
 				j--;
 				(*c)++;
 			}
 
 			if (i <= j) {
-				swap(arr[i++], arr[j--]); (*m) += 3;
+				Swap(&arr[i++], &arr[j--]); (*m) += 3;
 			}
 		}
 
 		if (j - l < r - i) {
-			QuickSortImp(arr, l, j, m, c, rec, maxRec);
+			QuickSortImp(arr, l, j, m, c, maxRec);
 			l = i;
 		}
 		else {
-			QuickSortImp(arr, i, r, m, c, rec, maxRec); 
+			QuickSortImp(arr, i, r, m, c, maxRec);
 			r = j;
 		}
 	}
 
-	rec--;
+	_recCounter--;
+}
+
+void MMerge(Node** a, int q, Node** b, int r, QueueClean* c, int& C, int& M) {
+	while (q != 0 && r != 0)
+	{
+		C++;
+		if ((*a)->data <= (*b)->data)
+		{
+			M++;
+			c->tail->next = *a;
+			c->tail = *a;
+			*a = (*a)->next;
+			q--;
+		}
+		else
+		{
+			M++;
+			c->tail->next = *b;
+			c->tail = *b;
+			*b = (*b)->next;
+			r--;
+		}
+	}
+	while (q > 0)
+	{
+		M++;
+		c->tail->next = *a;
+		c->tail = *a;
+		*a = (*a)->next;
+		q--;
+	}
+	while (r > 0)
+	{
+		M++;
+		c->tail->next = *b;
+		c->tail = *b;
+		*b = (*b)->next;
+		r--;
+	}
+}
+
+int MSplit(Node* S, Node** a, Node** b, int& M) {
+	Node* k, * p;
+	*a = S;
+	*b = S->next;
+	int n = 1;
+	k = *a;
+	p = *b;
+
+	while (p != NULL)
+	{
+		n++;
+		k->next = p->next;
+		k = p;
+		p = p->next;
+	}
+
+	M += n;
+
+	return n;
+}
+
+void MergeSort(Node* (&S), Node* (&tail), int& C, int& M) {
+	C = M = 0;
+	Node* a;
+	Node* b;
+	int n = MSplit(S, &a, &b, M);
+	int p = 1;
+	int q, r;
+	QueueClean c[2];
+
+	while (p < n)
+	{
+		c[0].tail = (Node*)&(c[0].head);
+		c[1].tail = (Node*)&(c[1].head);
+
+		int i = 0;
+		int m = n;
+
+		while (m > 0)
+		{
+			if (m >= p)
+				q = p;
+			else
+				q = m;
+
+			m = m - q;
+
+			if (m >= p)
+				r = p;
+			else
+				r = m;
+
+			m = m - r;
+			MMerge(&a, q, &b, r, &c[i], C, M);
+			i = 1 - i;
+		}
+
+		a = c[0].head;
+		b = c[1].head;
+		p = 2 * p;
+	}
+
+	c[0].tail->next = nullptr;
+	S = c[0].head;
+	tail = c[0].tail;
+}
+
+void DigitalSort(Node16* (&s), Node16* (&tail), int& m, bool isDec) {
+	int KDI[2] = { 1, 0 }, L = 2;
+	int k;
+	Node16* temp, *p;
+	Queue16 q[256];
+	unsigned char d;
+
+	for (int j = L - 1; j >= 0; j--) {
+		for (int i = 0; i <= 255; i++) {
+			q[i].tail = (Node16*)&(q[i].head);
+		}
+
+		p = s;
+		k = KDI[j];
+
+		while (p != NULL) {
+			m++;
+			d = p->digit[k];
+			q[d].tail->next = p;
+			q[d].tail = p;
+			p = p->next;
+		}
+
+		temp = p = (Node16*)&s;
+
+		int i = isDec ? 255 : 0, sign = isDec ? -1 : 1;
+
+		while (i > -1 && i < 256) {
+			if (q[i].tail != (Node16*)&(q[i].head)) {
+				m++;
+				p->next = q[i].head;
+				p = q[i].tail;
+			}
+
+			i += sign;
+		}
+
+		p->next = NULL;
+	}
+}
+
+void DigitalSort(Node32* (&s), Node32* (&tail), int& m, bool isDec) {
+	int KDI[4] = { 3, 2, 1, 0 }, L = 4, k;
+	Node32* temp, *p;
+	Queue32 q[256];
+	unsigned char d;
+
+	for (int j = L - 1; j >= 0; j--) {
+		for (int i = 0; i <= 255; i++) {
+			q[i].tail = (Node32*)&(q[i].head);
+		}
+
+		p = s;
+		k = KDI[j];
+
+		while (p != NULL) {
+			m++;
+			d = p->digit[k];
+			q[d].tail->next = p;
+			q[d].tail = p;
+			p = p->next;
+		}
+
+		temp = p = (Node32*)&s;
+
+		int i = isDec ? 255 : 0, sign = isDec ? -1 : 1;
+
+		while (i > -1 && i < 256) {
+			if (q[i].tail != (Node32*)&(q[i].head)) {
+				m++;
+				p->next = q[i].head;
+				p = q[i].tail;
+			}
+
+			i += sign;
+		}
+
+		p->next = NULL;
+	}
 }
 
 vector<vector<string>> GetSortData(const vector<sortersFType>& sorters, const vector<fillersFType>& fillers, const int min, const int max, const int step, int (*ct)(int), int (*mt)(int), const bool allowN, const bool allowMC) {

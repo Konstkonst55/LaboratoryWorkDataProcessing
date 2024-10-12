@@ -1,5 +1,4 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(517,5): warning MSB8028: промежуточный каталог (Debug\) содержит файлы, которые используются совместно с другим проектом (bgi.vcxproj, LabaratoryWorkDataProcessing.vcxproj).  Это может привести к ошибкам очистки и перестроения.
-  Queue.cpp
-  Stack.cpp
-  Создание кода...
+  Main.cpp
+D:\SibSUTIS\Course 1\САОД\Code\LaboratoryWorkDataProcessing\Main.cpp(117): warning C4715: ConsoleInit: значение возвращается не при всех путях выполнения
   bgi.vcxproj -> D:\SibSUTIS\Course 1\САОД\Code\LaboratoryWorkDataProcessing\Debug\LaboratoryWorkDataProcessing.exe

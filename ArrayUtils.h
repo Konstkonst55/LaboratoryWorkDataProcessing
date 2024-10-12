@@ -3,27 +3,37 @@
 #ifndef ARRAY_UTILS_H
 #define ARRAY_UTILS_H
 
+
 #include <vector>
 #include <string>
 #include "Point.h"
 #include <functional>
 #include "PhoneBook.h"
+#include "Node.h"
+#include "Queue.h"
+#include "Stack.h"
 
 using namespace std;
 
+#ifndef REC
+#define REC
+extern int _recCounter;
+#endif
+
 using sortersFType = function<void(int*, int, int*, int*)>;
-using sortersQuickFType = function<void(int*, int, int, int*, int*, int*, int*)>;
+using sortersQuickFType = function<void(int*, int, int, int*, int*, int*)>;
 using fillersFType = function<void(int*, int)>;
 using searchersFType = function<void(int*, int, int, int*)>;
 
 void FillInc(int arr[], int len);
 void FillDec(int arr[], int len);
 void FillRand(int arr[], int len);
+void FillRandUniq(int arr[], int len);
 
 int CheckSum(int arr[], int len);
 void PrintMas(int arr[], int len);
 int RunNumber(int arr[], int len);
-void swap(int* a, int* b);
+void Swap(int* a, int* b);
 
 void SelectSort(int arr[], int len, int* m, int* c);
 void SelectSortBetter(int arr[], int len, int* m, int* c);
@@ -62,8 +72,15 @@ vector<int> BSearchAllImp(int arr[], int len, int key, int* c);
 void BuildHeap(int arr[], int l, int r, int* m, int* c);
 void HeapSort(int arr[], int len, int* m, int* c);
 
-void QuickSort(int arr[], int l, int r, int* m, int* c, int* rec, int* maxRec);
-void QuickSortImp(int arr[], int l, int r, int* m, int* c, int* rec, int* maxRec);
+void QuickSort(int arr[], int l, int r, int* m, int* c, int* maxRec);
+void QuickSortImp(int arr[], int l, int r, int* m, int* c, int* maxRec);
+
+void MMerge(Node** a, int q, Node** b, int r, QueueClean* c, int& C, int& M);
+int MSplit(Node* S, Node** a, Node** b, int& M);
+void MergeSort(Node* (&S), Node* (&tail), int& C, int& M);
+
+void DigitalSort(Node16* (&s), Node16* (&tail), int& m, bool isDec);
+void DigitalSort(Node32* (&s), Node32* (&tail), int& m, bool isDec);
 
 vector<vector<string>> GetSortData(const vector<sortersFType>& sorters, const vector<fillersFType>& fillers, const int min, const int max, const int step, int (*ct)(int) = nullptr, int (*mt)(int) = nullptr, const bool allowN = true, const bool allowMC = true);
 vector<vector<string>> GetSearchData(const vector<searchersFType>& searchers, const int min, const int max, const int step, int (*ct)(int) = nullptr, const bool allowN = false);
