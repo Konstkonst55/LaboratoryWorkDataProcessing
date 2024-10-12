@@ -1,27 +1,28 @@
 ﻿
-#include <windows.h>
-#include <stdio.h>
-#include <iostream>
-#include "graphics.h"
 #include "ArrayUtils.h"
-#include "MathUtils.h"
-#include "TableHeaders.h"
-#include "Point.h"
-#include "WindowSize.h"
-#include "Table.h"
-#include "Chart.h"
 #include "AxisType.h"
+#include "Chart.h"
+#include "graphics.h"
+#include "MathUtils.h"
 #include "PhoneBook.h"
-#include "Stack.h"
+#include "Point.h"
 #include "Queue.h"
+#include "Stack.h"
+#include "ListUtils.h"
+#include "Table.h"
+#include "TableHeaders.h"
+#include "WindowSize.h"
+#include "TreeUtils.h"
+#include "TreeView.h"
 
-void ShowSorts();
-void ShowSearches();
-void ShowStructSorting();
-void ShowIndexes();
-void ShowHeapShell();
-void ShowQuickHeapShell();
-void ShowStackQueueList();
+#include <iostream>
+#include <random>
+#include <stdio.h>
+#include <windows.h>
+#include <cmath>
+#include <format>
+
+using namespace std;
 
 PhoneBook phoneBook[] = {
     {"Иванов", "Иван", "9231405856", "ул. Пушкина, 1"},
@@ -41,7 +42,35 @@ PhoneBook phoneBook[] = {
     {"Сергеев", "Сергей", "9231429327", "ул. Пушкина, 12"}
 };
 
+int ConsoleInit();
+void HandleTreeView(Vertex* root, std::string name = "BT View");
+void HandleTreeViewDeleting(BinaryTree& tree, std::string name = "BT View", int deleteCount = 10);
+void HandleTreeViewAdding(AVL& tree, std::string name = "BT View");
+std::vector<std::string> GetTableLineTree(BinaryTree& tree, const string& name);
+
+void ShowSorts();           // ✔
+void ShowSearches();        // ✔
+void ShowStructSorting();   // ✔
+void ShowIndexes();         // ✔
+void ShowHeapShell();       // ✔
+void ShowQuickHeapShell();  // ✔
+void ShowStackQueueList();  // ✔
+void ShowMerge();           // ✔
+void ShowDigital();         // ✔
+
+void ShowBinaryTree();      // ✔
+void BuildPBST();           // ✔
+void BuildRST();            // ✔
+void DeleteVertexRST();     // ✔
+void BuildAVL();            // 
+
 int main() {
+    ConsoleInit();
+
+    BuildAVL();
+}
+
+int ConsoleInit() {
     HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
     if (hOut == INVALID_HANDLE_VALUE) return 0;
     DWORD dwMode = 0;
@@ -50,8 +79,102 @@ int main() {
     if (!SetConsoleMode(hOut, dwMode)) return 0;
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
+}
 
-    ShowStackQueueList();
+void HandleTreeView(Vertex* root, std::string name) {
+    initwindow(1200, 800, name.c_str());
+
+    const double scaleStep = 0.5;
+    const int offsetStep = 100;
+    double scale = 1;
+    int offsetX = 0, offsetY = 0;
+
+    DrawTree(root, scale, offsetX, offsetY);
+
+    while (true) {
+        if (kbhit()) {
+            int key = getch();
+
+            switch (key) {
+                case 75: offsetX += offsetStep; break;
+                case 77: offsetX -= offsetStep; break;
+                case 72: offsetY += offsetStep; break;
+                case 80: offsetY -= offsetStep; break;
+                case 43:
+                case 61: scale += scaleStep; break;
+                case 45: scale = (scale > scaleStep) ? scale - scaleStep : scaleStep; break;
+                case VK_ESCAPE: closegraph(); return;
+            }
+
+            DrawTree(root, scale, offsetX, offsetY);
+        }
+    }
+}
+
+void HandleTreeViewDeleting(BinaryTree& tree, std::string name, int deleteCount) {
+    initwindow(1200, 800, name.c_str());
+
+    const double scaleStep = 0.5;
+    const int offsetStep = 100;
+    double scale = 1;
+    int offsetX = 0, offsetY = 0;
+
+    DrawTree(tree.root, scale, offsetX, offsetY);
+
+    for (int i = 0; i < deleteCount; i++) {
+        std::cout << std::endl << "Enter the key to delete (" << (deleteCount - i) << " left): ";
+        int key;
+        std::cin >> key;
+
+        if (tree.DeleteVertex(key)) {
+            DrawTree(tree.root, scale, offsetX, offsetY);
+        }
+        else {
+            i--;
+        }
+    }
+
+    while (true) {
+        if (kbhit()) {
+            if (getch() == VK_ESCAPE) {
+                closegraph();
+                return;
+            }
+        }
+    }
+}
+
+void HandleTreeViewAdding(AVL& tree, std::string name) {
+    initwindow(1200, 800, name.c_str());
+
+    const double scaleStep = 0.5;
+    const int offsetStep = 100;
+    double scale = 1;
+    int offsetX = 0, offsetY = 0;
+
+    DrawTree(tree.root, scale, offsetX, offsetY);
+
+    while (true) {
+        std::cout << std::endl << "Enter the key to insert: ";
+        int key;
+        std::cin >> key;
+
+        tree.AddVertex(key);
+        DrawTree(tree.root, scale, offsetX, offsetY);
+    }
+
+    while (true) {
+        if (kbhit()) {
+            if (getch() == VK_ESCAPE) {
+                closegraph();
+                return;
+            }
+        }
+    }
+}
+
+std::vector<std::string> GetTableLineTree(BinaryTree& tree, const string& name) {
+    return { name, std::to_string(tree.GetSize()), std::to_string(tree.GetSum()), std::to_string(tree.GetHeight()), std::to_string(tree.GetAvgHeight()).substr(0, std::to_string(tree.GetAvgHeight()).find('.') + 3) };
 }
 
 void ShowSorts() {
@@ -387,7 +510,7 @@ void ShowQuickHeapShell() {
     vector<vector<vector<string>>> sortsData = { shellSortData, heapSortData };
 
     for (int n = MIN_N; n <= MAX_N; n += STEP) {
-        int* arr, c = 0, m = 0, rec = 0, maxRec = 0;
+        int* arr, c = 0, m = 0, maxRec = 0;
         vector<string> row;
 
         row.push_back(to_string(n));
@@ -396,16 +519,16 @@ void ShowQuickHeapShell() {
         for (auto filler : fillers) {
             arr = new int[n];
             filler(arr, n);
-            QuickSort(arr, 0, n - 1, &m, &c, &rec, &maxRec);
+            QuickSort(arr, 0, n - 1, &m, &c, &maxRec);
             row.push_back(to_string(m + c));
-            delete[] arr; m = 0; c = 0; rec = 0; maxRec = 0;
+            delete[] arr; m = 0; c = 0; _recCounter = 0; maxRec = 0;
         }
 
         quickSortData.push_back(row);
     }
 
     for (int n = MIN_N; n <= MAX_N; n += DATA_STEP) {
-        int* arr, c = 0, m = 0, rec = 0, maxRec = 0;
+        int* arr, c = 0, m = 0, maxRec = 0;
         vector<string> row;
 
         row.push_back(to_string(n));
@@ -414,9 +537,9 @@ void ShowQuickHeapShell() {
             for (auto filler : fillers) {
                 arr = new int[n];
                 filler(arr, n);
-                sorter(arr, 0, n - 1, &m, &c, &rec, &maxRec);
+                sorter(arr, 0, n - 1, &m, &c, &maxRec);
                 row.push_back(to_string(maxRec));
-                delete[] arr; m = 0; c = 0; rec = 0; maxRec = 0;
+                delete[] arr; m = 0; c = 0; _recCounter = 0; maxRec = 0;
             }
         }
 
@@ -449,19 +572,19 @@ void ShowStackQueueList() {
     Stack stack;
 
     stack.FillInc(1, 9);
-    cout << "Возрастающий стэк:" << endl;
+    cout << "Возрастающий стэк:" << endl << endl;
     stack.Print();
     stack.Clear();
     cout << endl << endl;
 
     stack.FillDec(9, 1);
-    cout << "Убывающий стэк:" << endl;
+    cout << "Убывающий стэк:" << endl << endl;
     stack.Print();
     stack.Clear();
     cout << endl << endl;
 
     stack.FillRand(9, 1, 9);
-    cout << "Случайный стэк:" << endl;
+    cout << "Случайный стэк:" << endl << endl;
     stack.Print();
     stack.Clear();
     cout << endl << endl;
@@ -469,38 +592,369 @@ void ShowStackQueueList() {
     Queue queue;
 
     queue.FillInc(1, 9);
-    cout << "Возрастающая очередь:" << endl;
+    cout << "Возрастающая очередь:" << endl << endl;
     queue.Print();
     queue.Clear();
     cout << endl << endl;
 
     queue.FillDec(9, 1);
-    cout << "Убывающая очередь:" << endl;
+    cout << "Убывающая очередь:" << endl << endl;
     queue.Print();
     queue.Clear();
     cout << endl << endl;
 
     queue.FillRand(9, 1, 9);
-    cout << "Случайная очередь:" << endl;
+    cout << "Случайная очередь:" << endl << endl;
     queue.Print();
     queue.Clear();
     cout << endl << endl;
 
     stack.FillRand(15, 0, 30);
-    cout << endl << "Случайный стэк:" << endl;
+    cout << endl << "Случайный стэк:" << endl << endl;
     stack.Print();
-    cout << endl << "Случайный стэк (обр.):" << endl;
+    cout << endl << endl << "Случайный стэк (обр.):" << endl << endl;
     stack.PrintReverse();
-    cout << endl << "Сумма: " << stack.GetSum() << endl;
+    cout << endl << endl << "Сумма: " << stack.GetSum() << endl;
     cout << "Серии: " << stack.GetSeries() << endl;
 
     queue.FillRand(15, 0, 30);
-    cout << endl << "Случайная очередь:" << endl;
+    cout << endl << "Случайная очередь:" << endl << endl;
     queue.Print();
-    cout << endl << "Случайная очередь (обр.):" << endl;
+    cout << endl << endl << "Случайная очередь (обр.):" << endl << endl;
     queue.PrintReverse();
-    cout << endl << "Сумма: " << queue.GetSum() << endl;
-    cout << "Серии: " << queue.GetSeries() << endl;
+    cout << endl << endl << "Сумма: " << queue.GetSum() << endl;
+    cout << "Серии: " << queue.GetSeries() << endl << endl;
 
+    system("PAUSE");
+}
+
+void ShowMerge() {
+    //WindowSize wSize = { 1200, 800 };
+    //const int
+    //    MIN_N = 100,
+    //    MAX_N = 1000,
+    //    STEP = 10,
+    //    LABEL_DENSITY = 10,
+    //    LEGEND_STEP = 20,
+    //    LEGEND_START = 50,
+    //    DATA_STEP = 10;
+    //const double
+    //    X_SCALE = 1.1,
+    //    Y_SCALE = 0.02,
+    //    AXIS_STEP = MIN_N;
+    //const bool ALLOW_LABELS = false;
+    //const vector<fillersFType> fillers = { FillDec, FillRand, FillInc };
+    //const vector<sortersQuickFType> sorters = { QuickSort, QuickSortImp };
+    //const vector<int> colors = { WHITE, LIGHTBLUE, LIGHTRED };
+    //const vector<string> labels = { "HEAP", "QUICK", "MERGE"};
+
+    //int legY = 60; _recCounter = 0;
+
+    //vector<vector<string>> MCTable = DefaultMiniHeader,
+    //    quickSortData,
+    //    mergeSortData,
+    //    heapSortData = GetSortData({ HeapSort }, fillers, MIN_N, MAX_N, STEP, GetCTheorHeapSort, GetMTheorHeapSort);
+    //vector<vector<vector<string>>> sortsData = { heapSortData };
+
+    //for (int n = MIN_N; n <= MAX_N; n += STEP) {
+    //    int* arr, c = 0, m = 0, maxRec = 0;
+    //    vector<string> row;
+
+    //    row.push_back(to_string(n));
+    //    row.push_back(to_string(GetCTheorQuickSort(n) + GetMTheorQuickSort(n)));
+
+    //    for (auto filler : fillers) {
+    //        arr = new int[n];
+    //        filler(arr, n);
+    //        QuickSort(arr, 0, n - 1, &m, &c, &maxRec);
+    //        row.push_back(to_string(m + c));
+    //        delete[] arr; m = 0; c = 0; _recCounter = 0; maxRec = 0;
+    //    }
+
+    //    quickSortData.push_back(row);
+    //}
+
+    //for (int n = MIN_N; n <= MAX_N; n += STEP) {
+    //    int* arr, c = 0, m = 0;
+    //    vector<string> row;
+    //    Queue queue;
+
+    //    row.push_back(to_string(n));
+    //    row.push_back(to_string(GetCTheorMergeSort(n) + GetMTheorMergeSort(n)));
+
+    //    queue.FillDec(0, n);
+    //    MergeSort(queue.front, queue.back, &m, &c);
+    //    row.push_back(to_string(m + c));
+    //    queue.Clear(); m = 0; c = 0;
+
+    //    queue.FillRand(n, 0, n * 2);
+    //    MergeSort(queue.front, queue.back, &m, &c);
+    //    row.push_back(to_string(m + c));
+    //    queue.Clear(); m = 0; c = 0;
+
+    //    queue.FillInc(0, n);
+    //    MergeSort(queue.front, queue.back, &m, &c);
+    //    row.push_back(to_string(m + c));
+    //    queue.Clear(); m = 0; c = 0;
+
+    //    mergeSortData.push_back(row);
+    //}
+
+    //FillTable(MCTable, mergeSortData, 9, DATA_STEP);
+    //CreateTable(MCTable);
+
+    //sortsData.push_back(quickSortData);
+    //sortsData.push_back(mergeSortData);
+
+    //initwindow(wSize.x, wSize.y);
+
+    //DrawAxis(BOTTOM_LEFT, "N", "M+C", AXIS_STEP * X_SCALE, AXIS_STEP * Y_SCALE, 3, true, true);
+
+    //for (size_t s = 0; s < sortsData.size(); s++) {
+    //    OutChartText(LEGEND_START, legY += LEGEND_STEP, colors[s], (char*)labels[s].c_str());
+    //    DrawChartWithPoints(CreatePoints(sortsData[s], 0, 0, 3), X_SCALE, Y_SCALE, ALLOW_LABELS, LABEL_DENSITY, colors[s]);
+    //}
+    
+    // ---------------------------- //
+
+    //Node* stack;
+    //Node* a;
+    //Node* b;
+    //int c = 0, m = 0;
+    //int cmTheory = 0;
+
+    //cout << "Исходный стэк: " << endl;
+    //stack = FillRandNode(16, 0, 20);
+    //PrintNode(stack);
+    //MSplit(stack, &a, &b, m);
+    //cout << "Стэк 1:" << endl;
+    //PrintNode(a);
+    //cout << "Количество элементов в списке: " << GetNodeCount(a) << endl;
+    //cout << "Стек 2:" << endl;
+    //PrintNode(b);
+    //cout << "Количество элементов в списке: " << GetNodeCount(b) << endl;
+    //
+    //int q = floor(16 / 2);
+    //int r = floor(16 / 2);
+    //Node* stackA = FillRandNode(16, 0, 20);
+    //Node* stackB = FillRandNode(16, 0, 20);
+    //cout << "Стек 1:" << endl;
+    //PrintNode(stackA);
+    //cout << "Стек 2:" << endl;
+    //PrintNode(stackB);
+    //QueueClean queue;
+    //queue.tail = (Node*)&(queue.tail);
+    //MMerge(&stackA, q, &stackB, r, &queue, c, m);
+    //cout << "\nИтоговая Очередь:" << endl;
+    //PrintNode(queue.head);
+    //cout << "\nФактическое С+M: " << c + m << " | Теоретическое C+M: " << 2 * (q + r) - 1 << endl;
+    //cout << "Количество серий в списке: " << GetSeriesCount(queue.head) << endl;
+    //cout << "Сумма элементов списка: " << GetNodeSum(queue.head) << endl;
+
+    //system("PAUSE");
+}
+
+void ShowDigital() {
+    const int MinN = 100, MaxN = 500, Step = 100, N = 20;
+    int m = 0;
+    Node16* head16 = NULL, * tail16 = NULL;
+    Node32* head32 = NULL, * tail32 = NULL;
+
+    QueueFillRand(N, head32, tail32);
+    cout << "Неотсортированный список:" << endl;
+    PrintList(head32);
+    cout << "Количество серий в списке: " << CountSeries(head32) << endl;
+    cout << "Сумма элементов списка: " << SumList(head32) << endl << endl;
+
+    DigitalSort(head32, tail32, m, false);
+    cout << "Отсортированный список:" << endl;
+    PrintList(head32);
+    cout << "Количество серий в списке: " << CountSeries(head32) << endl
+    << "Сумма элементов списка: " << SumList(head32) << endl
+    << endl << "Фактическое M: " << m << " | Теоретическое M: " << N << endl
+    << endl << endl;
+
+    cout << "DigitalSort Двухбайтовый по возрастанию:" << endl;
+    QueueFillRand(N, head16, tail16);
+    m = 0;
+    DigitalSort(head16, tail16, m, false);
+    PrintList(head16);
+    cout << "DigitalSort Двухбайтовый по убыванию:" << endl;
+    DigitalSort(head16, tail16, m, true);
+    PrintList(head16);
+
+    cout << "\nDigitalSort Четырёхбайтовый по возрастанию:" << endl;
+    QueueFillRand(N, head32, tail32);
+    m = 0;
+    DigitalSort(head32, tail32, m, false);
+    PrintList(head32);
+    cout << "DigitalSort Четырёхбайтовый по убыванию:" << endl;
+    DigitalSort(head32, tail32, m, true);
+    PrintList(head32);
+    cout << endl << endl;
+
+    int *arr;
+    string* row;
+    vector<vector<string>> table = DigitalHeader;
+
+    for (int n = MinN; n <= MaxN; n += Step) {
+        Node16* head = nullptr, *tail = nullptr;
+        vector<string> row;
+        row.push_back(to_string(n));
+        row.push_back(to_string(n));
+
+        QueueFillDec(n, head, tail);
+        DigitalSort(head, tail, m, false);
+        row.push_back(to_string(m));
+        DeleteList(head, tail); m = 0;
+
+        QueueFillRand(n, head, tail);
+        DigitalSort(head, tail, m, false);
+        row.push_back(to_string(m));
+        DeleteList(head, tail); m = 0;
+
+        QueueFillInc(n, head, tail);
+        DigitalSort(head, tail, m, false);
+        row.push_back(to_string(m));
+        DeleteList(head, tail); m = 0;
+
+        table.push_back(row);
+    }
+
+    CreateTable(table);
+
+    system("PAUSE");
+}
+
+void ShowBinaryTree() {
+    BinaryTree tree;
+    tree.root = CreateVertex(1);
+
+    tree.root->left = CreateVertex(2);
+    tree.root->left->right = CreateVertex(3);
+    tree.root->left->right->left = CreateVertex(4);
+    tree.root->left->right->left->right = CreateVertex(5);
+    tree.root->left->right->left->right->right = CreateVertex(6);
+
+    std::cout << "Root-Left-Right: ";
+    tree.PrintRootLeftRight();
+
+    std::cout << std::endl << "Left-Root-Right: ";
+    tree.PrintLeftRootRight();
+
+    std::cout << std::endl << "Left-Right-Root: ";
+    tree.PrintLeftRightRoot();
+    std::cout << std::endl << std::endl;
+
+    tree.PrintInfo();
+
+    tree.Delete();
+
+    system("PAUSE");
+}
+
+void BuildPBST() {
+    PBST pbst;
+    int size = 100, * arr = new int[size];
+    
+    FillInc(arr, size);
+
+    pbst.Create(arr, size);
+    pbst.PrintLeftRootRight();
+    std::cout << std::endl << std::endl;
+    pbst.PrintInfo();
+    std::cout << std::endl;
+
+    system("PAUSE");
+}
+
+void BuildRST() {
+    RST rst, rstdi;
+    PBST pbst;
+    const int size = 100;
+    int arr[size], pbstArr[size];
+    
+    FillRand(arr, size);
+    FillInc(pbstArr, size);
+
+    pbst.Create(pbstArr, size);
+    
+    for (auto value : arr) {
+        rst.AddVertex(value);
+        rstdi.AddVertexDoubleIndirection(value);
+    }
+
+    std::cout << "RST Rec: ";
+    rst.PrintLeftRootRight();
+    std::cout << std::endl << std::endl;
+    std::cout << "RST DI:  ";
+    rstdi.PrintLeftRootRight();
+    std::cout << std::endl << std::endl;
+
+    auto header = TreeHeader;
+    header.push_back(GetTableLineTree(pbst, "ISDP"));
+    header.push_back(GetTableLineTree(rst, "SDP1"));
+    header.push_back(GetTableLineTree(rstdi, "SDP2"));
+
+    CreateTable(header);
+
+    HandleTreeView(pbst.root, "ISDP");
+    HandleTreeView(rst.root, "SDP1");
+    HandleTreeView(rstdi.root, "SDP2");
+
+    system("PAUSE");
+}
+
+void DeleteVertexRST() {
+    RST rst;
+    const int size = 30;
+    int arr[size], key;
+
+    FillRand(arr, size);
+    
+    for (auto value : arr) {
+        rst.AddVertex(value);
+    }
+
+    rst.PrintLeftRootRight();
+
+    HandleTreeViewDeleting(rst, "SDP", 12);
+
+    system("PAUSE");
+}
+
+void BuildAVL() {
+    PBST pbst;
+    AVL avl;
+    const int size = 100;
+    int arr[size];
+
+    FillRandUniq(arr, size);
+
+    for (auto value : arr) {
+        avl.AddVertex(value);
+    }
+
+    int m = 0, c = 0, maxRec = 0;
+    QuickSort(arr, 0, size - 1, &m, &c, &maxRec);
+
+    pbst.Create(arr, size);
+
+    std::cout << "ISDP: ";
+    pbst.PrintLeftRootRight();
+    std::cout << std::endl << std::endl;
+    std::cout << "AVL : ";
+    avl.PrintLeftRootRight();
+    std::cout << std::endl << std::endl;
+
+    auto header = TreeHeader;
+    header.push_back(GetTableLineTree(pbst, "ISDP"));
+    header.push_back(GetTableLineTree(avl, "AVL"));
+
+    CreateTable(header);
+
+    HandleTreeView(pbst.root, "ISDP");
+    HandleTreeView(avl.root, "AVL");
+    
     system("PAUSE");
 }
