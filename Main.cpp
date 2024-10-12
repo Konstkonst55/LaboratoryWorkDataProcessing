@@ -45,7 +45,7 @@ PhoneBook phoneBook[] = {
 int ConsoleInit();
 void HandleTreeView(Vertex* root, std::string name = "BT View");
 void HandleTreeViewDeleting(BinaryTree& tree, std::string name = "BT View", int deleteCount = 10);
-void HandleTreeViewAdding(AVL& tree, std::string name = "BT View");
+void HandleTreeViewAdding(BinaryTree& tree, std::string name = "BT View");
 std::vector<std::string> GetTableLineTree(BinaryTree& tree, const string& name);
 
 void ShowSorts();           // ✔
@@ -62,12 +62,13 @@ void ShowBinaryTree();      // ✔
 void BuildPBST();           // ✔
 void BuildRST();            // ✔
 void DeleteVertexRST();     // ✔
-void BuildAVL();            // 
+void BuildAVL();            // ✔
+void DeleteVertexAVL();     // 
 
 int main() {
     ConsoleInit();
 
-    BuildAVL();
+    DeleteVertexAVL();
 }
 
 int ConsoleInit() {
@@ -144,7 +145,7 @@ void HandleTreeViewDeleting(BinaryTree& tree, std::string name, int deleteCount)
     }
 }
 
-void HandleTreeViewAdding(AVL& tree, std::string name) {
+void HandleTreeViewAdding(BinaryTree& tree, std::string name) {
     initwindow(1200, 800, name.c_str());
 
     const double scaleStep = 0.5;
@@ -918,7 +919,7 @@ void DeleteVertexRST() {
 
     rst.PrintLeftRootRight();
 
-    HandleTreeViewDeleting(rst, "SDP", 12);
+    HandleTreeViewDeleting(rst, "SDP", 10);
 
     system("PAUSE");
 }
@@ -956,5 +957,23 @@ void BuildAVL() {
     HandleTreeView(pbst.root, "ISDP");
     HandleTreeView(avl.root, "AVL");
     
+    system("PAUSE");
+}
+
+void DeleteVertexAVL() {
+    AVL avl;
+    const int size = 30;
+    int arr[size], key;
+
+    FillRandUniq(arr, size);
+
+    for (auto value : arr) {
+        avl.AddVertex(value);
+    }
+
+    avl.PrintLeftRootRight();
+
+    HandleTreeViewDeleting(avl, "AVL", 10);
+
     system("PAUSE");
 }
