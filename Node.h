@@ -43,6 +43,7 @@ public:
     Vertex* right;
     int balance;
 
+    Vertex() : Vertex(0) { }
     Vertex(int val) : value(val), left(nullptr), right(nullptr), balance(0) { }
 };
 
