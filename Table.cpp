@@ -1,6 +1,6 @@
 
 #include "Table.h"
-#include <stdio.h>
+#include <iostream>
 
 void CreateTable(const vector<vector<string>>& table)
 {
@@ -14,23 +14,23 @@ void CreateTable(const vector<vector<string>>& table)
         columnWidths.push_back(maxWidth);
     }
 
-    printf("\n");
+    std::cout << std::endl;
 
     for (const auto& row : table) {
-        printf("| ");
+        std::cout << "| ";
 
         for (size_t col = 0; col < row.size(); ++col) {
-            printf(row[col].c_str());
+            std::cout << row[col].c_str();
 
-            for (size_t i = row[col].length(); i < columnWidths[col]; ++i) printf(" ");
+            for (size_t i = row[col].length(); i < columnWidths[col]; ++i) std::cout << " ";
             
-            printf(" | ");
+            std::cout << " | ";
         }
 
-        printf("\n");
+        std::cout << std::endl;
     }
 
-    printf("\n\n");
+    std::cout << std::endl << std::endl;
 }
 
 void FillTable(vector<vector<string>>& table, vector<vector<string>>& data, const int start, const int step) {
