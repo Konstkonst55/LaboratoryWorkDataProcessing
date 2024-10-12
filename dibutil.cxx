@@ -989,7 +989,8 @@ HDIB ChangeDIBFormat(HDIB hDIB, WORD wBitCount, DWORD dwCompression)
     GlobalUnlock(hDIB);
 
     // Validate wBitCount and dwCompression
-    // They must match correctly (i.e., BI_RLE4 and 4 BPP or
+    // They must match cor
+    // tly (i.e., BI_RLE4 and 4 BPP or
     // BI_RLE8 and 8BPP, etc.) or we return failure
     if (wBitCount == 0)
     {

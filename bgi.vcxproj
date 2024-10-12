@@ -14,6 +14,7 @@
     <ProjectGuid>{B0A1AF87-F642-456A-9C64-9C7ABBDF9EC1}</ProjectGuid>
     <RootNamespace>bgi</RootNamespace>
     <ProjectName>LaboratoryWorkDataProcessing</ProjectName>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -44,6 +45,8 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
+      <LanguageStandard>stdcpp14</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -69,6 +72,7 @@
     <ClCompile Include="dibutil.cxx" />
     <ClCompile Include="drawing.cxx" />
     <ClCompile Include="file.cxx" />
+    <ClCompile Include="ListUtils.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MathUtils.cpp" />
     <ClCompile Include="misc.cxx" />
@@ -80,6 +84,8 @@
     <ClCompile Include="Table.cpp" />
     <ClCompile Include="Table.h" />
     <ClCompile Include="text.cxx" />
+    <ClCompile Include="TreeUtils.cpp" />
+    <ClCompile Include="TreeView.cpp" />
     <ClCompile Include="winbgi.cxx" />
     <ClCompile Include="WindowSize.h" />
     <ClCompile Include="winthread.cxx" />
@@ -90,6 +96,7 @@
     <ClInclude Include="Chart.h" />
     <ClInclude Include="dibutil.h" />
     <ClInclude Include="graphics.h" />
+    <ClInclude Include="ListUtils.h" />
     <ClInclude Include="MathUtils.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="PhoneBook.h" />
@@ -97,6 +104,8 @@
     <ClInclude Include="Stack.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="TableHeaders.h" />
+    <ClInclude Include="TreeUtils.h" />
+    <ClInclude Include="TreeView.h" />
     <ClInclude Include="winbgi.h" />
     <ClInclude Include="winbgim.h" />
     <ClInclude Include="winbgitypes.h" />

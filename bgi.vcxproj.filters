@@ -13,26 +13,26 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\Lib">
-      <UniqueIdentifier>{1c049d4c-8355-4f2c-9f62-6c83fc484275}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Utils">
-      <UniqueIdentifier>{df9e90c5-a694-4621-8401-b7ddf98ea1e9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Lib">
-      <UniqueIdentifier>{33f855ad-06e4-4412-ab1f-c8901f72ce2e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Utils">
-      <UniqueIdentifier>{a1bb148c-ac43-447c-af33-aca221983517}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\View">
       <UniqueIdentifier>{a4178fd0-1e8e-429b-98f2-c074d4365a62}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\View">
       <UniqueIdentifier>{f3bc547c-f8ee-499e-84ac-00445672e802}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Data">
+    <Filter Include="Header Files\DataStructure">
       <UniqueIdentifier>{b3a16471-c94a-4a90-b276-9ce8b424f1b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Lib">
+      <UniqueIdentifier>{33f855ad-06e4-4412-ab1f-c8901f72ce2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Lib">
+      <UniqueIdentifier>{1c049d4c-8355-4f2c-9f62-6c83fc484275}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Util">
+      <UniqueIdentifier>{df9e90c5-a694-4621-8401-b7ddf98ea1e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Util">
+      <UniqueIdentifier>{a1bb148c-ac43-447c-af33-aca221983517}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -70,10 +70,10 @@
       <Filter>Source Files\Lib</Filter>
     </ClCompile>
     <ClCompile Include="ArrayUtils.cpp">
-      <Filter>Source Files\Utils</Filter>
+      <Filter>Source Files\Util</Filter>
     </ClCompile>
     <ClCompile Include="MathUtils.cpp">
-      <Filter>Source Files\Utils</Filter>
+      <Filter>Source Files\Util</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
@@ -88,13 +88,22 @@
       <Filter>Source Files\View</Filter>
     </ClCompile>
     <ClCompile Include="WindowSize.h">
-      <Filter>Header Files\Data</Filter>
+      <Filter>Header Files\DataStructure</Filter>
     </ClCompile>
     <ClCompile Include="Stack.cpp">
-      <Filter>Source Files\Utils</Filter>
+      <Filter>Source Files\Util</Filter>
     </ClCompile>
     <ClCompile Include="Queue.cpp">
-      <Filter>Source Files\Utils</Filter>
+      <Filter>Source Files\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="ListUtils.cpp">
+      <Filter>Source Files\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="TreeUtils.cpp">
+      <Filter>Source Files\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="TreeView.cpp">
+      <Filter>Source Files\View</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -114,34 +123,43 @@
       <Filter>Header Files\Lib</Filter>
     </ClInclude>
     <ClInclude Include="ArrayUtils.h">
-      <Filter>Header Files\Utils</Filter>
+      <Filter>Header Files\Util</Filter>
     </ClInclude>
     <ClInclude Include="MathUtils.h">
-      <Filter>Header Files\Utils</Filter>
+      <Filter>Header Files\Util</Filter>
     </ClInclude>
     <ClInclude Include="Chart.h">
       <Filter>Header Files\View</Filter>
     </ClInclude>
     <ClInclude Include="TableHeaders.h">
-      <Filter>Header Files\Data</Filter>
+      <Filter>Header Files\DataStructure</Filter>
     </ClInclude>
     <ClInclude Include="PhoneBook.h">
-      <Filter>Header Files\Data</Filter>
+      <Filter>Header Files\DataStructure</Filter>
     </ClInclude>
     <ClInclude Include="Point.h">
-      <Filter>Header Files\Data</Filter>
+      <Filter>Header Files\DataStructure</Filter>
     </ClInclude>
     <ClInclude Include="AxisType.h">
-      <Filter>Header Files\Data</Filter>
+      <Filter>Header Files\DataStructure</Filter>
     </ClInclude>
     <ClInclude Include="Stack.h">
-      <Filter>Header Files\Data</Filter>
+      <Filter>Header Files\DataStructure</Filter>
     </ClInclude>
     <ClInclude Include="Node.h">
-      <Filter>Header Files\Data</Filter>
+      <Filter>Header Files\DataStructure</Filter>
     </ClInclude>
     <ClInclude Include="Queue.h">
-      <Filter>Header Files\Data</Filter>
+      <Filter>Header Files\DataStructure</Filter>
+    </ClInclude>
+    <ClInclude Include="ListUtils.h">
+      <Filter>Header Files\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="TreeUtils.h">
+      <Filter>Header Files\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="TreeView.h">
+      <Filter>Header Files\View</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

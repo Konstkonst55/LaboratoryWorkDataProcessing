@@ -5,7 +5,7 @@
 
 using namespace std;
 
-Queue::Queue() : _front(nullptr), _back(nullptr) { }
+Queue::Queue() : front(nullptr), back((Node*)&(front)) { }
 
 bool Queue::IsEmpty(Node* node) {
     return node == nullptr;
@@ -74,7 +74,7 @@ void Queue::FillRand(int count, int min, int max) {
 
 int Queue::GetSum() {
     int sum = 0;
-    Node* temp = _front;
+    Node* temp = front;
 
     while (!IsEmpty(temp)) {
         sum += temp->data;
@@ -85,19 +85,19 @@ int Queue::GetSum() {
 }
 
 int Queue::GetSeries() {
-    return GetSeries(_front);
+    return GetSeries(front);
 }
 
 void Queue::Enqueue(int data) {
     Node* newNode = new Node(data);
 
-    if (IsEmpty(_back)) {
-        _front = _back = newNode;
+    if (IsEmpty(back)) {
+        front = back = newNode;
         return;
     }
 
-    _back->next = newNode;
-    _back = newNode;
+    back->next = newNode;
+    back = newNode;
 }
 
 int Queue::Dequeue() {
@@ -105,12 +105,12 @@ int Queue::Dequeue() {
         return -1;
     }
 
-    Node* temp = _front;
+    Node* temp = front;
     int data = temp->data;
-    _front = _front->next;
+    front = front->next;
 
     if (IsEmpty()) {
-        _back = nullptr;
+        back = nullptr;
     }
 
     delete temp;
@@ -118,7 +118,7 @@ int Queue::Dequeue() {
 }
 
 void Queue::Clear() {
-    Node* current = _front;
+    Node* current = front;
 
     while (!IsEmpty(current)) {
         Node* next = current->next;
@@ -126,18 +126,18 @@ void Queue::Clear() {
         current = next;
     }
 
-    _front = nullptr;
-    _back = nullptr;
+    front = nullptr;
+    back = nullptr;
 }
 
 bool Queue::IsEmpty() {
-    return _front == nullptr;
+    return front == nullptr;
 }
 
 void Queue::Print() {
-    Print(_front);
+    Print(front);
 }
 
 void Queue::PrintReverse() {
-    PrintReverse(_front);
+    PrintReverse(front);
 }

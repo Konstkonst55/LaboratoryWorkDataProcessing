@@ -7,15 +7,15 @@
 
 class Queue {
 private:
-    Node* _front;
-    Node* _back;
-
     bool IsEmpty(Node* node);
     void Print(Node* node);
     void PrintReverse(Node* node);
     int GetSeries(Node* node);
 
 public:
+    Node* front;
+    Node* back;
+
     Queue();
 
     void FillInc(int start, int end);
@@ -29,6 +29,23 @@ public:
     bool IsEmpty();
     void Print();
     void PrintReverse();
+};
+
+struct QueueClean {
+    Node* head;
+    Node* tail;
+};
+
+struct Queue16
+{
+    Node16* head;
+    Node16* tail;
+};
+
+struct Queue32
+{
+    Node32* head;
+    Node32* tail;
 };
 
 #endif // !QUEUE_H

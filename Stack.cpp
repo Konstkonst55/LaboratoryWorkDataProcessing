@@ -5,7 +5,7 @@
 
 using namespace std;
 
-Stack::Stack() : _top(nullptr) { }
+Stack::Stack() : top(nullptr) { }
 
 bool Stack::IsEmpty(Node* node) {
     return node == nullptr;
@@ -74,7 +74,7 @@ void Stack::FillRand(int count, int min, int max) {
 
 int Stack::GetSum() {
     int sum = 0;
-    Node* temp = _top;
+    Node* temp = top;
 
     while (!IsEmpty(temp)) {
         sum += temp->data;
@@ -85,13 +85,13 @@ int Stack::GetSum() {
 }
 
 int Stack::GetSeries() {
-    return GetSeries(_top);
+    return GetSeries(top);
 }
 
 void Stack::Push(int data) {
     Node* newNode = new Node(data);
-    newNode->next = _top;
-    _top = newNode;
+    newNode->next = top;
+    top = newNode;
 }
 
 void Stack::Pop() {
@@ -99,17 +99,17 @@ void Stack::Pop() {
         return;
     }
 
-    Node* temp = _top;
-    _top = _top->next;
+    Node* temp = top;
+    top = top->next;
     delete temp;
 }
 
 int Stack::Peek() {
-    return IsEmpty() ? -1 : _top->data;
+    return IsEmpty() ? -1 : top->data;
 }
 
 void Stack::Clear() {
-    Node* current = _top;
+    Node* current = top;
 
     while (!IsEmpty(current)) {
         Node* next = current->next;
@@ -117,17 +117,17 @@ void Stack::Clear() {
         current = next;
     }
 
-    _top = nullptr;
+    top = nullptr;
 }
 
 bool Stack::IsEmpty() {
-    return _top == nullptr;
+    return top == nullptr;
 }
 
 void Stack::Print() {
-    Print(_top);
+    Print(top);
 }
 
 void Stack::PrintReverse() {
-    PrintReverse(_top);
+    PrintReverse(top);
 }

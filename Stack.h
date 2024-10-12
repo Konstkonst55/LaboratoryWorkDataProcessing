@@ -7,14 +7,14 @@
 
 class Stack {
 private:
-    Node* _top;
-
     bool IsEmpty(Node* node);
     void Print(Node* node);
     void PrintReverse(Node* node);
     int GetSeries(Node* node);
 
 public:
+    Node* top;
+    
     Stack();
 
     void FillInc(int start, int end);
