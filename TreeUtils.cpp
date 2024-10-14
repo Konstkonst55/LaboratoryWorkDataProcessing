@@ -363,7 +363,7 @@ void AVL::BalanceLeftDelete(Vertex*& p) {
     else if (p->balance == 1) {
         p->right->balance >= 0 ? RotateRR1(p) : RotateRL(p);
     }
-    };
+}
 
 void AVL::BalanceRightDelete(Vertex*& p) {
     if (p->balance == 1) {
@@ -376,7 +376,7 @@ void AVL::BalanceRightDelete(Vertex*& p) {
     else if (p->balance = -1) {
         p->left->balance <= 0 ? RotateLL1(p) : RotateLR(p);
     }
-    };
+}
 
 void AVL::AddVertex(int data) {
     _grow = true;
