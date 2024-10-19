@@ -485,6 +485,66 @@ bool AVL::DeleteVertex(int key) {
     return DeleteVertexRecursive(root);
 }
 
+BBT::BBT() : BinaryTree() { }
+
+void BBT::AddVertex(int data) {
+    std::function<void(Vertex*&)> AddVertexRecursive = [&](Vertex*& p) {
+        if (!p) {
+            p = CreateVertex(data);
+            vr = 1;
+            return;
+        }
+
+        if (p->value == data) return;
+
+        bool goLeft = (p->value > data);
+        AddVertexRecursive(goLeft ? p->left : p->right);
+
+        if (vr == 1) {
+            if (goLeft) {
+                if (p->balance == 0) {
+                    Vertex* q = p->left;
+                    p->left = q->right;
+                    q->right = p;
+                    p = q;
+                    q->balance = 1;
+                    vr = 0;
+                    hr = 1;
+                }
+                else {
+                    p->balance = 0;
+                    vr = 1;
+                }
+            }
+            else {
+                p->balance = 1;
+                hr = 1;
+                vr = 0;
+            }
+        }
+        else if (hr == 1 && !goLeft && p->balance == 1) {
+            Vertex* q = p->right;
+            p->balance = q->balance = 0;
+            p->right = q->left;
+            q->left = p;
+            p = q;
+            vr = 1;
+        }
+
+        hr = 0;
+    };
+    
+    AddVertexRecursive(root);
+}
+
+int BBT::GetLevels() const {
+    std::function<int(Vertex*)> height = [&height](Vertex* p) {
+        return p ? 1 - p->balance + max(height(p->left), height(p->right)) : 0;
+    };
+
+    return height(root);
+}
+
 Vertex* CreateVertex(int value) {
     return new Vertex(value);
 }

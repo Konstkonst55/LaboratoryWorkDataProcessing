@@ -68,6 +68,17 @@ public:
 	bool DeleteVertex(int key) override;
 };
 
+class BBT : public BinaryTree {
+private:
+	int vr = 1, hr = 1;
+
+public:
+	BBT();
+
+	void AddVertex(int data) override;
+	int GetLevels() const;
+};
+
 Vertex* CreateVertex(int value);
 
 #endif // !TREE_UTILS_H

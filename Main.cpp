@@ -63,12 +63,13 @@ void BuildPBST();           // ✔
 void BuildRST();            // ✔
 void DeleteVertexRST();     // ✔
 void BuildAVL();            // ✔
-void DeleteVertexAVL();     // 
+void DeleteVertexAVL();     // ✔
+void BuildBBT();            // 
 
 int main() {
     ConsoleInit();
 
-    DeleteVertexAVL();
+    BuildBBT();
 }
 
 int ConsoleInit() {
@@ -974,6 +975,36 @@ void DeleteVertexAVL() {
     avl.PrintLeftRootRight();
 
     HandleTreeViewDeleting(avl, "AVL", 10);
+
+    system("PAUSE");
+}
+
+void BuildBBT() {
+    BBT bbt;
+    AVL avl;
+    const int size = 100;
+    int arr[size];
+
+    FillRandUniq(arr, size);
+
+    for (auto value : arr) {
+        avl.AddVertex(value);
+    }
+
+    for (auto value : arr) {
+        bbt.AddVertex(value);
+    }
+
+    std::cout << "Levels: " << bbt.GetLevels() << std::endl;
+
+    auto header = TreeHeader;
+    header.push_back(GetTableLineTree(bbt, "DBD"));
+    header.push_back(GetTableLineTree(avl, "AVL"));
+
+    CreateTable(header);
+
+    HandleTreeView(bbt.root, "DBD");
+    HandleTreeView(avl.root, "AVL");
 
     system("PAUSE");
 }
