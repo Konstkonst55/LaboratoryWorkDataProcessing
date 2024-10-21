@@ -489,51 +489,55 @@ BBT::BBT() : BinaryTree() { }
 
 void BBT::AddVertex(int data) {
     std::function<void(Vertex*&)> AddVertexRecursive = [&](Vertex*& p) {
-        if (!p) {
+        if (p == nullptr) {
             p = CreateVertex(data);
-            vr = 1;
+            vr = true;
             return;
         }
 
-        if (p->value == data) return;
+        if (data < p->value) {
+            AddVertexRecursive(p->left);
 
-        bool goLeft = (p->value > data);
-        AddVertexRecursive(goLeft ? p->left : p->right);
-
-        if (vr == 1) {
-            if (goLeft) {
+            if (vr) {
                 if (p->balance == 0) {
                     Vertex* q = p->left;
                     p->left = q->right;
                     q->right = p;
                     p = q;
                     q->balance = 1;
-                    vr = 0;
-                    hr = 1;
+                    vr = false;
+                    hr = true;
                 }
                 else {
                     p->balance = 0;
-                    vr = 1;
+                    vr = true;
+                    hr = false;
                 }
             }
-            else {
+        }
+        else if (data > p->value) {
+            AddVertexRecursive(p->right);
+
+            if (vr) {
                 p->balance = 1;
-                hr = 1;
-                vr = 0;
+                hr = true;
+                vr = false;
+            }
+            else if (hr) {
+                if (p->balance == 1) {
+                    Vertex* q = p->right;
+                    p->balance = q->balance = 0;
+                    p->right = q->left;
+                    q->left = p;
+                    p = q;
+                    vr = true;
+                }
+
+                hr = false;
             }
         }
-        else if (hr == 1 && !goLeft && p->balance == 1) {
-            Vertex* q = p->right;
-            p->balance = q->balance = 0;
-            p->right = q->left;
-            q->left = p;
-            p = q;
-            vr = 1;
-        }
-
-        hr = 0;
     };
-    
+
     AddVertexRecursive(root);
 }
 
