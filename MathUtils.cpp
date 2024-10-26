@@ -7,7 +7,15 @@
 int GetRandomInt(int min, int max) {
 	std::random_device rd;
 	std::mt19937 gen(rd());
-	std::uniform_int_distribution<> distr(min, max);
+	std::uniform_int_distribution<int> distr(min, max);
+
+	return distr(gen);
+}
+
+double GetRandomDouble(double min, double max) {
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_real_distribution<double> distr(min, max);
 
 	return distr(gen);
 }

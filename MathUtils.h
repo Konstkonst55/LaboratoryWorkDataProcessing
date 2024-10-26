@@ -4,6 +4,7 @@
 #define MATH_UTILS_H
 
 int GetRandomInt(int min = 0, int max = 9);
+double GetRandomDouble(double min = 0.0, double max = 9.0);
 
 int GetCTheorSelectSort(int n);
 int GetMTheorSelectSort(int n);

@@ -2,7 +2,7 @@
 #include "Table.h"
 #include <iostream>
 
-void CreateTable(const vector<vector<string>>& table)
+void CreateTable(const vector<vector<string>>& table, const std::string& separator)
 {
     vector<size_t> columnWidths;
 
@@ -17,14 +17,14 @@ void CreateTable(const vector<vector<string>>& table)
     std::cout << std::endl;
 
     for (const auto& row : table) {
-        std::cout << "| ";
+        std::cout << separator << " ";
 
         for (size_t col = 0; col < row.size(); ++col) {
             std::cout << row[col].c_str();
 
             for (size_t i = row[col].length(); i < columnWidths[col]; ++i) std::cout << " ";
             
-            std::cout << " | ";
+            std::cout << " " << separator << " ";
         }
 
         std::cout << std::endl;
