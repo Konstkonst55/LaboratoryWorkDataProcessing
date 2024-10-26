@@ -551,27 +551,27 @@ int BBT::GetLevels() const {
 
 void OST::CalculateWeights(const std::vector<std::pair<int, int>>& keysWithWeights) {
     int n = keysWithWeights.size();
-    _weights.resize(n, std::vector<int>(n, 0));
+    _weights.resize(n + 1, std::vector<int>(n + 1, 0));
 
-    for (int i = 0; i < n; i++) {
-        for (int j = i + 1; j < n; j++) {
-            _weights[i][j] = _weights[i][j - 1] + keysWithWeights[j].second;
+    for (int i = 0; i <= n; i++) {
+        for (int j = i + 1; j <= n; j++) {
+            _weights[i][j] = _weights[i][j - 1] + keysWithWeights[j - 1].second;
         }
     }
 }
 
 void OST::CalculateHeightsRoots(int n) {
-    _heights.resize(n, std::vector<int>(n, 0));
-    _roots.resize(n, std::vector<int>(n, 0));
+    _heights.resize(n + 1, std::vector<int>(n + 1, 0));
+    _roots.resize(n + 1, std::vector<int>(n + 1, 0));
 
-    for (int i = 0; i < n - 1; i++) {
+    for (int i = 0; i < n; i++) {
         int j = i + 1;
         _heights[i][j] = _weights[i][j];
         _roots[i][j] = j;
     }
 
-    for (int h = 2; h < n; h++) {
-        for (int i = 0; i < n - h; i++) {
+    for (int h = 2; h <= n; h++) {
+        for (int i = 0; i + h <= n; i++) {
             int j = i + h;
             int minRoot = _roots[i][j - 1];
             int minCost = _heights[i][minRoot - 1] + _heights[minRoot][j];
@@ -639,13 +639,13 @@ void OST::Create(const std::vector<std::pair<int, int>>& keysWithWeights) {
         if (left < right) {
             int k = _roots[left][right];
 
-            AddVertex(keysWithWeights[k].first, 0, keysWithWeights[k].second);
+            AddVertex(keysWithWeights[k - 1].first, 0, keysWithWeights[k - 1].second);
             CreateTree(left, k - 1);
             CreateTree(k, right);
         }
     };
 
-    CreateTree(0, n - 1);
+    CreateTree(0, n);
 }
 
 Vertex* CreateVertex(int value, int balance, int weight) {
