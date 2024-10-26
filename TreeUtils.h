@@ -4,6 +4,7 @@
 #define TREE_UTILS_H
 
 #include "Node.h"
+#include <vector>
 
 class BinaryTree {
 public:
@@ -25,7 +26,7 @@ public:
 
 	Vertex* FindVertex(int key);
 
-	virtual void AddVertex(int data);
+	virtual void AddVertex(int data, int bal = 0, int wgh = 0);
 	virtual bool DeleteVertex(int key);
 
 	void Delete();
@@ -64,21 +65,41 @@ protected:
 public:
 	AVL();
 
-	void AddVertex(int data) override;
+	void AddVertex(int data, int bal = 0, int wgh = 0) override;
 	bool DeleteVertex(int key) override;
 };
 
 class BBT : public BinaryTree {
 private:
-	int vr = 1, hr = 1;
+	int _vr = 1, _hr = 1;
 
 public:
 	BBT();
 
-	void AddVertex(int data) override;
+	void AddVertex(int data, int bal = 0, int wgh = 0) override;
 	int GetLevels() const;
 };
 
-Vertex* CreateVertex(int value);
+class OST : public BinaryTree {
+private:
+	std::vector<std::vector<int>> _weights, _heights, _roots;
+
+	void CalculateWeights(const std::vector<std::pair<int, int>>& keysWithWeights);
+	void CalculateHeightsRoots(int n);
+
+public:
+	OST();
+
+	const std::vector<std::vector<int>>& GetWeights() const;
+	const std::vector<std::vector<int>>& GetHeights() const;
+	const std::vector<std::vector<int>>& GetRoots() const;
+	
+	double GetWeightedAvgHeight() const;
+	double GetRatioHeightsWeights() const;
+
+	void Create(const std::vector<std::pair<int, int>>& keysWithWeights);
+};
+
+Vertex* CreateVertex(int value, int balance = 0, int weight = 0);
 
 #endif // !TREE_UTILS_H

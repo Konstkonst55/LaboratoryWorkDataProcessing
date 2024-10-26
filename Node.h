@@ -42,8 +42,9 @@ public:
     Vertex* left;
     Vertex* right;
     int balance;
+    int weight;
 
-    Vertex(int val = 0) : value(val), left(nullptr), right(nullptr), balance(0) { }
+    Vertex(int val = 0, int bal = 0, int wgh = 0) : value(val), left(nullptr), right(nullptr), balance(bal), weight(wgh) { }
 };
 
 #endif // !NODE_H

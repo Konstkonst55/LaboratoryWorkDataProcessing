@@ -123,10 +123,10 @@ Vertex* BinaryTree::FindVertex(int key) {
     return FindVertexRecursive(root, key);
 }
 
-void BinaryTree::AddVertex(int data) {
-    std::function<void(Vertex*&)> AddRecursive = [&AddRecursive, &data](Vertex*& root) {
+void BinaryTree::AddVertex(int data, int bal, int wgh) {
+    std::function<void(Vertex*&)> AddRecursive = [&AddRecursive, &data, &bal, &wgh](Vertex*& root) {
         if (!root) {
-            root = new Vertex(data);
+            root = new Vertex(data, bal, wgh);
         }
         else if (data < root->value) {
             AddRecursive(root->left);
@@ -378,7 +378,7 @@ void AVL::BalanceRightDelete(Vertex*& p) {
     }
 }
 
-void AVL::AddVertex(int data) {
+void AVL::AddVertex(int data, int bal, int wgh) {
     _grow = true;
 
     auto BalanceLeft = [&](Vertex*& p) {
@@ -413,7 +413,7 @@ void AVL::AddVertex(int data) {
 
     std::function<void(Vertex*&)> AddVertexRecursive = [&](Vertex*& p) {
         if (!p) {
-            p = CreateVertex(data);
+            p = CreateVertex(data, bal, wgh);
             _grow = true;
         }
 
@@ -487,53 +487,53 @@ bool AVL::DeleteVertex(int key) {
 
 BBT::BBT() : BinaryTree() { }
 
-void BBT::AddVertex(int data) {
+void BBT::AddVertex(int data, int bal, int wgh) {
     std::function<void(Vertex*&)> AddVertexRecursive = [&](Vertex*& p) {
         if (p == nullptr) {
-            p = CreateVertex(data);
-            vr = true;
+            p = CreateVertex(data, bal, wgh);
+            _vr = true;
             return;
         }
 
         if (data < p->value) {
             AddVertexRecursive(p->left);
 
-            if (vr) {
+            if (_vr) {
                 if (p->balance == 0) {
                     Vertex* q = p->left;
                     p->left = q->right;
                     q->right = p;
                     p = q;
                     q->balance = 1;
-                    vr = false;
-                    hr = true;
+                    _vr = false;
+                    _hr = true;
                 }
                 else {
                     p->balance = 0;
-                    vr = true;
-                    hr = false;
+                    _vr = true;
+                    _hr = false;
                 }
             }
         }
         else if (data > p->value) {
             AddVertexRecursive(p->right);
 
-            if (vr) {
+            if (_vr) {
                 p->balance = 1;
-                hr = true;
-                vr = false;
+                _hr = true;
+                _vr = false;
             }
-            else if (hr) {
+            else if (_hr) {
                 if (p->balance == 1) {
                     Vertex* q = p->right;
                     p->balance = q->balance = 0;
                     p->right = q->left;
                     q->left = p;
                     p = q;
-                    vr = true;
+                    _vr = true;
                 }
 
-                hr = false;
+                _hr = false;
             }
         }
     };
@@ -549,6 +549,105 @@ int BBT::GetLevels() const {
     return height(root);
 }
 
-Vertex* CreateVertex(int value) {
-    return new Vertex(value);
+void OST::CalculateWeights(const std::vector<std::pair<int, int>>& keysWithWeights) {
+    int n = keysWithWeights.size();
+    _weights.resize(n, std::vector<int>(n, 0));
+
+    for (int i = 0; i < n; i++) {
+        for (int j = i + 1; j < n; j++) {
+            _weights[i][j] = _weights[i][j - 1] + keysWithWeights[j].second;
+        }
+    }
+}
+
+void OST::CalculateHeightsRoots(int n) {
+    _heights.resize(n, std::vector<int>(n, 0));
+    _roots.resize(n, std::vector<int>(n, 0));
+
+    for (int i = 0; i < n - 1; i++) {
+        int j = i + 1;
+        _heights[i][j] = _weights[i][j];
+        _roots[i][j] = j;
+    }
+
+    for (int h = 2; h < n; h++) {
+        for (int i = 0; i < n - h; i++) {
+            int j = i + h;
+            int minRoot = _roots[i][j - 1];
+            int minCost = _heights[i][minRoot - 1] + _heights[minRoot][j];
+
+            for (int k = minRoot + 1; k <= _roots[i + 1][j]; k++) {
+                int cost = _heights[i][k - 1] + _heights[k][j];
+
+                if (cost < minCost) {
+                    minCost = cost;
+                    minRoot = k;
+                }
+            }
+
+            _heights[i][j] = minCost + _weights[i][j];
+            _roots[i][j] = minRoot;
+        }
+    }
+}
+
+OST::OST() : BinaryTree() { }
+
+const std::vector<std::vector<int>>& OST::GetWeights() const {
+    return _weights;
+}
+
+const std::vector<std::vector<int>>& OST::GetHeights() const {
+    return _heights;
+}
+
+const std::vector<std::vector<int>>& OST::GetRoots() const {
+    return _roots;
+}
+
+double OST::GetWeightedAvgHeight() const {
+    int totalWeightedHeight = 0, totalWeight = 0;
+
+    std::function<void(Vertex*, int)> СalculateWeightedHeight = [&](Vertex* node, int currentHeight) {
+        if (!node) return;
+
+        totalWeightedHeight += node->weight * currentHeight;
+        totalWeight += node->weight;
+
+        СalculateWeightedHeight(node->left, currentHeight + 1);
+        СalculateWeightedHeight(node->right, currentHeight + 1);
+    };
+
+    СalculateWeightedHeight(root, 1);
+
+    return totalWeight > 0 ? static_cast<double>(totalWeightedHeight) / totalWeight : 0.0;
+}
+
+double OST::GetRatioHeightsWeights() const {
+    int n = _heights[0].size() - 1;
+
+    return (n >= 0 && _weights[0][n] != 0) ? static_cast<double>(_heights[0][n]) / _weights[0][n] : 0.0;
+}
+
+void OST::Create(const std::vector<std::pair<int, int>>& keysWithWeights) {
+    int n = keysWithWeights.size();
+    
+    CalculateWeights(keysWithWeights);
+    CalculateHeightsRoots(n);
+
+    std::function<void(int, int)> CreateTree = [&](int left, int right) {
+        if (left < right) {
+            int k = _roots[left][right];
+
+            AddVertex(keysWithWeights[k].first, 0, keysWithWeights[k].second);
+            CreateTree(left, k - 1);
+            CreateTree(k, right);
+        }
+    };
+
+    CreateTree(0, n - 1);
+}
+
+Vertex* CreateVertex(int value, int balance, int weight) {
+    return new Vertex(value, balance, weight);
 }

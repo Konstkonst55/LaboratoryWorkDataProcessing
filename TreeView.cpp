@@ -18,7 +18,7 @@ void Draw(Vertex* node, int x, int y, int xOffset, double scale) {
     settextstyle(SMALL_FONT, HORIZ_DIR, 5);
     int textWidth = textwidth((char*)(std::to_string(node->value)).c_str());
 
-    outtextxy(x - textWidth / 2, y - textWidth / 2, (char*)(std::to_string(node->value) + ":" + std::to_string(node->balance)).c_str());
+    outtextxy(x - textWidth / 2, y - textWidth / 2, (char*)(std::to_string(node->value) + ":" + std::to_string(node->weight)).c_str());
 
     if (node->left) {
         line(x, y + circleRadius, x - xOffset, y + 50 - circleRadius);

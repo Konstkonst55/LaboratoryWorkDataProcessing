@@ -47,6 +47,9 @@ void HandleTreeView(Vertex* root, std::string name = "BT View");
 void HandleTreeViewDeleting(BinaryTree& tree, std::string name = "BT View", int deleteCount = 10);
 void HandleTreeViewAdding(BinaryTree& tree, std::string name = "BT View");
 std::vector<std::string> GetTableLineTree(BinaryTree& tree, const string& name);
+std::vector<std::string> GetTableLineOSTTree(OST& tree, const string& name);
+template <typename T> void PrintMatrix(const std::vector<std::vector<T>>& matrix);
+template <typename T = int> std::vector<std::vector<std::string>> ConvertMatrixToString(const std::vector<std::vector<T>>& matrix);
 
 void ShowSorts();           // ✔
 void ShowSearches();        // ✔
@@ -64,12 +67,13 @@ void BuildRST();            // ✔
 void DeleteVertexRST();     // ✔
 void BuildAVL();            // ✔
 void DeleteVertexAVL();     // ✔
-void BuildBBT();            // 
+void BuildBBT();            // ✔
+void BuildOST();            // 
 
 int main() {
     ConsoleInit();
 
-    BuildBBT();
+    BuildOST();
 }
 
 int ConsoleInit() {
@@ -177,6 +181,30 @@ void HandleTreeViewAdding(BinaryTree& tree, std::string name) {
 
 std::vector<std::string> GetTableLineTree(BinaryTree& tree, const string& name) {
     return { name, std::to_string(tree.GetSize()), std::to_string(tree.GetSum()), std::to_string(tree.GetHeight()), std::to_string(tree.GetAvgHeight()).substr(0, std::to_string(tree.GetAvgHeight()).find('.') + 3) };
+}
+
+std::vector<std::string> GetTableLineOSTTree(OST& tree, const string& name) {
+    return { name, std::to_string(tree.GetSize()), std::to_string(tree.GetSum()), std::to_string(tree.GetHeight()), std::to_string(tree.GetWeightedAvgHeight()).substr(0, std::to_string(tree.GetWeightedAvgHeight()).find('.') + 3) };
+}
+
+template <typename T = int> void PrintMatrix(const std::vector<std::vector<T>>& matrix) {
+    for (const auto& row : matrix) {
+        for (const auto& value : row) {
+            std::cout << value << "  ";
+        }
+
+        std::cout << std::endl;
+    }
+}
+
+template <typename T = int> std::vector<std::vector<std::string>> ConvertMatrixToString(const std::vector<std::vector<T>>& matrix) {
+    std::vector<std::vector<std::string>> stringMatrix(matrix.size());
+
+    for (size_t i = 0; i < matrix.size(); ++i) {
+        std::transform(matrix[i].begin(), matrix[i].end(), std::back_inserter(stringMatrix[i]), [](T value) { return std::to_string(value); });
+    }
+
+    return stringMatrix;
 }
 
 void ShowSorts() {
@@ -1007,4 +1035,41 @@ void BuildBBT() {
     HandleTreeView(avl.root, "AVL");
 
     system("PAUSE");
+}
+
+void BuildOST() {
+    OST ost;
+    const int size = 100;
+    int keysArr[size];
+    std::vector<std::pair<int, int>> keyWithWeights;
+
+    FillInc(keysArr, size);
+
+    for (int i = 0; i < size; i++) {
+        keyWithWeights.emplace_back(keysArr[i], GetRandomDouble(1.0, 100.0));
+    }
+
+    ost.Create(keyWithWeights);
+
+    std::cout << "AW: " << std::endl;
+    CreateTable(ConvertMatrixToString(ost.GetWeights()), "");
+
+    std::cout << "AP: " << std::endl;
+    CreateTable(ConvertMatrixToString(ost.GetHeights()), "");
+
+    std::cout << "AR: " << std::endl;
+    CreateTable(ConvertMatrixToString(ost.GetRoots()), "");
+
+    std::cout << "Left Root Right:" << std::endl << std::endl;
+    ost.PrintLeftRootRight();
+
+    std::cout << std::endl << std::endl << "AP/AW = h: " << ost.GetRatioHeightsWeights() << " = " << ost.GetWeightedAvgHeight() << std::endl << std::endl;
+
+    auto header = TreeHeader;
+    header.push_back(GetTableLineOSTTree(ost, "DOP"));
+    CreateTable(header);
+
+    HandleTreeView(ost.root, "DOP");
+
+    system("pause");
 }
