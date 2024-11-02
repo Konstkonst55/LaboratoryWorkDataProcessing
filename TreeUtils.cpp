@@ -651,26 +651,21 @@ void OST::Create(std::vector<std::pair<int, int>>& keysWithWeights) {
     CreateTree(0, n);
 }
 
-void A1::QuickSortPairs(std::vector<std::pair<int, int>>& keysWithWeights, bool ascending) {
+void A1::QuickSortPairs(std::vector<std::pair<int, int>>& keysWithWeights, comparatorType comp) {
     std::function<void(int, int)> QuickSortPairsRecursive;
 
-    QuickSortPairsRecursive = [&keysWithWeights, &QuickSortPairsRecursive, ascending](int l, int r) {
+    QuickSortPairsRecursive = [&keysWithWeights, &QuickSortPairsRecursive, &comp](int l, int r) {
         if (l >= r) return;
 
         std::pair<int, int> pivot = keysWithWeights[l];
         int i = l, j = r;
 
-        auto compare = [&](const std::pair<int, int>& a, const std::pair<int, int>& b) {
-            return ascending ? (a.second < b.second) || (a.second == b.second && a.first < b.first) :
-                (a.second > b.second) || (a.second == b.second && a.first < b.first);
-        };
-
         while (i <= j) {
-            while (compare(keysWithWeights[i], pivot)) {
+            while (comp(keysWithWeights[i], pivot)) {
                 i++;
             }
 
-            while (compare(pivot, keysWithWeights[j])) {
+            while (comp(pivot, keysWithWeights[j])) {
                 j--;
             }
 
@@ -696,10 +691,14 @@ void A1::Create(std::vector<std::pair<int, int>>& keysWithWeights) {
     }
 }
 
-A2::A2() : OST() { }
+A2::A2() : A1() { }
 
 void A2::Create(std::vector<std::pair<int, int>>& keysWithWeights) {
     const int n = keysWithWeights.size();
+
+    QuickSortPairs(keysWithWeights, [](const std::pair<int, int>& a, const std::pair<int, int>& b) {
+        return (a.first < b.first);
+    });
 
     std::function<void(int, int)> CreateTree = [&](int left, int right) {
         if (left <= right) {

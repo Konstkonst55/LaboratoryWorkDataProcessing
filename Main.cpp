@@ -1083,15 +1083,17 @@ void BuildA1A2() {
     int keysArr[size];
     std::vector<std::pair<int, int>> keyWithWeights;
 
-    FillInc(keysArr, size);
+    if (keyWithWeights.empty()) {
+        FillInc(keysArr, size);
 
-    for (int i = 0; i < size; i++) {
-        keyWithWeights.emplace_back(keysArr[i], GetRandomInt(1, 100));
+        for (int i = 0; i < size; i++) {
+            keyWithWeights.emplace_back(keysArr[i], GetRandomInt(1, 100));
+        }
     }
 
     ost.Create(keyWithWeights);
-    a2.Create(keyWithWeights);
     a1.Create(keyWithWeights);
+    a2.Create(keyWithWeights);
 
     auto header = TreeHeader;
     header.push_back(GetTableLineOST(ost, "DOP"));
@@ -1100,8 +1102,8 @@ void BuildA1A2() {
     CreateTable(header);
 
     HandleTreeView(ost.root, "DOP");
-    HandleTreeView(a2.root, "A2");
     HandleTreeView(a1.root, "A1");
+    HandleTreeView(a2.root, "A2");
 
     system("pause");
 }

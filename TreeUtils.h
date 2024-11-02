@@ -5,6 +5,9 @@
 
 #include "Node.h"
 #include <vector>
+#include <functional>
+
+using comparatorType = std::function<bool(const std::pair<int, int>&, const std::pair<int, int>&)>;
 
 class BinaryTree {
 public:
@@ -101,8 +104,10 @@ public:
 };
 
 class A1 : public OST {
-private:
-	void QuickSortPairs(std::vector<std::pair<int, int>>& keysWithWeights, bool ascending = false);
+protected:
+	void QuickSortPairs(std::vector<std::pair<int, int>>& keysWithWeights, comparatorType comp = [](const std::pair<int, int>& a, const std::pair<int, int>& b) {
+		return (a.second > b.second) || (a.second == b.second && a.first < b.first);
+	});
 
 public:
 	A1();
@@ -110,7 +115,7 @@ public:
 	void Create(std::vector<std::pair<int, int>>& keysWithWeights) override;
 };
 
-class A2 : public OST {
+class A2 : public A1 {
 public:
 	A2();
 
