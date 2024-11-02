@@ -68,12 +68,13 @@ void DeleteVertexRST();     // ✔
 void BuildAVL();            // ✔
 void DeleteVertexAVL();     // ✔
 void BuildBBT();            // ✔
-void BuildOST();            // 
+void BuildOST();            // ✔
+void BuildA1A2();           // 
 
 int main() {
     ConsoleInit();
 
-    BuildOST();
+    BuildA1A2();
 }
 
 int ConsoleInit() {
@@ -1039,14 +1040,14 @@ void BuildBBT() {
 
 void BuildOST() {
     OST ost;
-    const int size = 100;
+    const int size = 10;
     int keysArr[size];
     std::vector<std::pair<int, int>> keyWithWeights;
 
     FillInc(keysArr, size);
 
     for (int i = 0; i < size; i++) {
-        keyWithWeights.emplace_back(keysArr[i], GetRandomDouble(1.0, 100.0));
+        keyWithWeights.emplace_back(keysArr[i], GetRandomInt(1, 100));
     }
 
     ost.Create(keyWithWeights);
@@ -1070,6 +1071,37 @@ void BuildOST() {
     CreateTable(header);
 
     HandleTreeView(ost.root, "DOP");
+
+    system("pause");
+}
+
+void BuildA1A2() {
+    OST ost;
+    A1 a1;
+    A2 a2;
+    const int size = 100;
+    int keysArr[size];
+    std::vector<std::pair<int, int>> keyWithWeights;
+
+    FillInc(keysArr, size);
+
+    for (int i = 0; i < size; i++) {
+        keyWithWeights.emplace_back(keysArr[i], GetRandomInt(1, 100));
+    }
+
+    ost.Create(keyWithWeights);
+    a1.Create(keyWithWeights);
+    a2.Create(keyWithWeights);
+
+    auto header = TreeHeader;
+    header.push_back(GetTableLineOSTTree(ost, "DOP"));
+    header.push_back(GetTableLineOSTTree(a1, "A1"));
+    header.push_back(GetTableLineOSTTree(a2, "A2"));
+    CreateTable(header);
+
+    HandleTreeView(ost.root, "DOP");
+    HandleTreeView(a1.root, "A1");
+    HandleTreeView(a2.root, "A2");
 
     system("pause");
 }

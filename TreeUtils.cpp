@@ -1,5 +1,6 @@
 ﻿
 #include "TreeUtils.h"
+#include "ArrayUtils.h"
 
 #include <iostream>
 #include <queue>
@@ -8,6 +9,8 @@
 #include <iomanip>
 #include <windows.h>
 #include <functional>
+#include <algorithm>
+#include <utility>
 
 BinaryTree::BinaryTree() : root(nullptr) {
 }
@@ -629,7 +632,7 @@ double OST::GetRatioHeightsWeights() const {
     return (n >= 0 && _weights[0][n] != 0) ? static_cast<double>(_heights[0][n]) / _weights[0][n] : 0.0;
 }
 
-void OST::Create(const std::vector<std::pair<int, int>>& keysWithWeights) {
+void OST::Create(std::vector<std::pair<int, int>>& keysWithWeights) {
     int n = keysWithWeights.size();
     
     CalculateWeights(keysWithWeights);
@@ -642,6 +645,78 @@ void OST::Create(const std::vector<std::pair<int, int>>& keysWithWeights) {
             AddVertex(keysWithWeights[k - 1].first, 0, keysWithWeights[k - 1].second);
             CreateTree(left, k - 1);
             CreateTree(k, right);
+        }
+    };
+
+    CreateTree(0, n);
+}
+
+void A1::QuickSortPairs(std::vector<std::pair<int, int>>& keysWithWeights) {
+    std::function<void(int, int)> QuickSortPairsRecursive;
+
+    QuickSortPairsRecursive = [&keysWithWeights, &QuickSortPairsRecursive](int l, int r) {
+        if (l >= r) return;
+
+        std::pair<int, int> pivot = keysWithWeights[l];
+        int i = l, j = r;
+
+        while (i <= j) {
+            while (keysWithWeights[i].second > pivot.second || (keysWithWeights[i].second == pivot.second && keysWithWeights[i].first < pivot.first)) {
+                i++;
+            }
+
+            while (keysWithWeights[j].second < pivot.second || (keysWithWeights[j].second == pivot.second && keysWithWeights[j].first > pivot.first)) {
+                j--;
+            }
+
+            if (i <= j) {
+                std::swap(keysWithWeights[i++], keysWithWeights[j--]);
+            }
+        }
+
+        if (l < j) QuickSortPairsRecursive(l, j);
+        if (i < r) QuickSortPairsRecursive(i, r);
+    };
+
+    QuickSortPairsRecursive(0, keysWithWeights.size() - 1);
+}
+
+A1::A1() : OST() { }
+
+void A1::Create(std::vector<std::pair<int, int>>& keysWithWeights) {
+    QuickSortPairs(keysWithWeights);
+
+    for (const auto& pair : keysWithWeights) {
+        AddVertex(pair.first, 0, pair.second);
+    }
+}
+
+A2::A2() : OST() { }
+
+void A2::Create(std::vector<std::pair<int, int>>& keysWithWeights) {
+    int n = keysWithWeights.size();
+
+    std::function<void(int, int)> CreateTree = [&](int left, int right) {
+        if (left < right) {
+            int i = 0, sum = 0, weight = 0;
+
+            for (i = left; i < right; i++) {
+                weight += keysWithWeights[i].second;
+            }
+
+            for (i = left; i < right; i++) {
+                if ((sum < weight / 2) && (sum + keysWithWeights[i].second >= weight / 2)) {
+                    break;
+                }
+
+                sum += keysWithWeights[i].second;
+            }
+
+            if (i < right) {
+                AddVertex(keysWithWeights[i].first, 0, keysWithWeights[i].second);
+                CreateTree(left, i);
+                CreateTree(i + 1, right);
+            }
         }
     };
 

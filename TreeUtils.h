@@ -81,7 +81,7 @@ public:
 };
 
 class OST : public BinaryTree {
-private:
+protected:
 	std::vector<std::vector<int>> _weights, _heights, _roots;
 
 	void CalculateWeights(const std::vector<std::pair<int, int>>& keysWithWeights);
@@ -97,7 +97,24 @@ public:
 	double GetWeightedAvgHeight() const;
 	double GetRatioHeightsWeights() const;
 
-	void Create(const std::vector<std::pair<int, int>>& keysWithWeights);
+	virtual void Create(std::vector<std::pair<int, int>>& keysWithWeights);
+};
+
+class A1 : public OST {
+private:
+	void QuickSortPairs(std::vector<std::pair<int, int>>& keysWithWeights);
+
+public:
+	A1();
+
+	void Create(std::vector<std::pair<int, int>>& keysWithWeights) override;
+};
+
+class A2 : public OST {
+public:
+	A2();
+
+	void Create(std::vector<std::pair<int, int>>& keysWithWeights) override;
 };
 
 Vertex* CreateVertex(int value, int balance = 0, int weight = 0);
