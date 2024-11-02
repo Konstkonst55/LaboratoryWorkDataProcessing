@@ -507,26 +507,32 @@ void HeapSort(int arr[], int len, int* m, int* c) {
 int _recCounter = 0;
 
 void QuickSort(int arr[], int l, int r, int* m, int* c, int* maxRec) {
+	_recCounter = 0;
 	_recCounter++;
-	if (_recCounter > *maxRec) *maxRec = _recCounter;
+
+	if (maxRec && _recCounter > *maxRec)
+		*maxRec = _recCounter;
 
 	int pivot = arr[l], i = l, j = r;
 
-	while (i < j) {
-		(*c)++;
+	while (i <= j) {
+		if (c) (*c)++;
 		while (arr[i] < pivot) {
 			i++;
-			(*c)++;
+			if (c) (*c)++;
 		}
 
-		(*c)++;
+		if (c) (*c)++;
 		while (arr[j] > pivot) {
 			j--;
-			(*c)++;
+			if (c) (*c)++;
 		}
 
 		if (i <= j) {
-			Swap(&arr[i++], &arr[j--]); (*m) += 3;
+			Swap(&arr[i], &arr[j]);
+			if (m) (*m) += 3;
+			i++;
+			j--;
 		}
 	}
 

@@ -72,7 +72,7 @@ vector<int> BSearchAllImp(int arr[], int len, int key, int* c);
 void BuildHeap(int arr[], int l, int r, int* m, int* c);
 void HeapSort(int arr[], int len, int* m, int* c);
 
-void QuickSort(int arr[], int l, int r, int* m, int* c, int* maxRec);
+void QuickSort(int arr[], int l, int r, int* m = nullptr, int* c = nullptr, int* maxRec = nullptr);
 void QuickSortImp(int arr[], int l, int r, int* m, int* c, int* maxRec);
 
 void MMerge(Node** a, int q, Node** b, int r, QueueClean* c, int& C, int& M);
