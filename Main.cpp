@@ -1081,7 +1081,7 @@ void BuildA1A2() {
     A2 a2;
     const int size = 100;
     int keysArr[size];
-    std::vector<std::pair<int, int>> keyWithWeights; 
+    std::vector<std::pair<int, int>> keyWithWeights;
 
     FillInc(keysArr, size);
 

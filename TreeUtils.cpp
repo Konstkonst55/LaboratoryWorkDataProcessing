@@ -633,7 +633,7 @@ double OST::GetRatioHeightsWeights() const {
 }
 
 void OST::Create(std::vector<std::pair<int, int>>& keysWithWeights) {
-    int n = keysWithWeights.size();
+    const int n = keysWithWeights.size();
     
     CalculateWeights(keysWithWeights);
     CalculateHeightsRoots(n);
@@ -699,7 +699,7 @@ void A1::Create(std::vector<std::pair<int, int>>& keysWithWeights) {
 A2::A2() : OST() { }
 
 void A2::Create(std::vector<std::pair<int, int>>& keysWithWeights) {
-    int n = keysWithWeights.size();
+    const int n = keysWithWeights.size();
 
     std::function<void(int, int)> CreateTree = [&](int left, int right) {
         if (left <= right) {
