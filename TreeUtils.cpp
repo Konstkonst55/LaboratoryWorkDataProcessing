@@ -69,7 +69,7 @@ int BinaryTree::GetSize() {
         if (node == nullptr) return 0;
 
         return 1 + CalculateSizeRecursive(node->left) + CalculateSizeRecursive(node->right);
-        };
+    };
 
     return CalculateSizeRecursive(root);
 }
@@ -79,7 +79,7 @@ int BinaryTree::GetSum() {
         if (node == nullptr) return 0;
 
         return node->value + CalculateSumRecursive(node->left) + CalculateSumRecursive(node->right);
-        };
+    };
 
     return CalculateSumRecursive(root);
 }
@@ -89,7 +89,7 @@ int BinaryTree::GetHeight() {
         if (node == nullptr) return 0;
 
         return 1 + max(CalculateHeightRecursive(node->left), CalculateHeightRecursive(node->right));
-        };
+    };
 
     return CalculateHeightRecursive(root);
 }
@@ -651,21 +651,26 @@ void OST::Create(std::vector<std::pair<int, int>>& keysWithWeights) {
     CreateTree(0, n);
 }
 
-void A1::QuickSortPairs(std::vector<std::pair<int, int>>& keysWithWeights) {
+void A1::QuickSortPairs(std::vector<std::pair<int, int>>& keysWithWeights, bool ascending) {
     std::function<void(int, int)> QuickSortPairsRecursive;
 
-    QuickSortPairsRecursive = [&keysWithWeights, &QuickSortPairsRecursive](int l, int r) {
+    QuickSortPairsRecursive = [&keysWithWeights, &QuickSortPairsRecursive, ascending](int l, int r) {
         if (l >= r) return;
 
         std::pair<int, int> pivot = keysWithWeights[l];
         int i = l, j = r;
 
+        auto compare = [&](const std::pair<int, int>& a, const std::pair<int, int>& b) {
+            return ascending ? (a.second < b.second) || (a.second == b.second && a.first < b.first) :
+                (a.second > b.second) || (a.second == b.second && a.first < b.first);
+        };
+
         while (i <= j) {
-            while (keysWithWeights[i].second > pivot.second || (keysWithWeights[i].second == pivot.second && keysWithWeights[i].first < pivot.first)) {
+            while (compare(keysWithWeights[i], pivot)) {
                 i++;
             }
 
-            while (keysWithWeights[j].second < pivot.second || (keysWithWeights[j].second == pivot.second && keysWithWeights[j].first > pivot.first)) {
+            while (compare(pivot, keysWithWeights[j])) {
                 j--;
             }
 
@@ -697,30 +702,30 @@ void A2::Create(std::vector<std::pair<int, int>>& keysWithWeights) {
     int n = keysWithWeights.size();
 
     std::function<void(int, int)> CreateTree = [&](int left, int right) {
-        if (left < right) {
-            int i = 0, sum = 0, weight = 0;
+        if (left <= right) {
+            double weight = 0.0;
+            int sum = 0, i = 0;
 
-            for (i = left; i < right; i++) {
+            for (i = left; i <= right; i++) {
                 weight += keysWithWeights[i].second;
             }
 
-            for (i = left; i < right; i++) {
-                if ((sum < weight / 2) && (sum + keysWithWeights[i].second >= weight / 2)) {
+            for (i = left; i <= right; i++) {
+                if ((sum < weight / 2.0) && (sum + keysWithWeights[i].second >= weight / 2.0)) {
                     break;
                 }
 
                 sum += keysWithWeights[i].second;
             }
 
-            if (i < right) {
-                AddVertex(keysWithWeights[i].first, 0, keysWithWeights[i].second);
-                CreateTree(left, i);
-                CreateTree(i + 1, right);
-            }
+            AddVertex(keysWithWeights[i].first, 0, keysWithWeights[i].second);
+
+            CreateTree(left, i - 1);
+            CreateTree(i + 1, right);
         }
     };
 
-    CreateTree(0, n);
+    CreateTree(0, n - 1);
 }
 
 Vertex* CreateVertex(int value, int balance, int weight) {

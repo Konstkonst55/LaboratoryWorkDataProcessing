@@ -102,7 +102,7 @@ public:
 
 class A1 : public OST {
 private:
-	void QuickSortPairs(std::vector<std::pair<int, int>>& keysWithWeights);
+	void QuickSortPairs(std::vector<std::pair<int, int>>& keysWithWeights, bool ascending = false);
 
 public:
 	A1();

@@ -47,7 +47,7 @@ void HandleTreeView(Vertex* root, std::string name = "BT View");
 void HandleTreeViewDeleting(BinaryTree& tree, std::string name = "BT View", int deleteCount = 10);
 void HandleTreeViewAdding(BinaryTree& tree, std::string name = "BT View");
 std::vector<std::string> GetTableLineTree(BinaryTree& tree, const string& name);
-std::vector<std::string> GetTableLineOSTTree(OST& tree, const string& name);
+std::vector<std::string> GetTableLineOST(OST& tree, const string& name);
 template <typename T> void PrintMatrix(const std::vector<std::vector<T>>& matrix);
 template <typename T = int> std::vector<std::vector<std::string>> ConvertMatrixToString(const std::vector<std::vector<T>>& matrix);
 
@@ -184,7 +184,7 @@ std::vector<std::string> GetTableLineTree(BinaryTree& tree, const string& name) 
     return { name, std::to_string(tree.GetSize()), std::to_string(tree.GetSum()), std::to_string(tree.GetHeight()), std::to_string(tree.GetAvgHeight()).substr(0, std::to_string(tree.GetAvgHeight()).find('.') + 3) };
 }
 
-std::vector<std::string> GetTableLineOSTTree(OST& tree, const string& name) {
+std::vector<std::string> GetTableLineOST(OST& tree, const string& name) {
     return { name, std::to_string(tree.GetSize()), std::to_string(tree.GetSum()), std::to_string(tree.GetHeight()), std::to_string(tree.GetWeightedAvgHeight()).substr(0, std::to_string(tree.GetWeightedAvgHeight()).find('.') + 3) };
 }
 
@@ -1067,7 +1067,7 @@ void BuildOST() {
     std::cout << std::endl << std::endl << "AP/AW = h: " << ost.GetRatioHeightsWeights() << " = " << ost.GetWeightedAvgHeight() << std::endl << std::endl;
 
     auto header = TreeHeader;
-    header.push_back(GetTableLineOSTTree(ost, "DOP"));
+    header.push_back(GetTableLineOST(ost, "DOP"));
     CreateTable(header);
 
     HandleTreeView(ost.root, "DOP");
@@ -1081,7 +1081,7 @@ void BuildA1A2() {
     A2 a2;
     const int size = 100;
     int keysArr[size];
-    std::vector<std::pair<int, int>> keyWithWeights;
+    std::vector<std::pair<int, int>> keyWithWeights; 
 
     FillInc(keysArr, size);
 
@@ -1090,18 +1090,18 @@ void BuildA1A2() {
     }
 
     ost.Create(keyWithWeights);
-    a1.Create(keyWithWeights);
     a2.Create(keyWithWeights);
+    a1.Create(keyWithWeights);
 
     auto header = TreeHeader;
-    header.push_back(GetTableLineOSTTree(ost, "DOP"));
-    header.push_back(GetTableLineOSTTree(a1, "A1"));
-    header.push_back(GetTableLineOSTTree(a2, "A2"));
+    header.push_back(GetTableLineOST(ost, "DOP"));
+    header.push_back(GetTableLineOST(a1, "A1"));
+    header.push_back(GetTableLineOST(a2, "A2"));
     CreateTable(header);
 
     HandleTreeView(ost.root, "DOP");
-    HandleTreeView(a1.root, "A1");
     HandleTreeView(a2.root, "A2");
+    HandleTreeView(a1.root, "A1");
 
     system("pause");
 }
