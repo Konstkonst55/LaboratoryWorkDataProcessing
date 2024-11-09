@@ -3,6 +3,8 @@
 #ifndef NODE_H
 #define NODE_H
 
+#include <vector>
+
 struct Node {
     int data;
     Node* next;
@@ -45,6 +47,13 @@ public:
     int weight;
 
     Vertex(int val = 0, int bal = 0, int wgh = 0) : value(val), left(nullptr), right(nullptr), balance(bal), weight(wgh) { }
+};
+
+class CodeVertex : public Vertex {
+public:
+    std::vector<int> code;
+
+    CodeVertex(char symbol, const std::vector<int>& cd) : Vertex((int)symbol), code(cd) { }
 };
 
 #endif // !NODE_H

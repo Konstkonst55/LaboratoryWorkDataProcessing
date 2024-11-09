@@ -122,6 +122,13 @@ public:
 	void Create(std::vector<std::pair<int, int>>& keysWithWeights) override;
 };
 
+class CodeTree : public BinaryTree {
+public:
+	CodeTree();
+
+	void AddVertex(char symbol, const std::vector<int>& code);
+};
+
 Vertex* CreateVertex(int value, int balance = 0, int weight = 0);
 
 #endif // !TREE_UTILS_H

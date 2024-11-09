@@ -5,7 +5,7 @@
 
 #include "TreeUtils.h"
 
-void Draw(Vertex* node, int x, int y, int xOffset, double scale);
-void DrawTree(Vertex* node, double scale, int offsetX, int offsetY);
+void DrawCodeTree(Vertex* root, double scale, int offsetX, int offsetY);
+void DrawTree(Vertex* root, double scale, int offsetX, int offsetY);
 
 #endif // !TREE_VIEW

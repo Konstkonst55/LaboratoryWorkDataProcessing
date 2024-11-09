@@ -705,11 +705,11 @@ void A2::Create(std::vector<std::pair<int, int>>& keysWithWeights) {
             double weight = 0.0;
             int sum = 0, i = 0;
 
-            for (i = left; i <= right; i++) {
+            for (i = left; i < right; i++) {
                 weight += keysWithWeights[i].second;
             }
 
-            for (i = left; i <= right; i++) {
+            for (i = left; i < right; i++) {
                 if ((sum < weight / 2.0) && (sum + keysWithWeights[i].second >= weight / 2.0)) {
                     break;
                 }
@@ -725,6 +725,34 @@ void A2::Create(std::vector<std::pair<int, int>>& keysWithWeights) {
     };
 
     CreateTree(0, n - 1);
+}
+
+CodeTree::CodeTree() : BinaryTree() { }
+
+void CodeTree::AddVertex(char symbol, const std::vector<int>& code) {
+    if (!root) {
+        root = new CodeVertex(symbol, code);
+    }
+    else {
+        CodeVertex* current = static_cast<CodeVertex*>(root);
+
+        for (size_t i = 0; i < code.size(); i++) {
+            if (code[i] == 0) {
+                if (!current->left) {
+                    current->left = new CodeVertex(symbol, code);
+                }
+
+                current = static_cast<CodeVertex*>(current->left);
+            }
+            else { 
+                if (!current->right) {
+                    current->right = new CodeVertex(symbol, code);
+                }
+
+                current = static_cast<CodeVertex*>(current->right);
+            }
+        }
+    }
 }
 
 Vertex* CreateVertex(int value, int balance, int weight) {

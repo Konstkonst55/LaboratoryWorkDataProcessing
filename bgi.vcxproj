@@ -71,6 +71,7 @@
     <ClCompile Include="Chart.cpp" />
     <ClCompile Include="dibutil.cxx" />
     <ClCompile Include="drawing.cxx" />
+    <ClCompile Include="EncodingUtils.cpp" />
     <ClCompile Include="file.cxx" />
     <ClCompile Include="ListUtils.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -95,6 +96,7 @@
     <ClInclude Include="AxisType.h" />
     <ClInclude Include="Chart.h" />
     <ClInclude Include="dibutil.h" />
+    <ClInclude Include="EncodingUtils.h" />
     <ClInclude Include="graphics.h" />
     <ClInclude Include="ListUtils.h" />
     <ClInclude Include="MathUtils.h" />

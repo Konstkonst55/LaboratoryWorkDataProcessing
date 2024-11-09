@@ -14,13 +14,19 @@
 #include "WindowSize.h"
 #include "TreeUtils.h"
 #include "TreeView.h"
+#include "EncodingUtils.h"
 
 #include <iostream>
+#include <fstream>
 #include <random>
 #include <stdio.h>
 #include <windows.h>
 #include <cmath>
 #include <format>
+#include <locale>
+#include <codecvt>
+#include <random>
+#include <unordered_map>
 
 using namespace std;
 
@@ -43,13 +49,15 @@ PhoneBook phoneBook[] = {
 };
 
 int ConsoleInit();
-void HandleTreeView(Vertex* root, std::string name = "BT View");
+void HandleTreeView(Vertex* root, std::string name = "BT View", bool isBinary = true);
 void HandleTreeViewDeleting(BinaryTree& tree, std::string name = "BT View", int deleteCount = 10);
 void HandleTreeViewAdding(BinaryTree& tree, std::string name = "BT View");
 std::vector<std::string> GetTableLineTree(BinaryTree& tree, const string& name);
 std::vector<std::string> GetTableLineOST(OST& tree, const string& name);
 template <typename T> void PrintMatrix(const std::vector<std::vector<T>>& matrix);
 template <typename T = int> std::vector<std::vector<std::string>> ConvertMatrixToString(const std::vector<std::vector<T>>& matrix);
+std::string EscapeSpecialChar(char symbol);
+std::string GenerateRandomString(size_t length);
 
 void ShowSorts();           // ✔
 void ShowSearches();        // ✔
@@ -69,12 +77,14 @@ void BuildAVL();            // ✔
 void DeleteVertexAVL();     // ✔
 void BuildBBT();            // ✔
 void BuildOST();            // ✔
-void BuildA1A2();           // 
+void BuildA1A2();           // ✔
+
+void GenerateShannonCode();
 
 int main() {
     ConsoleInit();
 
-    BuildA1A2();
+    GenerateShannonCode();
 }
 
 int ConsoleInit() {
@@ -88,7 +98,7 @@ int ConsoleInit() {
     SetConsoleOutputCP(1251);
 }
 
-void HandleTreeView(Vertex* root, std::string name) {
+void HandleTreeView(Vertex* root, std::string name, bool isBinary) {
     initwindow(1200, 800, name.c_str());
 
     const double scaleStep = 0.5;
@@ -96,7 +106,12 @@ void HandleTreeView(Vertex* root, std::string name) {
     double scale = 1;
     int offsetX = 0, offsetY = 0;
 
-    DrawTree(root, scale, offsetX, offsetY);
+    if (isBinary) {
+        DrawTree(root, scale, offsetX, offsetY);
+    }
+    else {
+        DrawCodeTree(root, scale, offsetX, offsetY);
+    }
 
     while (true) {
         if (kbhit()) {
@@ -113,7 +128,12 @@ void HandleTreeView(Vertex* root, std::string name) {
                 case VK_ESCAPE: closegraph(); return;
             }
 
-            DrawTree(root, scale, offsetX, offsetY);
+            if (isBinary) {
+                DrawTree(root, scale, offsetX, offsetY);
+            }
+            else {
+                DrawCodeTree(root, scale, offsetX, offsetY);
+            }
         }
     }
 }
@@ -206,6 +226,41 @@ template <typename T = int> std::vector<std::vector<std::string>> ConvertMatrixT
     }
 
     return stringMatrix;
+}
+
+std::string EscapeSpecialChar(char symbol) {
+    static const std::unordered_map<char, std::string> specialChars = {
+        {'\n', "/n"},
+        {'\t', "/t"},
+        {'\r', "/r"},
+        {'\v', "/v"},
+        {'\f', "/f"},
+        {'\b', "/b"},
+        {'\a', "/a"},
+        {'\\', "/\\"},
+        {'\'', "/\'"},
+        {'\"', "/\""}
+    };
+
+    if (specialChars.find(symbol) != specialChars.end()) {
+        return specialChars.at(symbol);
+    }
+
+    return std::string(1, symbol);
+}
+
+std::string GenerateRandomString(size_t length) {
+    const std::string chars = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя1234567890";
+    std::random_device rd;
+    std::mt19937 generator(rd());
+    std::uniform_int_distribution<> distribution(0, chars.size() - 1);
+    std::string result;
+
+    for (size_t i = 0; i < length; ++i) {
+        result += chars[distribution(generator)];
+    }
+
+    return result;
 }
 
 void ShowSorts() {
@@ -1104,6 +1159,87 @@ void BuildA1A2() {
     HandleTreeView(ost.root, "DOP");
     HandleTreeView(a1.root, "A1");
     HandleTreeView(a2.root, "A2");
+
+    system("pause");
+}
+
+void GenerateShannonCode() {
+    const std::string path = "encoding.txt";
+
+    std::ifstream file(path, std::ios::binary);
+
+    if (!file.is_open()) {
+        std::cerr << "Не удалось открыть файл: " << path << std::endl;
+        return;
+    }
+
+    std::string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+    file.close();
+
+    //content = GenerateRandomString(100);
+
+    ShannonCoding code(content.c_str());
+    std::cout << content << std::endl;
+    auto symbols = code.GetSymbols();
+    auto encodingHeader = EncodingHeader;
+
+    for (size_t i = 0; i < code.GetSymbolCount(); i++) {
+        std::string codeData;
+
+        for (size_t j = 0; j < symbols[i].code.length; j++) {
+            codeData.append(std::to_string(symbols[i].code.data[j]));
+        }
+
+        std::string escapedSymbol = EscapeSpecialChar(symbols[i].symbol);
+        encodingHeader.push_back({ escapedSymbol, std::to_string(symbols[i].probability), codeData, std::to_string(symbols[i].code.length) });
+    }
+
+    CreateTable(encodingHeader);
+
+    auto codeHeader = CodeInfoHeader;
+    codeHeader.push_back({ std::to_string(code.GetKraftInequality()), std::to_string(code.GetEntropy()), std::to_string(code.GetAverageCodeLength()), std::to_string(code.GetRedundancy()) });
+
+    CreateTable(codeHeader);
+
+    std::vector<int> encodedText;
+
+    for (size_t i = 0; i < content.size(); i++) {
+        char c = content[i];
+
+        for (size_t j = 0; j < code.GetSymbolCount(); j++) {
+            if (symbols[j].symbol == c) {
+                for (size_t bit = 0; bit < symbols[j].code.length; bit++) {
+                    encodedText.push_back(symbols[j].code.data[bit]);
+                }
+
+                break;
+            }
+        }
+    }
+
+    std::cout << "Encoded text: ";
+
+    for (int bit : encodedText) {
+        std::cout << bit;
+    }
+
+    std::cout << std::endl << std::endl;
+
+    size_t encodedTextLength = encodedText.size();
+    size_t originalTextLength = content.size() * 8;
+    double compressionRatio = (double)originalTextLength / encodedTextLength;
+
+    std::cout << "Source text length in bits: " << originalTextLength << std::endl;
+    std::cout << "Encoded text length in bits: " << encodedTextLength << std::endl;
+    std::cout << "Compression ratio: " << compressionRatio << std::endl;
+
+    CodeTree ctree;
+    
+    for (size_t i = 0; i < code.GetSymbolCount(); i++) {
+        ctree.AddVertex(symbols[i].symbol, std::vector<int>(symbols[i].code.data, symbols[i].code.data + symbols[i].code.length));
+    }
+
+    HandleTreeView(ctree.root, "Code Tree", false);
 
     system("pause");
 }

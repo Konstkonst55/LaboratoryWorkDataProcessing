@@ -69,4 +69,14 @@ const vector<vector<string>> TreeHeader = {
     { "------", " ---- ", "  ---  ", "------", "----------" }
 };
 
+const vector<vector<string>> EncodingHeader = {
+    { "Symbol", "Probability", "Code", "Length" },
+    { "------", "-----------", "----", "------"}
+};
+
+const vector<vector<string>> CodeInfoHeader = {
+    { "Kraft", "Entropy", "Avg length", "Redundancy" },
+    { "-----", "-------", "----------", "----------" }
+};
+
 #endif // !TABLE_HEADERS_H

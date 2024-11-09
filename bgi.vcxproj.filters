@@ -105,6 +105,9 @@
     <ClCompile Include="TreeView.cpp">
       <Filter>Source Files\View</Filter>
     </ClCompile>
+    <ClCompile Include="EncodingUtils.cpp">
+      <Filter>Source Files\Util</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dibutil.h">
@@ -160,6 +163,9 @@
     </ClInclude>
     <ClInclude Include="TreeView.h">
       <Filter>Header Files\View</Filter>
+    </ClInclude>
+    <ClInclude Include="EncodingUtils.h">
+      <Filter>Header Files\Util</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
