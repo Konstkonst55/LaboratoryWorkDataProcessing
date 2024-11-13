@@ -4,6 +4,7 @@
 #define ENCODING_UTILS_H
 
 #include <cmath>
+#include <stdexcept>
 
 static const size_t _maxTextLen = 1024, _maxSymbols = 256, _maxCodeLen = 32;
 

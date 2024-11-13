@@ -12,13 +12,13 @@ ShannonCoding::ShannonCoding(const char* inputText) {
 }
 
 void ShannonCoding::QuickSortSymbols(SymbolInfo symbols[], size_t size) {
-    std::function<void(size_t, size_t)> SortRecursive;
+    std::function<void(int, int)> SortRecursive;
 
-    SortRecursive = [&symbols, &SortRecursive](size_t left, size_t right) {
-        if (left >= right || left == right - 1) return;
+    SortRecursive = [&symbols, &SortRecursive](int left, int right) {
+        if (left >= right) return;
 
         SymbolInfo pivot = symbols[left];
-        size_t i = left, j = right;
+        int i = left, j = right;
 
         while (i <= j) {
             while (symbols[i] < pivot) {
@@ -41,7 +41,7 @@ void ShannonCoding::QuickSortSymbols(SymbolInfo symbols[], size_t size) {
     };
 
     if (size > 0) {
-        SortRecursive(0, size - 1);
+        SortRecursive(0, (int)size - 1);
     }
 }
 
@@ -51,7 +51,7 @@ void ShannonCoding::CalculateFrequencies() {
 
     for (size_t i = 0; i < total; i++) {
         unsigned char c = _text[i];
-        if (c != ' ') frequencies[c]++;
+        frequencies[c]++;
     }
 
     for (size_t i = 0; i < _maxSymbols; i++) {
@@ -78,11 +78,11 @@ void ShannonCoding::Build() {
 
     for (size_t i = 0; i < _symbolCount; i++) {
         double probability = _symbols[i].probability;
-        size_t codeLength = ceil(-log2(probability));
+        size_t codeLength = static_cast<size_t>(ceil(-log2(probability)));
         _symbols[i].code.length = codeLength;
         double value = cumulativeProbability;
 
-        for (int j = 0; j < codeLength; j++) {
+        for (size_t j = 0; j < codeLength; j++) {
             value *= 2.0;
 
             if (value >= 1.0) {
