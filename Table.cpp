@@ -30,7 +30,7 @@ void CreateTable(const vector<vector<string>>& table, const std::string& separat
         std::cout << std::endl;
     }
 
-    std::cout << std::endl << std::endl;
+    std::cout << std::endl;
 }
 
 void FillTable(vector<vector<string>>& table, vector<vector<string>>& data, const int start, const int step) {

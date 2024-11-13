@@ -25,7 +25,6 @@
 #include <format>
 #include <locale>
 #include <codecvt>
-#include <random>
 #include <unordered_map>
 
 using namespace std;
@@ -230,16 +229,17 @@ template <typename T = int> std::vector<std::vector<std::string>> ConvertMatrixT
 
 std::string EscapeSpecialChar(char symbol) {
     static const std::unordered_map<char, std::string> specialChars = {
-        {'\n', "/n"},
-        {'\t', "/t"},
-        {'\r', "/r"},
-        {'\v', "/v"},
-        {'\f', "/f"},
-        {'\b', "/b"},
-        {'\a', "/a"},
-        {'\\', "/\\"},
-        {'\'', "/\'"},
-        {'\"', "/\""}
+        {'\n', "\'n\'"},
+        {'\t', "\'t\'"},
+        {'\r', "\'r\'"},
+        {'\v', "\'v\'"},
+        {'\f', "\'f\'"},
+        {'\b', "\'b\'"},
+        {'\a', "\'a\'"},
+        {'\\', "\\"},
+        {'\'', "\'"},
+        {'\"', "\""},
+        {' ', "\' \'"}
     };
 
     if (specialChars.find(symbol) != specialChars.end()) {
@@ -1165,6 +1165,7 @@ void BuildA1A2() {
 
 void GenerateShannonCode() {
     const std::string path = "encoding.txt";
+    const size_t encodeSize = 100;
 
     std::ifstream file(path, std::ios::binary);
 
@@ -1176,12 +1177,13 @@ void GenerateShannonCode() {
     std::string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
     file.close();
 
-    //content = GenerateRandomString(100);
+    // content = GenerateRandomString(100);
 
     ShannonCoding code(content.c_str());
     std::cout << content << std::endl;
     auto symbols = code.GetSymbols();
     auto encodingHeader = EncodingHeader;
+    double totalProbability = 0.0;
 
     for (size_t i = 0; i < code.GetSymbolCount(); i++) {
         std::string codeData;
@@ -1192,9 +1194,13 @@ void GenerateShannonCode() {
 
         std::string escapedSymbol = EscapeSpecialChar(symbols[i].symbol);
         encodingHeader.push_back({ escapedSymbol, std::to_string(symbols[i].probability), codeData, std::to_string(symbols[i].code.length) });
+        
+        totalProbability += symbols[i].probability;
     }
 
     CreateTable(encodingHeader);
+
+    std::cout << "Total probability: " << totalProbability << std::endl;
 
     auto codeHeader = CodeInfoHeader;
     codeHeader.push_back({ std::to_string(code.GetKraftInequality()), std::to_string(code.GetEntropy()), std::to_string(code.GetAverageCodeLength()), std::to_string(code.GetRedundancy()) });
@@ -1203,7 +1209,7 @@ void GenerateShannonCode() {
 
     std::vector<int> encodedText;
 
-    for (size_t i = 0; i < content.size(); i++) {
+    for (size_t i = 0; i < encodeSize; i++) {
         char c = content[i];
 
         for (size_t j = 0; j < code.GetSymbolCount(); j++) {
@@ -1226,12 +1232,12 @@ void GenerateShannonCode() {
     std::cout << std::endl << std::endl;
 
     size_t encodedTextLength = encodedText.size();
-    size_t originalTextLength = content.size() * 8;
-    double compressionRatio = (double)originalTextLength / encodedTextLength;
+    size_t originalTextLength = encodeSize * 8;
+    double compressionRatio = (double)encodedTextLength / originalTextLength * 100.0;
 
     std::cout << "Source text length in bits: " << originalTextLength << std::endl;
     std::cout << "Encoded text length in bits: " << encodedTextLength << std::endl;
-    std::cout << "Compression ratio: " << compressionRatio << std::endl;
+    std::cout << "Compression ratio: " << compressionRatio << "%" << std::endl;
 
     CodeTree ctree;
     
