@@ -57,6 +57,7 @@ template <typename T> void PrintMatrix(const std::vector<std::vector<T>>& matrix
 template <typename T = int> std::vector<std::vector<std::string>> ConvertMatrixToString(const std::vector<std::vector<T>>& matrix);
 std::string EscapeSpecialChar(char symbol);
 std::string GenerateRandomString(size_t length);
+void GenerateCode(CodeBuilder& codeBuilder, bool enableView = true, bool showText = true, bool showEncodedText = true, bool showEncodingInfo = true);
 
 void ShowSorts();           // ✔
 void ShowSearches();        // ✔
@@ -78,12 +79,13 @@ void BuildBBT();            // ✔
 void BuildOST();            // ✔
 void BuildA1A2();           // ✔
 
-void GenerateShannonCode();
+void GenerateShannonCode(); // ✔
+void GenerateFanoCode();    // 
 
 int main() {
     ConsoleInit();
 
-    GenerateShannonCode();
+    GenerateFanoCode();
 }
 
 int ConsoleInit() {
@@ -261,6 +263,95 @@ std::string GenerateRandomString(size_t length) {
     }
 
     return result;
+}
+
+void GenerateCode(CodeBuilder& codeBuilder, bool enableView, bool showText, bool showEncodedText, bool showEncodingInfo) {
+    const std::string path = "encoding.txt";
+    const size_t encodeSize = 100;
+
+    std::ifstream file(path, std::ios::binary);
+
+    if (!file.is_open()) {
+        std::cerr << "Не удалось открыть файл: " << path << std::endl;
+        return;
+    }
+
+    std::string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+    file.close();
+
+    codeBuilder.SetText(content.c_str());
+    if (showText) std::cout << content << std::endl;
+    auto symbols = codeBuilder.GetSymbols();
+    auto encodingHeader = EncodingHeader;
+    double totalProbability = 0.0;
+
+    for (size_t i = 0; i < codeBuilder.GetSymbolCount(); i++) {
+        std::string codeData;
+
+        for (size_t j = 0; j < symbols[i].code.length; j++) {
+            codeData.append(std::to_string(symbols[i].code.data[j]));
+        }
+
+        std::string escapedSymbol = EscapeSpecialChar(symbols[i].symbol);
+        encodingHeader.push_back({ escapedSymbol, std::to_string(symbols[i].probability), codeData, std::to_string(symbols[i].code.length) });
+
+        totalProbability += symbols[i].probability;
+    }
+
+    CreateTable(encodingHeader);
+
+    std::cout << "Total probability: " << totalProbability << std::endl;
+
+    auto codeHeader = CodeInfoHeader;
+    codeHeader.push_back({ std::to_string(codeBuilder.GetKraftInequality()), std::to_string(codeBuilder.GetEntropy()), std::to_string(codeBuilder.GetAverageCodeLength()), std::to_string(codeBuilder.GetRedundancy()) });
+
+    CreateTable(codeHeader);
+
+    std::vector<int> encodedText;
+
+    for (size_t i = 0; i < encodeSize; i++) {
+        char c = content[i];
+
+        for (size_t j = 0; j < codeBuilder.GetSymbolCount(); j++) {
+            if (symbols[j].symbol == c) {
+                for (size_t bit = 0; bit < symbols[j].code.length; bit++) {
+                    encodedText.push_back(symbols[j].code.data[bit]);
+                }
+
+                break;
+            }
+        }
+    }
+
+    if (showEncodedText) {
+        std::cout << "Encoded text: ";
+
+        for (int bit : encodedText) {
+            std::cout << bit;
+        }
+
+        std::cout << std::endl << std::endl;
+    }
+
+    if (showEncodingInfo) {
+        size_t encodedTextLength = encodedText.size();
+        size_t originalTextLength = encodeSize * 8;
+        double compressionRatio = (double)encodedTextLength / originalTextLength * 100.0;
+
+        std::cout << "Source text length in bits: " << originalTextLength << std::endl;
+        std::cout << "Encoded text length in bits: " << encodedTextLength << std::endl;
+        std::cout << "Compression ratio: " << compressionRatio << "%" << std::endl;
+    }
+    
+    if (enableView) {
+        CodeTree ctree;
+
+        for (size_t i = 0; i < codeBuilder.GetSymbolCount(); i++) {
+            ctree.AddVertex(symbols[i].symbol, std::vector<int>(symbols[i].code.data, symbols[i].code.data + symbols[i].code.length));
+        }
+
+        HandleTreeView(ctree.root, "Code Tree", false);
+    }
 }
 
 void ShowSorts() {
@@ -1164,88 +1255,13 @@ void BuildA1A2() {
 }
 
 void GenerateShannonCode() {
-    const std::string path = "encoding.txt";
-    const size_t encodeSize = 100;
+    GenerateCode(ShannonCodeBuilder());
 
-    std::ifstream file(path, std::ios::binary);
+    system("pause");
+}
 
-    if (!file.is_open()) {
-        std::cerr << "Не удалось открыть файл: " << path << std::endl;
-        return;
-    }
-
-    std::string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
-    file.close();
-
-    // content = GenerateRandomString(100);
-
-    ShannonCoding code(content.c_str());
-    std::cout << content << std::endl;
-    auto symbols = code.GetSymbols();
-    auto encodingHeader = EncodingHeader;
-    double totalProbability = 0.0;
-
-    for (size_t i = 0; i < code.GetSymbolCount(); i++) {
-        std::string codeData;
-
-        for (size_t j = 0; j < symbols[i].code.length; j++) {
-            codeData.append(std::to_string(symbols[i].code.data[j]));
-        }
-
-        std::string escapedSymbol = EscapeSpecialChar(symbols[i].symbol);
-        encodingHeader.push_back({ escapedSymbol, std::to_string(symbols[i].probability), codeData, std::to_string(symbols[i].code.length) });
-        
-        totalProbability += symbols[i].probability;
-    }
-
-    CreateTable(encodingHeader);
-
-    std::cout << "Total probability: " << totalProbability << std::endl;
-
-    auto codeHeader = CodeInfoHeader;
-    codeHeader.push_back({ std::to_string(code.GetKraftInequality()), std::to_string(code.GetEntropy()), std::to_string(code.GetAverageCodeLength()), std::to_string(code.GetRedundancy()) });
-
-    CreateTable(codeHeader);
-
-    std::vector<int> encodedText;
-
-    for (size_t i = 0; i < encodeSize; i++) {
-        char c = content[i];
-
-        for (size_t j = 0; j < code.GetSymbolCount(); j++) {
-            if (symbols[j].symbol == c) {
-                for (size_t bit = 0; bit < symbols[j].code.length; bit++) {
-                    encodedText.push_back(symbols[j].code.data[bit]);
-                }
-
-                break;
-            }
-        }
-    }
-
-    std::cout << "Encoded text: ";
-
-    for (int bit : encodedText) {
-        std::cout << bit;
-    }
-
-    std::cout << std::endl << std::endl;
-
-    size_t encodedTextLength = encodedText.size();
-    size_t originalTextLength = encodeSize * 8;
-    double compressionRatio = (double)encodedTextLength / originalTextLength * 100.0;
-
-    std::cout << "Source text length in bits: " << originalTextLength << std::endl;
-    std::cout << "Encoded text length in bits: " << encodedTextLength << std::endl;
-    std::cout << "Compression ratio: " << compressionRatio << "%" << std::endl;
-
-    CodeTree ctree;
-    
-    for (size_t i = 0; i < code.GetSymbolCount(); i++) {
-        ctree.AddVertex(symbols[i].symbol, std::vector<int>(symbols[i].code.data, symbols[i].code.data + symbols[i].code.length));
-    }
-
-    HandleTreeView(ctree.root, "Code Tree", false);
+void GenerateFanoCode() {
+    GenerateCode(FanoCodeBuilder());
 
     system("pause");
 }

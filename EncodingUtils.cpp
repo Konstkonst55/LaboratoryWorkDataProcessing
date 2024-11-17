@@ -4,14 +4,20 @@
 #include <cstring>
 #include <iomanip>
 
-ShannonCoding::ShannonCoding(const char* inputText) {
+CodeBuilder::CodeBuilder() { }
+
+CodeBuilder::CodeBuilder(const char* inputText) {
     strncpy(_text, inputText, _maxTextLen);
+    Initialize();
+}
+
+void CodeBuilder::Initialize() {
     CalculateFrequencies();
     CalculateEntropy();
     Build();
 }
 
-void ShannonCoding::QuickSortSymbols(SymbolInfo symbols[], size_t size) {
+void CodeBuilder::QuickSortSymbols(SymbolInfo symbols[], size_t size) {
     std::function<void(int, int)> SortRecursive;
 
     SortRecursive = [&symbols, &SortRecursive](int left, int right) {
@@ -45,7 +51,7 @@ void ShannonCoding::QuickSortSymbols(SymbolInfo symbols[], size_t size) {
     }
 }
 
-void ShannonCoding::CalculateFrequencies() {
+void CodeBuilder::CalculateFrequencies() {
     int frequencies[_maxSymbols] = { 0 };
     size_t total = strlen(_text);
 
@@ -64,14 +70,73 @@ void ShannonCoding::CalculateFrequencies() {
     }
 }
 
-void ShannonCoding::CalculateEntropy() {
+void CodeBuilder::CalculateEntropy() {
     for (size_t i = 0; i < _symbolCount; i++) {
         double p = _symbols[i].probability;
         _entropy -= p * log2(p);
     }
 }
 
-void ShannonCoding::Build() {
+const char* CodeBuilder::GetText() const {
+    return _text;
+}
+
+void CodeBuilder::SetText(const char* text) {
+    strncpy(_text, text, _maxTextLen);
+    Initialize();
+}
+
+size_t CodeBuilder::GetTextLength() const {
+    return _maxTextLen;
+}
+
+const SymbolInfo* CodeBuilder::GetSymbols() const {
+    return _symbols;
+}
+
+const SymbolInfo& CodeBuilder::GetSymbol(size_t index) const {
+    if (index >= _symbolCount) {
+        throw std::out_of_range("Index was out of range!");
+    }
+
+    return _symbols[index];
+}
+
+size_t CodeBuilder::GetSymbolCount() const {
+    return _symbolCount;
+}
+
+double CodeBuilder::GetKraftInequality() {
+    double sum = 0.0;
+
+    for (size_t i = 0; i < _symbolCount; i++) {
+        sum = pow(2, -(int)_symbols[i].code.length);
+    }
+
+    return sum;
+}
+
+double CodeBuilder::GetEntropy() {
+    return _entropy;
+}
+
+double CodeBuilder::GetAverageCodeLength() {
+    double avgLength = 0.0;
+
+    for (size_t i = 0; i < _symbolCount; i++) {
+        avgLength += _symbols[i].probability * _symbols[i].code.length;
+    }
+
+    return avgLength;
+}
+
+double CodeBuilder::GetRedundancy() {
+    return GetAverageCodeLength() - _entropy;
+}
+
+void ShannonCodeBuilder::Build() {
+    if (_symbolCount == 0) return;
+
     QuickSortSymbols(_symbols, _symbolCount);
 
     double cumulativeProbability = 0.0;
@@ -102,54 +167,48 @@ void ShannonCoding::Build() {
     }
 }
 
-const char* ShannonCoding::GetText() const {
-    return _text;
-}
+void FanoCodeBuilder::Build() {
+    if (_symbolCount == 0) return;
 
-size_t ShannonCoding::GetTextLength() const {
-    return _maxTextLen;
-}
+    QuickSortSymbols(_symbols, _symbolCount);
 
-const SymbolInfo* ShannonCoding::GetSymbols() const {
-    return _symbols;
-}
+    auto GetMiddleProbability = [&](size_t left, size_t right) -> size_t {
+        double leftSum = 0, rightSum = _symbols[right].probability;
+        size_t point = right;
 
-const SymbolInfo& ShannonCoding::GetSymbol(size_t index) const {
-    if (index >= _symbolCount) {
-        throw std::out_of_range("Index was out of range!");
-    }
+        for (int i = left; i <= right - 1; i++) {
+            leftSum += _symbols[i].probability;
+        }
 
-    return _symbols[index];
-}
+        if (leftSum == 0) return 0;
 
-size_t ShannonCoding::GetSymbolCount() const {
-    return _symbolCount;
-}
+        while (leftSum >= rightSum && (double)point > left) {
+            point--;
+            leftSum -= _symbols[point].probability;
+            rightSum += _symbols[point].probability;
+        }
 
-double ShannonCoding::GetKraftInequality() {
-    double sum = 0.0;
+        return point;
+    };
 
-    for (size_t i = 0; i < _symbolCount; i++) {
-        sum = pow(2, -(int)_symbols[i].code.length);
-    }
+    std::function<void(size_t, size_t, size_t)> BuildFanoRecursive = [&](size_t left, size_t right, size_t depth) {
+        if (left >= right) return;
 
-    return sum;
-}
+        size_t middle = GetMiddleProbability(left, right);
 
-double ShannonCoding::GetEntropy() {
-    return _entropy;
-}
+        for (size_t i = left; i <= middle; i++) {
+            _symbols[i].code.data[depth] = 0;
+            _symbols[i].code.length = depth + 1;
+        }
 
-double ShannonCoding::GetAverageCodeLength() {
-    double avgLength = 0.0;
+        for (size_t i = middle + 1; i <= right; i++) {
+            _symbols[i].code.data[depth] = 1;
+            _symbols[i].code.length = depth + 1;
+        }
 
-    for (size_t i = 0; i < _symbolCount; i++) {
-        avgLength += _symbols[i].probability * _symbols[i].code.length;
-    }
+        BuildFanoRecursive(left, middle, depth + 1);
+        BuildFanoRecursive(middle + 1, right, depth + 1);
+    };
 
-    return avgLength;
-}
-
-double ShannonCoding::GetRedundancy() {
-    return GetAverageCodeLength() - _entropy;
+    BuildFanoRecursive(0, _symbolCount - 1, 0);
 }

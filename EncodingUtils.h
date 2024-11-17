@@ -23,22 +23,25 @@ struct SymbolInfo {
     }
 };
 
-class ShannonCoding {
-private:
+class CodeBuilder {
+protected:
     char _text[_maxTextLen];
     size_t _symbolCount = 0;
     SymbolInfo _symbols[_maxSymbols];
     double _entropy = 0.0;
 
+    virtual void Initialize();
     void QuickSortSymbols(SymbolInfo symbols[], size_t size);
-    void CalculateFrequencies();
-    void CalculateEntropy();
-    void Build();
+    virtual void CalculateFrequencies();
+    virtual void CalculateEntropy();
+    virtual void Build() = 0;
 
 public:
-    ShannonCoding(const char* inputText);
+    CodeBuilder();
+    CodeBuilder(const char* inputText);
 
     const char* GetText() const;
+    void SetText(const char* text);
     size_t GetTextLength() const;
     const SymbolInfo* GetSymbols() const;
     const SymbolInfo& GetSymbol(size_t index) const;
@@ -48,5 +51,22 @@ public:
     double GetAverageCodeLength();
     double GetRedundancy();
 };
+
+class ShannonCodeBuilder : public CodeBuilder {
+private: 
+    void Build() override;
+
+public:
+    using CodeBuilder::CodeBuilder;
+};
+
+class FanoCodeBuilder : public CodeBuilder {
+private:
+    void Build() override;
+
+public:
+    using CodeBuilder::CodeBuilder;
+};
+
 
 #endif // !ENCODING_UTILS_H
