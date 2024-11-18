@@ -267,7 +267,7 @@ std::string GenerateRandomString(size_t length) {
 
 void GenerateCode(CodeBuilder& codeBuilder, bool enableView, bool showText, bool showEncodedText, bool showEncodingInfo) {
     const std::string path = "encoding.txt";
-    const size_t encodeSize = 100;
+    size_t encodeSize = 100;
 
     std::ifstream file(path, std::ios::binary);
 
@@ -307,6 +307,10 @@ void GenerateCode(CodeBuilder& codeBuilder, bool enableView, bool showText, bool
 
     CreateTable(codeHeader);
 
+    if (encodeSize > content.size()) {
+        encodeSize = content.size();
+    }
+
     std::vector<int> encodedText;
 
     for (size_t i = 0; i < encodeSize; i++) {
@@ -322,7 +326,7 @@ void GenerateCode(CodeBuilder& codeBuilder, bool enableView, bool showText, bool
             }
         }
     }
-
+ 
     if (showEncodedText) {
         std::cout << "Encoded text: ";
 
@@ -1261,7 +1265,7 @@ void GenerateShannonCode() {
 }
 
 void GenerateFanoCode() {
-    GenerateCode(FanoCodeBuilder());
+    GenerateCode(FanoCodeBuilder(), false);
 
     system("pause");
 }

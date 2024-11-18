@@ -110,7 +110,7 @@ double CodeBuilder::GetKraftInequality() {
     double sum = 0.0;
 
     for (size_t i = 0; i < _symbolCount; i++) {
-        sum = pow(2, -(int)_symbols[i].code.length);
+        sum += pow(2, -(int)_symbols[i].code.length);
     }
 
     return sum;
@@ -176,13 +176,13 @@ void FanoCodeBuilder::Build() {
         double leftSum = 0, rightSum = _symbols[right].probability;
         size_t point = right;
 
-        for (int i = left; i <= right - 1; i++) {
+        for (int i = left; i < right; i++) {
             leftSum += _symbols[i].probability;
         }
 
         if (leftSum == 0) return 0;
 
-        while (leftSum >= rightSum && (double)point > left) {
+        while (leftSum >= rightSum) {
             point--;
             leftSum -= _symbols[point].probability;
             rightSum += _symbols[point].probability;
@@ -198,12 +198,12 @@ void FanoCodeBuilder::Build() {
 
         for (size_t i = left; i <= middle; i++) {
             _symbols[i].code.data[depth] = 0;
-            _symbols[i].code.length = depth + 1;
+            _symbols[i].code.length++;
         }
-
+        
         for (size_t i = middle + 1; i <= right; i++) {
             _symbols[i].code.data[depth] = 1;
-            _symbols[i].code.length = depth + 1;
+            _symbols[i].code.length++;
         }
 
         BuildFanoRecursive(left, middle, depth + 1);
