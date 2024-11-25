@@ -5,15 +5,18 @@
 
 #include <cmath>
 #include <stdexcept>
+#include <vector>
 
 static const size_t _maxTextLen = 1024, _maxSymbols = 256, _maxCodeLen = 32;
 
 struct Code {
+public:
     int data[_maxCodeLen];
     size_t length;
 };
 
 struct SymbolInfo {
+public:
     char symbol;
     double probability;
     Code code;
@@ -62,11 +65,21 @@ public:
 
 class FanoCodeBuilder : public CodeBuilder {
 private:
+    size_t GetMiddleProbability(size_t left, size_t right) const;
     void Build() override;
 
 public:
     using CodeBuilder::CodeBuilder;
 };
 
+class HuffmanCodeBuilder : public CodeBuilder {
+private:
+    size_t Up(size_t n, std::vector<double>& probabilities, double probability);
+    void Down(size_t n, size_t up);
+    void Build() override;
+
+public:
+    using CodeBuilder::CodeBuilder;
+};
 
 #endif // !ENCODING_UTILS_H

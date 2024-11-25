@@ -80,12 +80,13 @@ void BuildOST();            // ✔
 void BuildA1A2();           // ✔
 
 void GenerateShannonCode(); // ✔
-void GenerateFanoCode();    // 
+void GenerateFanoCode();    // ✔
+void GenerateHuffmanCode();     //
 
 int main() {
     ConsoleInit();
 
-    GenerateFanoCode();
+    GenerateHuffmanCode();
 }
 
 int ConsoleInit() {
@@ -1265,7 +1266,13 @@ void GenerateShannonCode() {
 }
 
 void GenerateFanoCode() {
-    GenerateCode(FanoCodeBuilder(), false);
+    GenerateCode(FanoCodeBuilder());
+
+    system("pause");
+}
+
+void GenerateHuffmanCode() {
+    GenerateCode(HuffmanCodeBuilder());
 
     system("pause");
 }
