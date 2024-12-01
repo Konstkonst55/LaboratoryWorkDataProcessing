@@ -79,4 +79,9 @@ const vector<vector<string>> CodeInfoHeader = {
     { "-----", "-------", "----------", "----------" }
 };
 
+const vector<vector<string>> CodeInfoHeaderWithName = {
+    { "Name", "Kraft", "Entropy", "Avg length", "Redundancy" },
+    { "----", "-----", "-------", "----------", "----------" }
+};
+
 #endif // !TABLE_HEADERS_H

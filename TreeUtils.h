@@ -126,7 +126,7 @@ class CodeTree : public BinaryTree {
 public:
 	CodeTree();
 
-	void AddVertex(char symbol, const std::vector<int>& code);
+	void AddVertex(char symbol, const int* code, size_t size);
 };
 
 Vertex* CreateVertex(int value, int balance = 0, int weight = 0);

@@ -6,6 +6,7 @@
 #include <cmath>
 #include <stdexcept>
 #include <vector>
+#include <functional>
 
 static const size_t _maxTextLen = 1024, _maxSymbols = 256, _maxCodeLen = 32;
 
@@ -34,7 +35,8 @@ protected:
     double _entropy = 0.0;
 
     virtual void Initialize();
-    void QuickSortSymbols(SymbolInfo symbols[], size_t size);
+    void QuickSortSymbols(SymbolInfo symbols[], size_t size, std::function<bool(const SymbolInfo&, const SymbolInfo&)> comparator = [](const SymbolInfo& a, const SymbolInfo& b) {return a.probability > b.probability;});
+
     virtual void CalculateFrequencies();
     virtual void CalculateEntropy();
     virtual void Build() = 0;
@@ -76,6 +78,14 @@ class HuffmanCodeBuilder : public CodeBuilder {
 private:
     size_t Up(size_t n, std::vector<double>& probabilities, double probability);
     void Down(size_t n, size_t up);
+    void Build() override;
+
+public:
+    using CodeBuilder::CodeBuilder;
+};
+
+class GilbertMoorBuilder : public CodeBuilder {
+private:
     void Build() override;
 
 public:

@@ -58,35 +58,39 @@ template <typename T = int> std::vector<std::vector<std::string>> ConvertMatrixT
 std::string EscapeSpecialChar(char symbol);
 std::string GenerateRandomString(size_t length);
 void GenerateCode(CodeBuilder& codeBuilder, bool enableView = true, bool showText = true, bool showEncodedText = true, bool showEncodingInfo = true);
+void GenerateCodes(const std::vector<std::pair<std::string, CodeBuilder&>>& codeBuilders, bool enableView = true, bool showText = true, bool showEncodedText = true, bool showEncodingInfo = true);
+std::string DecodeText(const CodeTree& tree, const std::vector<int>& encodedText);
 
-void ShowSorts();           // ✔
-void ShowSearches();        // ✔
-void ShowStructSorting();   // ✔
-void ShowIndexes();         // ✔
-void ShowHeapShell();       // ✔
-void ShowQuickHeapShell();  // ✔
-void ShowStackQueueList();  // ✔
-void ShowMerge();           // ✔
-void ShowDigital();         // ✔
+void ShowSorts();               // ✔
+void ShowSearches();            // ✔
+void ShowStructSorting();       // ✔
+void ShowIndexes();             // ✔
+void ShowHeapShell();           // ✔
+void ShowQuickHeapShell();      // ✔
+void ShowStackQueueList();      // ✔
+void ShowMerge();               // ✔
+void ShowDigital();             // ✔
 
-void ShowBinaryTree();      // ✔
-void BuildPBST();           // ✔
-void BuildRST();            // ✔
-void DeleteVertexRST();     // ✔
-void BuildAVL();            // ✔
-void DeleteVertexAVL();     // ✔
-void BuildBBT();            // ✔
-void BuildOST();            // ✔
-void BuildA1A2();           // ✔
+void ShowBinaryTree();          // ✔
+void BuildPBST();               // ✔
+void BuildRST();                // ✔
+void DeleteVertexRST();         // ✔
+void BuildAVL();                // ✔
+void DeleteVertexAVL();         // ✔
+void BuildBBT();                // ✔
+void BuildOST();                // ✔
+void BuildA1A2();               // ✔
 
-void GenerateShannonCode(); // ✔
-void GenerateFanoCode();    // ✔
-void GenerateHuffmanCode();     //
+void GenerateShannonCode();     // ✔
+void GenerateFanoCode();        // ✔
+void GenerateHuffmanCode();     // ✔
+void GenerateGilbertMoorCode(); //
+void GenerateAllCodes();
 
 int main() {
     ConsoleInit();
 
-    GenerateHuffmanCode();
+    GenerateAllCodes();
 }
 
 int ConsoleInit() {
@@ -341,7 +345,7 @@ void GenerateCode(CodeBuilder& codeBuilder, bool enableView, bool showText, bool
     if (showEncodingInfo) {
         size_t encodedTextLength = encodedText.size();
         size_t originalTextLength = encodeSize * 8;
-        double compressionRatio = (double)encodedTextLength / originalTextLength * 100.0;
+        double compressionRatio = 100.0 - (double)encodedTextLength / originalTextLength * 100.0;
 
         std::cout << "Source text length in bits: " << originalTextLength << std::endl;
         std::cout << "Encoded text length in bits: " << encodedTextLength << std::endl;
@@ -352,11 +356,169 @@ void GenerateCode(CodeBuilder& codeBuilder, bool enableView, bool showText, bool
         CodeTree ctree;
 
         for (size_t i = 0; i < codeBuilder.GetSymbolCount(); i++) {
-            ctree.AddVertex(symbols[i].symbol, std::vector<int>(symbols[i].code.data, symbols[i].code.data + symbols[i].code.length));
+            ctree.AddVertex(symbols[i].symbol, symbols[i].code.data, symbols[i].code.length);
+        }
+
+        if (showEncodedText) {
+            try {
+                std::cout << "Decoded text" << DecodeText(ctree, encodedText) << std::endl << std::endl;
+            }
+            catch (const std::exception& ex) {
+                std::cerr << std::endl << ex.what() << std::endl;
+            }
         }
 
         HandleTreeView(ctree.root, "Code Tree", false);
     }
+}
+
+void GenerateCodes(const std::vector<std::pair<std::string, CodeBuilder&>>& codeBuilders, bool enableView, bool showText, bool showEncodedText, bool showEncodingInfo) {
+    const std::string path = "encoding.txt";
+    size_t encodeSize = 100;
+
+    std::ifstream file(path, std::ios::binary);
+
+    if (!file.is_open()) {
+        std::cerr << "Не удалось открыть файл: " << path << std::endl;
+        return;
+    }
+
+    std::string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+    file.close();
+
+    if (showText) std::cout << content << std::endl;
+
+    for (auto& builder : codeBuilders) {
+        builder.second.SetText(content.c_str());
+
+        auto symbols = builder.second.GetSymbols();
+        auto encodingHeader = EncodingHeader;
+        double totalProbability = 0.0;
+
+        for (size_t i = 0; i < builder.second.GetSymbolCount(); i++) {
+            std::string codeData;
+
+            for (size_t j = 0; j < symbols[i].code.length; j++) {
+                codeData.append(std::to_string(symbols[i].code.data[j]));
+            }
+
+            std::string escapedSymbol = EscapeSpecialChar(symbols[i].symbol);
+            encodingHeader.push_back({ escapedSymbol, std::to_string(symbols[i].probability), codeData, std::to_string(symbols[i].code.length) });
+
+            totalProbability += symbols[i].probability;
+        }
+
+        std::cout << std::endl << "Code table (" << builder.first << ")" << std::endl;
+        CreateTable(encodingHeader);
+
+        std::cout << "Total probability: " << totalProbability << std::endl;
+
+        auto codeHeader = CodeInfoHeader;
+        codeHeader.push_back({ std::to_string(builder.second.GetKraftInequality()), std::to_string(builder.second.GetEntropy()), std::to_string(builder.second.GetAverageCodeLength()), std::to_string(builder.second.GetRedundancy()) });
+
+        CreateTable(codeHeader);
+
+        if (encodeSize > content.size()) {
+            encodeSize = content.size();
+        }
+
+        std::vector<int> encodedText;
+
+        for (size_t i = 0; i < encodeSize; i++) {
+            char c = content[i];
+
+            for (size_t j = 0; j < builder.second.GetSymbolCount(); j++) {
+                if (symbols[j].symbol == c) {
+                    for (size_t bit = 0; bit < symbols[j].code.length; bit++) {
+                        encodedText.push_back(symbols[j].code.data[bit]);
+                    }
+
+                    break;
+                }
+            }
+        }
+
+        if (showEncodedText) {
+            std::cout << "Encoded text (" << builder.first << "): ";
+
+            for (int bit : encodedText) {
+                std::cout << bit;
+            }
+
+            std::cout << std::endl << std::endl;
+        }
+
+        if (showEncodingInfo) {
+            size_t encodedTextLength = encodedText.size();
+            size_t originalTextLength = encodeSize * 8;
+            double compressionRatio = 100.0 - (double)encodedTextLength / originalTextLength * 100.0;
+
+            std::cout << "Encoding info (" << builder.first << ")" << std::endl;
+            std::cout << "Source text length in bits: " << originalTextLength << std::endl;
+            std::cout << "Encoded text length in bits: " << encodedTextLength << std::endl;
+            std::cout << "Compression ratio: " << compressionRatio << "%" << std::endl;
+        }
+
+        if (enableView) {
+            CodeTree ctree;
+
+            for (size_t i = 0; i < builder.second.GetSymbolCount(); i++) {
+                ctree.AddVertex(symbols[i].symbol, symbols[i].code.data, symbols[i].code.length);
+            }
+
+            if (showEncodedText) {
+                try {
+                    std::cout << "Decoded text (" << builder.first << "): " << DecodeText(ctree, encodedText) << std::endl << std::endl;
+                }
+                catch (const std::exception& ex) {
+                    std::cerr << std::endl << ex.what() << std::endl;
+                }
+            }
+
+            HandleTreeView(ctree.root, builder.first, false);
+        }
+    }
+
+    auto codeHeader = CodeInfoHeaderWithName;
+
+    for (const auto& builder : codeBuilders) {
+        codeHeader.push_back({ builder.first, std::to_string(builder.second.GetKraftInequality()), std::to_string(builder.second.GetEntropy()), std::to_string(builder.second.GetAverageCodeLength()), std::to_string(builder.second.GetRedundancy()) });
+    }
+
+    std::cout << std::endl << "Result table:" << std::endl;
+    CreateTable(codeHeader);
+}
+
+std::string DecodeText(const CodeTree& tree, const std::vector<int>& encodedText) {
+    std::string decodedText;
+    Vertex* current = tree.root; 
+
+    for (int bit : encodedText) {
+        if (!current) {
+            throw std::runtime_error("Ошибка декодирования: неправильный путь в дереве.");
+        }
+
+        if (bit == 0) {
+            current = current->left;
+        }
+        else if (bit == 1) {
+            current = current->right;
+        }
+        else {
+            throw std::invalid_argument("Закодированный текст должен содержать только символы '0' и '1'.");
+        }
+
+        if (current && current->left == nullptr && current->right == nullptr) {
+            decodedText += static_cast<char>(current->value);
+            current = tree.root;
+        }
+    }
+
+    if (current != tree.root) {
+        throw std::runtime_error("Ошибка декодирования: закодированный текст не завершён.");
+    }
+
+    return decodedText;
 }
 
 void ShowSorts() {
@@ -1273,6 +1435,23 @@ void GenerateFanoCode() {
 
 void GenerateHuffmanCode() {
     GenerateCode(HuffmanCodeBuilder());
+
+    system("pause");
+}
+
+void GenerateGilbertMoorCode() {
+    GenerateCode(GilbertMoorBuilder());
+
+    system("pause");
+}
+
+void GenerateAllCodes() {
+    GenerateCodes({
+        { "Shannon", ShannonCodeBuilder() },
+        { "Fano", FanoCodeBuilder() },
+        { "Huffman", HuffmanCodeBuilder() },
+        { "Gilbert-Moor", GilbertMoorBuilder() }
+    });
 
     system("pause");
 }

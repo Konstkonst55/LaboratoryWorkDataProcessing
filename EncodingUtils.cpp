@@ -17,21 +17,21 @@ void CodeBuilder::Initialize() {
     Build();
 }
 
-void CodeBuilder::QuickSortSymbols(SymbolInfo symbols[], size_t size) {
+void CodeBuilder::QuickSortSymbols(SymbolInfo symbols[], size_t size, std::function<bool(const SymbolInfo&, const SymbolInfo&)> comparator) {
     std::function<void(int, int)> SortRecursive;
 
-    SortRecursive = [&symbols, &SortRecursive](int left, int right) {
+    SortRecursive = [&symbols, &SortRecursive, &comparator](int left, int right) {
         if (left >= right) return;
 
         SymbolInfo pivot = symbols[left];
         int i = left, j = right;
 
         while (i <= j) {
-            while (symbols[i] < pivot) {
+            while (comparator(symbols[i], pivot)) {
                 i++;
             }
 
-            while (pivot < symbols[j]) {
+            while (comparator(pivot, symbols[j])) {
                 j--;
             }
 
@@ -43,6 +43,7 @@ void CodeBuilder::QuickSortSymbols(SymbolInfo symbols[], size_t size) {
         }
 
         if (left < j) SortRecursive(left, j);
+    
         if (i < right) SortRecursive(i, right);
     };
 
@@ -284,4 +285,33 @@ void HuffmanCodeBuilder::Build() {
     };
 
     BuildHuffmanRecursive(_symbolCount);
+}
+
+void GilbertMoorBuilder::Build() {
+    auto bySymbolAscending = [](const SymbolInfo& a, const SymbolInfo& b) {
+        return a.symbol < b.symbol;
+    };
+
+    QuickSortSymbols(_symbols, _symbolCount, bySymbolAscending);
+
+    double cumulativeProbability = 0.0;
+
+    for (size_t i = 0; i < _symbolCount; i++) {
+        SymbolInfo& symbol = _symbols[i];
+
+        symbol.code.length = static_cast<size_t>(ceil(-log2(symbol.probability))) + 1;
+        cumulativeProbability += symbol.probability;
+        double temp = cumulativeProbability - (symbol.probability / 2);
+
+        for (size_t j = 0; j < symbol.code.length; j++) {
+            temp *= 2;
+            symbol.code.data[j] = static_cast<int>(floor(temp));
+
+            symbol.code.data[j] = symbol.code.data[j] > 0 ? 1 : 0;
+
+            if (temp >= 1.0) {
+                temp -= 1.0;
+            }
+        }
+    }
 }

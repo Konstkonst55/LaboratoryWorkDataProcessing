@@ -729,30 +729,31 @@ void A2::Create(std::vector<std::pair<int, int>>& keysWithWeights) {
 
 CodeTree::CodeTree() : BinaryTree() { }
 
-void CodeTree::AddVertex(char symbol, const std::vector<int>& code) {
+void CodeTree::AddVertex(char symbol, const int* code, size_t size) {
     if (!root) {
-        root = new CodeVertex(symbol, code);
+        root = new Vertex();
     }
-    else {
-        CodeVertex* current = static_cast<CodeVertex*>(root);
 
-        for (size_t i = 0; i < code.size(); i++) {
-            if (code[i] == 0) {
-                if (!current->left) {
-                    current->left = new CodeVertex(symbol, code);
-                }
+    Vertex* current = root;
 
-                current = static_cast<CodeVertex*>(current->left);
+    for (size_t i = 0; i < size; i++) {
+        if (code[i] == 0) {
+            if (!current->left) {
+                current->left = new Vertex();
             }
-            else { 
-                if (!current->right) {
-                    current->right = new CodeVertex(symbol, code);
-                }
 
-                current = static_cast<CodeVertex*>(current->right);
+            current = current->left;
+        }
+        else if (code[i] == 1) {
+            if (!current->right) {
+                current->right = new Vertex();
             }
+
+            current = current->right;
         }
     }
+
+    current->value = static_cast<int>(symbol); 
 }
 
 Vertex* CreateVertex(int value, int balance, int weight) {
