@@ -69,6 +69,7 @@
     <ClCompile Include="ArrayUtils.cpp" />
     <ClCompile Include="bgiout.cxx" />
     <ClCompile Include="Chart.cpp" />
+    <ClCompile Include="CustomString.cpp" />
     <ClCompile Include="dibutil.cxx" />
     <ClCompile Include="drawing.cxx" />
     <ClCompile Include="EncodingUtils.cpp" />
@@ -95,6 +96,7 @@
     <ClInclude Include="ArrayUtils.h" />
     <ClInclude Include="AxisType.h" />
     <ClInclude Include="Chart.h" />
+    <ClInclude Include="CustomString.h" />
     <ClInclude Include="dibutil.h" />
     <ClInclude Include="EncodingUtils.h" />
     <ClInclude Include="graphics.h" />
